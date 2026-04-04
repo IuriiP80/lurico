@@ -10,180 +10,310 @@
 <style>
 body {
   font-family: 'Montserrat', Arial, sans-serif;
-  margin:0;
-  background:#f5f5f5;
-  line-height:1.6;
+  margin: 0;
+  background: #f5f5f5;
+  line-height: 1.6;
+  color: #222;
 }
 
 /* HEADER */
 .header {
-  display:flex;
-  justify-content:space-between;
-  align-items:center;
-  padding:10px 20px;
-  background:#0d6efd;
-  color:white;
-}
-
-/* LOGO */
-.logo {
-  height:60px;
-  width:auto;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px 20px;
+  background: #0d6efd;
+  color: white;
 }
 
 .logo-wrap {
-  display:flex;
-  align-items:center;
-  gap:10px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.logo {
+  height: 40px;
+  width: auto;
+  display: block;
 }
 
 .logo-text strong {
-  font-size:18px;
+  display: block;
+  font-size: 18px;
+  line-height: 1.1;
 }
 
 .logo-text span {
-  font-size:12px;
-  color:#ddd;
+  display: block;
+  font-size: 12px;
+  color: #dbe7ff;
 }
 
-/* CALL */
 .header-call {
-  color:white;
-  text-decoration:none;
-  font-weight:600;
+  color: white;
+  text-decoration: none;
+  font-weight: 600;
+  white-space: nowrap;
 }
 
 /* HERO */
 .hero {
-  padding:80px 20px;
-  text-align:center;
-  background:white;
+  padding: 80px 20px;
+  text-align: center;
+  background: white;
 }
 
 .hero h1 {
-  font-size:36px;
-  font-weight:700;
+  font-size: 36px;
+  font-weight: 700;
+  margin: 0 0 10px;
 }
 
 .hero p {
-  font-size:18px;
+  font-size: 18px;
+  margin: 0 0 20px;
+  color: #555;
 }
 
 /* BUTTONS */
 .btn {
-  display:inline-block;
-  margin:8px;
-  padding:14px 22px;
-  background:#ff6600;
-  color:white;
-  border-radius:6px;
-  text-decoration:none;
-  font-weight:600;
+  display: inline-block;
+  margin: 8px;
+  padding: 14px 22px;
+  background: #ff6600;
+  color: white;
+  border-radius: 6px;
+  text-decoration: none;
+  font-weight: 600;
+  transition: 0.2s ease;
+}
+
+.btn:hover {
+  opacity: 0.92;
 }
 
 /* SECTIONS */
 .section {
-  padding:60px 20px;
-  display:flex;
-  flex-direction:column;
-  align-items:center;
-  text-align:center;
+  padding: 60px 20px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+}
+
+.section-alt {
+  background: white;
 }
 
 h2 {
-  font-size:26px;
-  font-weight:700;
+  font-size: 26px;
+  font-weight: 700;
+  margin: 0 0 20px;
 }
 
-/* CARDS */
+/* GRID / CARDS */
 .grid {
-  display:flex;
-  flex-wrap:wrap;
-  justify-content:center;
-  gap:20px;
-  max-width:1000px;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 20px;
+  max-width: 1000px;
 }
 
 .card {
-  background:white;
-  padding:25px;
-  border-radius:12px;
-  width:260px;
-  border:1px solid #eee;
+  background: white;
+  padding: 25px 20px;
+  border-radius: 12px;
+  width: 260px;
+  border: 1px solid #eee;
+  box-shadow: 0 4px 14px rgba(0,0,0,0.04);
+  transition: 0.25s ease;
 }
 
 .card:hover {
-  transform:translateY(-5px);
-  box-shadow:0 10px 30px rgba(0,0,0,0.1);
+  transform: translateY(-5px);
+  box-shadow: 0 12px 30px rgba(0,0,0,0.10);
+}
+
+.card h3 {
+  margin: 0 0 8px;
+  font-size: 18px;
+}
+
+.card p {
+  margin: 0;
+  font-size: 14px;
+  color: #666;
+}
+
+/* SIMPLE LIST TEXT */
+.feature-list p,
+.review-list p,
+.areas-text {
+  margin: 6px 0;
+  font-size: 16px;
 }
 
 /* FORM */
 .form {
-  background:white;
-  padding:25px;
-  border-radius:12px;
-  max-width:420px;
-  width:100%;
+  background: white;
+  padding: 25px;
+  border-radius: 12px;
+  max-width: 420px;
+  width: 100%;
+  box-shadow: 0 5px 20px rgba(0,0,0,0.10);
 }
 
 input, textarea {
-  width:100%;
-  padding:12px;
-  margin:10px 0;
-  border-radius:6px;
-  border:1px solid #ccc;
-  box-sizing:border-box;
+  width: 100%;
+  padding: 12px;
+  margin: 10px 0;
+  border-radius: 6px;
+  border: 1px solid #ccc;
+  box-sizing: border-box;
+  font-family: 'Montserrat', Arial, sans-serif;
+  font-size: 15px;
+}
+
+textarea {
+  min-height: 120px;
+  resize: vertical;
 }
 
 button {
-  background:#0d6efd;
-  color:white;
-  border:none;
-  padding:15px;
-  width:100%;
-  border-radius:6px;
+  background: #0d6efd;
+  color: white;
+  border: none;
+  padding: 15px;
+  width: 100%;
+  border-radius: 6px;
+  font-family: 'Montserrat', Arial, sans-serif;
+  font-weight: 600;
+  font-size: 15px;
+  cursor: pointer;
 }
 
 /* FIXED BUTTON */
 .call-fixed {
-  position:fixed;
-  bottom:15px;
-  left:50%;
-  transform:translateX(-50%);
-  background:#ff6600;
-  color:white;
-  padding:15px 25px;
-  border-radius:50px;
-  text-decoration:none;
+  position: fixed;
+  bottom: 15px;
+  left: 50%;
+  transform: translateX(-50%);
+  background: #ff6600;
+  color: white;
+  padding: 15px 25px;
+  border-radius: 50px;
+  text-decoration: none;
+  font-weight: 600;
+  box-shadow: 0 5px 15px rgba(0,0,0,0.25);
+  z-index: 999;
+}
+
+/* POPUP */
+.popup {
+  display: none;
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,0.6);
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+}
+
+.popup-box {
+  background: white;
+  padding: 25px;
+  border-radius: 12px;
+  text-align: center;
+  max-width: 320px;
+  width: 90%;
+  position: relative;
+  box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+}
+
+.popup-box h2 {
+  font-size: 24px;
+  margin-bottom: 10px;
+}
+
+.close {
+  position: absolute;
+  top: 10px;
+  right: 12px;
+  cursor: pointer;
+  font-size: 18px;
+}
+
+/* FOOTER */
+.footer {
+  background: #0f172a;
+  color: white;
+  text-align: center;
+  padding: 28px 20px 90px;
+}
+
+.footer p {
+  margin: 6px 0;
+  color: #d5d9e3;
+}
+
+.footer a {
+  color: white;
+  text-decoration: none;
+  font-weight: 600;
 }
 
 /* MOBILE */
-@media (max-width:600px){
+@media (max-width: 600px) {
+  .header {
+    flex-direction: column;
+    gap: 10px;
+    text-align: center;
+  }
 
-.header {
-  flex-direction:column;
-  gap:10px;
-}
+  .logo {
+    height: 32px;
+  }
 
-.logo {
-  height:32px;
-}
+  .hero {
+    padding: 56px 15px;
+  }
 
-.btn {
-  display:block;
-  width:100%;
-}
+  .hero h1 {
+    font-size: 28px;
+  }
 
-.grid {
-  flex-direction:column;
-  align-items:center;
-}
+  .hero p {
+    font-size: 16px;
+  }
 
-.card {
-  width:100%;
-  max-width:320px;
-}
+  .btn {
+    display: block;
+    width: 100%;
+    box-sizing: border-box;
+    margin: 10px 0;
+  }
 
+  .section {
+    padding: 42px 15px;
+  }
+
+  .grid {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .card {
+    width: 100%;
+    max-width: 320px;
+  }
+
+  .call-fixed {
+    width: 90%;
+    text-align: center;
+    box-sizing: border-box;
+  }
 }
 </style>
 </head>
@@ -203,42 +333,120 @@ button {
 </div>
 
 <div class="hero">
-<h1>Same-Day Appliance Repair</h1>
-<p>Fast • Reliable • Affordable</p>
+  <h1>Same-Day Appliance Repair</h1>
+  <p>Fast • Reliable • Affordable</p>
 
-<a href="tel:+19543055539" class="btn">📞 Call Now</a>
-<a href="sms:+19543055539" class="btn">💬 Text Us</a>
-<a href="https://wa.me/19543055539" class="btn">🟢 WhatsApp</a>
+  <a href="tel:+19543055539" class="btn">📞 Call Now</a>
+  <a href="sms:+19543055539" class="btn">💬 Text Us</a>
+  <a href="https://wa.me/19543055539" class="btn">🟢 WhatsApp</a>
+  <a href="#form" class="btn">📩 Get Quote</a>
 </div>
 
 <div class="section">
-<h2>We Repair All Major Appliances</h2>
+  <h2>We Repair All Major Appliances</h2>
 
-<div class="grid">
+  <div class="grid">
+    <div class="card">
+      <h3>❄️ Refrigerators</h3>
+      <p>Cooling issues, leaks, no ice</p>
+    </div>
 
-<div class="card"><h3>❄️ Refrigerators</h3></div>
-<div class="card"><h3>🧺 Washers</h3></div>
-<div class="card"><h3>🔥 Dryers</h3></div>
-<div class="card"><h3>🍽 Dishwashers</h3></div>
-<div class="card"><h3>🍳 Ovens</h3></div>
-<div class="card"><h3>❄️ AC Units</h3></div>
+    <div class="card">
+      <h3>🧺 Washers</h3>
+      <p>Not spinning, leaking, noisy</p>
+    </div>
 
+    <div class="card">
+      <h3>🔥 Dryers</h3>
+      <p>No heat, takes too long</p>
+    </div>
+
+    <div class="card">
+      <h3>🍽 Dishwashers</h3>
+      <p>Not cleaning, water problems</p>
+    </div>
+
+    <div class="card">
+      <h3>🍳 Ovens</h3>
+      <p>Not heating, temp issues</p>
+    </div>
+
+    <div class="card">
+      <h3>❄️ AC Units</h3>
+      <p>No cooling, airflow issues</p>
+    </div>
+  </div>
 </div>
+
+<div class="section section-alt">
+  <h2>Why Choose Us</h2>
+  <div class="feature-list">
+    <p>✔ Same Day Service</p>
+    <p>✔ Licensed & Experienced</p>
+    <p>✔ Affordable Pricing</p>
+    <p>✔ Warranty Included</p>
+  </div>
 </div>
 
 <div class="section">
-<h2>Get a Free Quote</h2>
-
-<form action="https://formspree.io/f/mdaplrvq" method="POST" class="form">
-<input type="text" name="name" placeholder="Your Name" required>
-<input type="tel" name="phone" placeholder="Phone Number" required>
-<textarea name="message" placeholder="What needs repair?" required></textarea>
-<button type="submit">Send Request</button>
-</form>
-
+  <h2>Customer Reviews</h2>
+  <div class="review-list">
+    <p>⭐⭐⭐⭐⭐ Fixed same day – Mike</p>
+    <p>⭐⭐⭐⭐⭐ Fast and professional – Anna</p>
+  </div>
 </div>
+
+<div class="section section-alt" id="form">
+  <h2>Get a Free Quote</h2>
+
+  <form action="https://formspree.io/f/mdaplrvq" method="POST" class="form">
+    <input type="hidden" name="_replyto" value="luricollc@gmail.com">
+    <input type="hidden" name="_autoresponse" value="Thanks! We will contact you shortly">
+
+    <input type="text" name="name" placeholder="Your Name" required>
+    <input type="tel" name="phone" placeholder="Phone Number" required>
+    <textarea name="message" placeholder="What needs repair?" required></textarea>
+    <button type="submit">Send Request</button>
+  </form>
+</div>
+
+<div class="section">
+  <h2>Service Areas</h2>
+  <p class="areas-text">Palm Beach Gardens • West Palm Beach • Jupiter • Boca Raton</p>
+</div>
+
+<footer class="footer">
+  <p><strong>Lurico Appliance Repair</strong></p>
+  <p><a href="tel:+19543055539">📞 954-305-5539</a></p>
+  <p>Serving Palm Beach Gardens • West Palm Beach • Jupiter • Boca Raton</p>
+  <p>© 2026 Lurico Appliance Repair. All rights reserved.</p>
+</footer>
 
 <a href="tel:+19543055539" class="call-fixed">📞 Call Now</a>
+
+<div class="popup" id="popup">
+  <div class="popup-box">
+    <h2>$20 OFF Repair</h2>
+    <p>Leave your phone — we call you fast</p>
+
+    <form action="https://formspree.io/f/mdaplrvq" method="POST">
+      <input type="tel" name="phone" placeholder="Phone" required>
+      <button type="submit">Get Discount</button>
+    </form>
+
+    <span class="close" onclick="closePopup()">✖</span>
+  </div>
+</div>
+
+<script>
+setTimeout(() => {
+  document.getElementById("popup").style.display = "flex";
+}, 5000);
+
+function closePopup() {
+  document.getElementById("popup").style.display = "none";
+}
+</script>
 
 </body>
 </html>

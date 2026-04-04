@@ -204,7 +204,50 @@ button {
   width:90%;
   text-align:center;
 }
+.header {
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  padding:15px 20px;
+}
 
+.logo-wrap {
+  display:flex;
+  align-items:center;
+  gap:10px;
+}
+
+.logo {
+  height:50px;
+}
+
+.logo-text strong {
+  display:block;
+  font-size:18px;
+}
+
+.logo-text span {
+  font-size:12px;
+  color:#ddd;
+}
+
+.header-call {
+  color:white;
+  text-decoration:none;
+  font-weight:600;
+}
+
+/* мобилка */
+@media (max-width:600px){
+  .header {
+    flex-direction:column;
+    gap:10px;
+  }
+
+  .logo {
+    height:40px;
+  }
+}
 }
 </style>
 </head>

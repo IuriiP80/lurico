@@ -533,14 +533,140 @@
 
         <form action="https://formspree.io/f/mdaplrvq" method="POST" class="quote-form">
           <input type="hidden" name="_subject" value="New Service Request - Lurico Appliance Repair" />
+
           <input type="text" name="name" placeholder="Your Name" required />
+
           <input type="tel" name="phone" placeholder="Phone Number" required />
-          <textarea name="message" rows="5" placeholder="Describe your appliance issue" required></textarea>
+
+          <input type="text" name="address" placeholder="Service Address" required />
+
+          <div class="row">
+            <select id="appliance" name="appliance" required>
+              <option value="">Select Appliance</option>
+              <option>Refrigerator</option>
+              <option>Washer</option>
+              <option>Dryer</option>
+              <option>Dishwasher</option>
+              <option>Oven / Range</option>
+              <option>AC Unit</option>
+            </select>
+
+            <select id="issue" name="issue" required>
+              <option value="">Select Issue</option>
+              <option>Not cooling</option>
+              <option>Not heating</option>
+              <option>Leaking water</option>
+              <option>Not turning on</option>
+              <option>Making noise</option>
+              <option>Not draining</option>
+              <option>Not spinning</option>
+            </select>
+          </div>
+
+          <textarea id="message" name="message" rows="5" placeholder="Describe your appliance issue" required></textarea>
+
           <div class="sms-note">
             By submitting this form, you agree to receive SMS messages from Lurico Appliance Repair related to your request. Reply STOP to opt out. Message frequency may vary. Message and data rates may apply.
           </div>
+
           <button type="submit" class="btn btn-primary">Get Service Now</button>
         </form>
+
+        <script>
+          const appliance = document.getElementById('appliance');
+          const issue = document.getElementById('issue');
+          const message = document.getElementById('message');
+
+          const issuesByAppliance = {
+            'Refrigerator': [
+              'Not cooling',
+              'Leaking water',
+              'No ice',
+              'Making noise',
+              'Temperature problem',
+              'Ice maker not working'
+            ],
+            'Washer': [
+              'Not spinning',
+              'Not draining',
+              'Leaking water',
+              'Making noise',
+              'Not turning on',
+              'Door issue'
+            ],
+            'Dryer': [
+              'Not heating',
+              'Making noise',
+              'Not turning on',
+              'Takes too long to dry',
+              'Burning smell',
+              'Not spinning'
+            ],
+            'Dishwasher': [
+              'Not draining',
+              'Leaking water',
+              'Not cleaning dishes',
+              'Not turning on',
+              'Making noise',
+              'Door issue'
+            ],
+            'Oven / Range': [
+              'Not heating',
+              'Temperature problem',
+              'Not turning on',
+              'Burner not working',
+              'Error code on display',
+              'Gas smell'
+            ],
+            'AC Unit': [
+              'Not cooling',
+              'Airflow issue',
+              'Making noise',
+              'Not turning on',
+              'Water leak',
+              'Thermostat problem'
+            ]
+          };
+
+          function fillIssues() {
+            const selectedAppliance = appliance.value;
+            const currentIssue = issue.value;
+            issue.innerHTML = '<option value="">Select Issue</option>';
+
+            if (issuesByAppliance[selectedAppliance]) {
+              issuesByAppliance[selectedAppliance].forEach(function(item) {
+                const option = document.createElement('option');
+                option.value = item;
+                option.textContent = item;
+                issue.appendChild(option);
+              });
+
+              if (issuesByAppliance[selectedAppliance].includes(currentIssue)) {
+                issue.value = currentIssue;
+              }
+            }
+
+            autoFill();
+          }
+
+          function autoFill() {
+            let text = 'I need service';
+
+            if (appliance.value) {
+              text += ' for my ' + appliance.value;
+            }
+
+            if (issue.value) {
+              text += '. Issue: ' + issue.value;
+            }
+
+            text += '.';
+            message.value = text;
+          }
+
+          appliance.addEventListener('change', fillIssues);
+          issue.addEventListener('change', autoFill);
+        </script>
       </div>
     </div>
   </section>
@@ -721,5 +847,3 @@
   </script>
 </body>
 </html>
-
- 

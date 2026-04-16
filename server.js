@@ -16,7 +16,9 @@ const accountSid = process.env.TWILIO_SID;
 
 // ❗ ВСТАВЬ СВОЙ AUTH TOKEN ИЗ TWILIO
 const authToken = process.env.TWILIO_AUTH_TOKEN;
+console.log('SID:', process.env.TWILIO_SID);
 
+console.log('TOKEN OK:', !!process.env.TWILIO_AUTH_TOKEN);
 const client = twilio(accountSid, authToken);
 
 app.post('/send', async (req, res) => {

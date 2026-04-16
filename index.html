@@ -1,452 +1,725 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Lurico Appliance Repair</title>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Lurico Appliance Repair</title>
+  <meta name="description" content="Same-day appliance repair in Palm Beach Gardens, West Palm Beach, Jupiter, and Boca Raton. Fast, reliable, and affordable service." />
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
 
-<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700&display=swap" rel="stylesheet">
+    body {
+      font-family: Montserrat, Arial, sans-serif;
+      background: #f7f9fc;
+      color: #1b1b1b;
+      line-height: 1.6;
+    }
 
-<style>
-body {
-  font-family: 'Montserrat', Arial, sans-serif;
-  margin: 0;
-  background: #f5f5f5;
-  line-height: 1.6;
-  color: #222;
-}
+    a {
+      text-decoration: none;
+      color: inherit;
+    }
 
-/* HEADER */
-.header {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  padding: 10px 20px;
-  background: #0d6efd;
-  color: white;
-}
+    img {
+      max-width: 100%;
+      display: block;
+    }
 
-.logo-wrap {
-  display: flex;
-  align-items: center;
-  gap: 10px;
-}
+    .container {
+      width: min(1120px, calc(100% - 32px));
+      margin: 0 auto;
+    }
 
-.logo {
-  height: 40px;
-  width: auto;
-  display: block;
-}
+    .topbar {
+      background: #0f172a;
+      color: #fff;
+      padding: 12px 0;
+      font-size: 15px;
+    }
 
-.logo-text strong {
-  display: block;
-  font-size: 18px;
-  line-height: 1.1;
-}
+    .topbar-inner {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 12px;
+      flex-wrap: wrap;
+    }
 
-.logo-text span {
-  display: block;
-  font-size: 12px;
-  color: #dbe7ff;
-}
+    .topbar a {
+      font-weight: 700;
+    }
 
-.header-call {
-  color: white;
-  text-decoration: none;
-  font-weight: 600;
-  white-space: nowrap;
-}
+    .hero {
+      background: linear-gradient(180deg, #ffffff 0%, #edf4ff 100%);
+      padding: 40px 0 56px;
+      border-bottom: 1px solid #e5e7eb;
+    }
 
-/* HERO */
-.hero {
-  padding: 80px 20px;
-  text-align: center;
-  background: white;
-}
+    .hero-card {
+      display: grid;
+      grid-template-columns: 1.1fr 0.9fr;
+      gap: 28px;
+      align-items: center;
+    }
 
-.hero h1 {
-  font-size: 36px;
-  font-weight: 700;
-  margin: 0 0 10px;
-}
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      margin-bottom: 18px;
+    }
 
-.hero p {
-  font-size: 18px;
-  margin: 0 0 20px;
-  color: #555;
-}
+    .logo {
+      width: 72px;
+      height: 72px;
+      object-fit: contain;
+      border-radius: 16px;
+      background: #fff;
+      padding: 8px;
+      box-shadow: 0 8px 20px rgba(15, 23, 42, 0.08);
+    }
 
-/* BUTTONS */
-.btn {
-  display: inline-block;
-  margin: 8px;
-  padding: 14px 22px;
-  background: #ff6600;
-  color: white;
-  border-radius: 6px;
-  text-decoration: none;
-  font-weight: 600;
-  transition: 0.2s ease;
-}
+    .brand-text {
+      font-size: 14px;
+      text-transform: uppercase;
+      letter-spacing: 0.14em;
+      color: #2563eb;
+      font-weight: 800;
+    }
 
-.btn:hover {
-  opacity: 0.92;
-}
+    h1 {
+      font-size: clamp(34px, 5vw, 58px);
+      line-height: 1.08;
+      margin-bottom: 14px;
+      color: #0f172a;
+    }
 
-/* SECTIONS */
-.section {
-  padding: 60px 20px;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  text-align: center;
-}
+    .subtitle {
+      font-size: 19px;
+      color: #334155;
+      max-width: 650px;
+      margin-bottom: 20px;
+    }
 
-.section-alt {
-  background: white;
-}
+    .benefits {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-bottom: 24px;
+    }
 
-h2 {
-  font-size: 26px;
-  font-weight: 700;
-  margin: 0 0 20px;
-}
+    .benefit {
+      background: #fff;
+      border: 1px solid #dbeafe;
+      color: #0f172a;
+      border-radius: 999px;
+      padding: 10px 14px;
+      font-size: 14px;
+      font-weight: 700;
+      box-shadow: 0 4px 10px rgba(37, 99, 235, 0.06);
+    }
 
-/* GRID / CARDS */
-.grid {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
-  gap: 20px;
-  max-width: 1000px;
-}
+    .cta-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+      margin-bottom: 18px;
+    }
 
-.card {
-  background: white;
-  padding: 25px 20px;
-  border-radius: 12px;
-  width: 260px;
-  border: 1px solid #eee;
-  box-shadow: 0 4px 14px rgba(0,0,0,0.04);
-  transition: 0.25s ease;
-}
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      min-height: 52px;
+      padding: 14px 20px;
+      border-radius: 14px;
+      font-weight: 800;
+      border: none;
+      cursor: pointer;
+      transition: transform 0.15s ease, opacity 0.15s ease;
+    }
 
-.card:hover {
-  transform: translateY(-5px);
-  box-shadow: 0 12px 30px rgba(0,0,0,0.10);
-}
+    .btn:hover {
+      transform: translateY(-1px);
+      opacity: 0.97;
+    }
 
-.card h3 {
-  margin: 0 0 8px;
-  font-size: 18px;
-}
+    .btn-primary {
+      background: #2563eb;
+      color: #fff;
+      box-shadow: 0 12px 24px rgba(37, 99, 235, 0.22);
+    }
 
-.card p {
-  margin: 0;
-  font-size: 14px;
-  color: #666;
-}
+    .btn-dark {
+      background: #0f172a;
+      color: #fff;
+    }
 
-/* SIMPLE LIST TEXT */
-.feature-list p,
-.review-list p,
-.areas-text {
-  margin: 6px 0;
-  font-size: 16px;
-}
+    .btn-green {
+      background: #16a34a;
+      color: #fff;
+    }
 
-/* FORM */
-.form {
-  background: white;
-  padding: 25px;
-  border-radius: 12px;
-  max-width: 420px;
-  width: 100%;
-  box-shadow: 0 5px 20px rgba(0,0,0,0.10);
-}
+    .offer {
+      background: #fff7d6;
+      border: 1px solid #fde68a;
+      border-radius: 18px;
+      padding: 18px;
+      color: #7c2d12;
+      max-width: 520px;
+    }
 
-input, textarea {
-  width: 100%;
-  padding: 12px;
-  margin: 10px 0;
-  border-radius: 6px;
-  border: 1px solid #ccc;
-  box-sizing: border-box;
-  font-family: 'Montserrat', Arial, sans-serif;
-  font-size: 15px;
-}
+    .offer strong {
+      display: block;
+      font-size: 22px;
+      line-height: 1.2;
+      margin-bottom: 6px;
+    }
 
-textarea {
-  min-height: 120px;
-  resize: vertical;
-}
+    .form-card {
+      background: #fff;
+      border-radius: 24px;
+      padding: 26px;
+      box-shadow: 0 20px 50px rgba(15, 23, 42, 0.12);
+      border: 1px solid #e5e7eb;
+    }
 
-button {
-  background: #0d6efd;
-  color: white;
-  border: none;
-  padding: 15px;
-  width: 100%;
-  border-radius: 6px;
-  font-family: 'Montserrat', Arial, sans-serif;
-  font-weight: 600;
-  font-size: 15px;
-  cursor: pointer;
-}
+    .form-card h2 {
+      font-size: 28px;
+      margin-bottom: 8px;
+      color: #0f172a;
+    }
 
-/* FIXED BUTTON */
-.call-fixed {
-  position: fixed;
-  bottom: 15px;
-  left: 50%;
-  transform: translateX(-50%);
-  background: #ff6600;
-  color: white;
-  padding: 15px 25px;
-  border-radius: 50px;
-  text-decoration: none;
-  font-weight: 600;
-  box-shadow: 0 5px 15px rgba(0,0,0,0.25);
-  z-index: 999;
-}
+    .form-card p {
+      color: #475569;
+      margin-bottom: 18px;
+    }
 
-/* POPUP */
-.popup {
-  display: none;
-  position: fixed;
-  inset: 0;
-  background: rgba(0,0,0,0.6);
-  justify-content: center;
-  align-items: center;
-  z-index: 1000;
-}
+    .quote-form {
+      display: flex;
+      flex-direction: column;
+      gap: 14px;
+    }
 
-.popup-box {
-  background: white;
-  padding: 25px;
-  border-radius: 12px;
-  text-align: center;
-  max-width: 320px;
-  width: 90%;
-  position: relative;
-  box-shadow: 0 10px 30px rgba(0,0,0,0.2);
-}
+    .quote-form input,
+    .quote-form textarea {
+      width: 100%;
+      border: 1px solid #d1d5db;
+      border-radius: 14px;
+      padding: 14px 16px;
+      font: inherit;
+      background: #fff;
+      color: #111827;
+    }
 
-.popup-box h2 {
-  font-size: 24px;
-  margin-bottom: 10px;
-}
+    .quote-form input:focus,
+    .quote-form textarea:focus {
+      outline: none;
+      border-color: #2563eb;
+      box-shadow: 0 0 0 4px rgba(37, 99, 235, 0.12);
+    }
 
-.close {
-  position: absolute;
-  top: 10px;
-  right: 12px;
-  cursor: pointer;
-  font-size: 18px;
-}
+    .sms-note {
+      font-size: 12px;
+      color: #64748b;
+      line-height: 1.55;
+    }
 
-/* FOOTER */
-.footer {
-  background: #0f172a;
-  color: white;
-  text-align: center;
-  padding: 28px 20px 90px;
-}
+    .section {
+      padding: 64px 0;
+    }
 
-.footer p {
-  margin: 6px 0;
-  color: #d5d9e3;
-}
+    .section-title {
+      text-align: center;
+      margin-bottom: 36px;
+    }
 
-.footer a {
-  color: white;
-  text-decoration: none;
-  font-weight: 600;
-}
+    .section-title h2 {
+      font-size: clamp(28px, 4vw, 40px);
+      margin-bottom: 8px;
+      color: #0f172a;
+    }
 
-/* MOBILE */
-@media (max-width: 600px) {
-  .header {
-    flex-direction: column;
-    gap: 10px;
-    text-align: center;
-  }
+    .section-title p {
+      color: #475569;
+      max-width: 700px;
+      margin: 0 auto;
+    }
 
-  .logo {
-    height: 32px;
-  }
+    .services-grid,
+    .why-grid,
+    .reviews-grid {
+      display: grid;
+      gap: 18px;
+    }
 
-  .hero {
-    padding: 56px 15px;
-  }
+    .services-grid {
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+    }
 
-  .hero h1 {
-    font-size: 28px;
-  }
+    .why-grid,
+    .reviews-grid {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
 
-  .hero p {
-    font-size: 16px;
-  }
+    .card {
+      background: #fff;
+      border: 1px solid #e5e7eb;
+      border-radius: 22px;
+      padding: 22px;
+      box-shadow: 0 8px 18px rgba(15, 23, 42, 0.05);
+    }
 
-  .btn {
-    display: block;
-    width: 100%;
-    box-sizing: border-box;
-    margin: 10px 0;
-  }
+    .card h3 {
+      font-size: 22px;
+      margin-bottom: 10px;
+      color: #0f172a;
+    }
 
-  .section {
-    padding: 42px 15px;
-  }
+    .card p {
+      color: #475569;
+    }
 
-  .grid {
-    flex-direction: column;
-    align-items: center;
-  }
+    .areas {
+      text-align: center;
+      font-size: 18px;
+      font-weight: 700;
+      color: #0f172a;
+      background: #fff;
+      border: 1px solid #e5e7eb;
+      border-radius: 20px;
+      padding: 24px;
+    }
 
-  .card {
-    width: 100%;
-    max-width: 320px;
-  }
+    footer {
+      background: #0f172a;
+      color: #fff;
+      padding: 34px 0 24px;
+      margin-top: 24px;
+    }
 
-  .call-fixed {
-    width: 90%;
-    text-align: center;
-    box-sizing: border-box;
-  }
-}
-</style>
+    .footer-grid {
+      display: grid;
+      grid-template-columns: 1fr auto;
+      gap: 20px;
+      align-items: center;
+    }
+
+    .footer-brand h3 {
+      font-size: 24px;
+      margin-bottom: 6px;
+    }
+
+    .footer-brand p,
+    .footer-brand a {
+      color: #cbd5e1;
+    }
+
+    .footer-actions {
+      display: flex;
+      gap: 12px;
+      flex-wrap: wrap;
+      justify-content: flex-end;
+    }
+
+    .legal-links {
+      margin-top: 18px;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 14px;
+      color: #93c5fd;
+      font-weight: 700;
+    }
+
+    .copyright {
+      margin-top: 18px;
+      color: #94a3b8;
+      font-size: 14px;
+    }
+
+    .floating-offer {
+      position: fixed;
+      right: 18px;
+      bottom: 18px;
+      z-index: 1000;
+      background: #ffffff;
+      border: 1px solid #dbeafe;
+      box-shadow: 0 18px 40px rgba(15, 23, 42, 0.16);
+      border-radius: 18px;
+      padding: 16px;
+      max-width: 320px;
+    }
+
+    .floating-offer strong {
+      display: block;
+      margin-bottom: 6px;
+      color: #0f172a;
+    }
+
+    .floating-offer p {
+      color: #475569;
+      font-size: 14px;
+      margin-bottom: 12px;
+    }
+
+    .floating-offer form {
+      display: flex;
+      gap: 8px;
+    }
+
+    .floating-offer input {
+      flex: 1;
+      min-width: 0;
+      border: 1px solid #d1d5db;
+      border-radius: 12px;
+      padding: 12px 14px;
+      font: inherit;
+    }
+
+    .floating-offer button,
+    .floating-offer .close-x {
+      border: none;
+      cursor: pointer;
+      font: inherit;
+    }
+
+    .floating-offer .close-x {
+      position: absolute;
+      top: 8px;
+      right: 10px;
+      background: transparent;
+      font-size: 20px;
+      color: #64748b;
+    }
+
+    .modal {
+      display: none;
+      position: fixed;
+      inset: 0;
+      background: rgba(15, 23, 42, 0.65);
+      z-index: 2000;
+      padding: 24px;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .modal-content {
+      width: min(760px, 100%);
+      max-height: 85vh;
+      overflow: auto;
+      background: #fff;
+      border-radius: 22px;
+      padding: 28px 24px;
+      position: relative;
+    }
+
+    .modal-content h2 {
+      font-size: 30px;
+      color: #0f172a;
+      margin-bottom: 12px;
+    }
+
+    .modal-content p,
+    .modal-content li {
+      color: #334155;
+      margin-bottom: 12px;
+    }
+
+    .modal-content ul {
+      padding-left: 20px;
+    }
+
+    .modal-close {
+      position: absolute;
+      right: 14px;
+      top: 10px;
+      border: none;
+      background: transparent;
+      font-size: 30px;
+      cursor: pointer;
+      color: #64748b;
+    }
+
+    @media (max-width: 920px) {
+      .hero-card,
+      .footer-grid,
+      .services-grid,
+      .why-grid,
+      .reviews-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .footer-actions {
+        justify-content: flex-start;
+      }
+    }
+
+    @media (max-width: 640px) {
+      .hero {
+        padding-top: 24px;
+      }
+
+      .cta-row,
+      .floating-offer form,
+      .topbar-inner {
+        flex-direction: column;
+        align-items: stretch;
+      }
+
+      .btn {
+        width: 100%;
+      }
+
+      .floating-offer {
+        left: 12px;
+        right: 12px;
+        bottom: 12px;
+        max-width: none;
+      }
+    }
+  </style>
 </head>
-
 <body>
-
-<div class="header">
-  <div class="logo-wrap">
-    <img src="logo.png" alt="Lurico" class="logo">
-    <div class="logo-text">
-      <strong>LURICO</strong>
-      <span>Appliance Repair</span>
+  <div class="topbar">
+    <div class="container topbar-inner">
+      <div>Same-Day Appliance Repair in Palm Beach Area</div>
+      <a href="tel:+19543055539">📞 954-305-5539</a>
     </div>
   </div>
 
-  <a href="tel:+19543055539" class="header-call">📞 954-305-5539</a>
-</div>
+  <section class="hero">
+    <div class="container hero-card">
+      <div>
+        <div class="brand">
+          <img src="logo.png" alt="Lurico logo" class="logo" />
+          <div>
+            <div class="brand-text">Lurico Appliance Repair</div>
+            <div style="font-weight: 700; color: #475569;">Fast • Reliable • Affordable</div>
+          </div>
+        </div>
 
-<div class="hero">
-  <h1>Same-Day Appliance Repair</h1>
-  <p>Fast • Reliable • Affordable</p>
+        <h1>Same-Day Appliance Repair You Can Count On</h1>
+        <p class="subtitle">
+          We repair refrigerators, washers, dryers, dishwashers, ovens, and AC units — often the same day.
+        </p>
 
-  <a href="tel:+19543055539" class="btn">📞 Call Now</a>
-  <a href="sms:+19543055539" class="btn">💬 Text Us</a>
-  <a href="https://wa.me/19543055539" class="btn">🟢 WhatsApp</a>
-  <a href="#form" class="btn">📩 Get Quote</a>
-</div>
+        <div class="benefits">
+          <div class="benefit">✔ Licensed & Experienced</div>
+          <div class="benefit">✔ Warranty Included</div>
+          <div class="benefit">✔ Affordable Pricing</div>
+          <div class="benefit">✔ 5-Star Rated Service</div>
+        </div>
 
-<div class="section">
-  <h2>We Repair All Major Appliances</h2>
+        <div class="cta-row">
+          <a href="tel:+19543055539" class="btn btn-primary">📞 Call Now</a>
+          <a href="sms:+19543055539" class="btn btn-dark">💬 Text Us</a>
+          <a href="https://wa.me/19543055539" class="btn btn-green">🟢 WhatsApp</a>
+        </div>
 
-  <div class="grid">
-    <div class="card">
-      <h3>❄️ Refrigerators</h3>
-      <p>Cooling issues, leaks, no ice</p>
+        <div class="offer">
+          <strong>Get $20 Off Your Repair Today</strong>
+          <span>Call or text now — we respond fast.</span>
+        </div>
+      </div>
+
+      <div class="form-card" id="request-service">
+        <h2>Request Service</h2>
+        <p>Tell us what appliance is giving you trouble, and we’ll get back to you quickly.</p>
+
+        <form action="https://formspree.io/f/mdaplrvq" method="POST" class="quote-form">
+          <input type="hidden" name="_subject" value="New Service Request - Lurico Appliance Repair" />
+          <input type="text" name="name" placeholder="Your Name" required />
+          <input type="tel" name="phone" placeholder="Phone Number" required />
+          <textarea name="message" rows="5" placeholder="Describe your appliance issue" required></textarea>
+          <div class="sms-note">
+            By submitting this form, you agree to receive SMS messages from Lurico Appliance Repair related to your request. Reply STOP to opt out. Message frequency may vary. Message and data rates may apply.
+          </div>
+          <button type="submit" class="btn btn-primary">Get Service Now</button>
+        </form>
+      </div>
     </div>
+  </section>
 
-    <div class="card">
-      <h3>🧺 Washers</h3>
-      <p>Not spinning, leaking, noisy</p>
+  <section class="section">
+    <div class="container">
+      <div class="section-title">
+        <h2>We Repair All Major Appliances</h2>
+        <p>Fast troubleshooting and dependable repair for the appliances you use every day.</p>
+      </div>
+
+      <div class="services-grid">
+        <div class="card">
+          <h3>❄️ Refrigerators</h3>
+          <p>Cooling issues, leaks, warm fridge, no ice, unusual noise.</p>
+        </div>
+        <div class="card">
+          <h3>🧺 Washers</h3>
+          <p>Not spinning, leaking, not draining, vibration, strange sounds.</p>
+        </div>
+        <div class="card">
+          <h3>🔥 Dryers</h3>
+          <p>No heat, takes too long, not turning, burning smell, loud drum.</p>
+        </div>
+        <div class="card">
+          <h3>🍽 Dishwashers</h3>
+          <p>Not cleaning, won’t start, water problems, drainage and drying issues.</p>
+        </div>
+        <div class="card">
+          <h3>🍳 Ovens</h3>
+          <p>Not heating, wrong temperature, broken igniter, control panel issues.</p>
+        </div>
+        <div class="card">
+          <h3>❄️ AC Units</h3>
+          <p>No cooling, weak airflow, thermostat issues, unusual operation.</p>
+        </div>
+      </div>
     </div>
+  </section>
 
-    <div class="card">
-      <h3>🔥 Dryers</h3>
-      <p>No heat, takes too long</p>
+  <section class="section" style="background:#eef5ff;">
+    <div class="container">
+      <div class="section-title">
+        <h2>Why Choose Us</h2>
+        <p>We focus on fast response, honest service, and repairs that last.</p>
+      </div>
+
+      <div class="why-grid">
+        <div class="card">
+          <h3>Same-Day Service</h3>
+          <p>We work hard to get your appliance back up and running as soon as possible.</p>
+        </div>
+        <div class="card">
+          <h3>Experienced Technicians</h3>
+          <p>Skilled repair service with attention to detail and clear communication.</p>
+        </div>
+        <div class="card">
+          <h3>Affordable Pricing</h3>
+          <p>Fair rates with no unnecessary upsells and transparent recommendations.</p>
+        </div>
+        <div class="card">
+          <h3>Warranty Included</h3>
+          <p>We stand behind our work so you can feel confident after the repair.</p>
+        </div>
+      </div>
     </div>
+  </section>
 
-    <div class="card">
-      <h3>🍽 Dishwashers</h3>
-      <p>Not cleaning, water problems</p>
+  <section class="section">
+    <div class="container">
+      <div class="section-title">
+        <h2>Customer Reviews</h2>
+        <p>What local customers say about our service.</p>
+      </div>
+
+      <div class="reviews-grid">
+        <div class="card">
+          <h3>⭐⭐⭐⭐⭐ Mike</h3>
+          <p>Fixed the issue the same day. Fast response and very professional service.</p>
+        </div>
+        <div class="card">
+          <h3>⭐⭐⭐⭐⭐ Anna</h3>
+          <p>Quick, friendly, and honest. I would definitely call again.</p>
+        </div>
+      </div>
     </div>
+  </section>
 
-    <div class="card">
-      <h3>🍳 Ovens</h3>
-      <p>Not heating, temp issues</p>
+  <section class="section">
+    <div class="container">
+      <div class="section-title">
+        <h2>Service Areas</h2>
+        <p>We proudly serve customers across the Palm Beach area.</p>
+      </div>
+      <div class="areas">Palm Beach Gardens • West Palm Beach • Jupiter • Boca Raton</div>
     </div>
+  </section>
 
-    <div class="card">
-      <h3>❄️ AC Units</h3>
-      <p>No cooling, airflow issues</p>
+  <footer>
+    <div class="container footer-grid">
+      <div class="footer-brand">
+        <h3>Lurico Appliance Repair</h3>
+        <p><a href="tel:+19543055539">📞 954-305-5539</a></p>
+        <p><a href="mailto:luricollc@gmail.com">luricollc@gmail.com</a></p>
+        <p>Serving Palm Beach Gardens • West Palm Beach • Jupiter • Boca Raton</p>
+        <div class="legal-links">
+          <a href="#" onclick="openModal('privacyModal'); return false;">Privacy Policy</a>
+          <a href="#" onclick="openModal('termsModal'); return false;">Terms & Conditions</a>
+        </div>
+        <div class="copyright">© 2026 Lurico Appliance Repair. All rights reserved.</div>
+      </div>
+
+      <div class="footer-actions">
+        <a href="tel:+19543055539" class="btn btn-primary">📞 Call Now</a>
+        <a href="sms:+19543055539" class="btn btn-dark">💬 Text Us</a>
+      </div>
     </div>
-  </div>
-</div>
+  </footer>
 
-<div class="section section-alt">
-  <h2>Why Choose Us</h2>
-  <div class="feature-list">
-    <p>✔ Same Day Service</p>
-    <p>✔ Licensed & Experienced</p>
-    <p>✔ Affordable Pricing</p>
-    <p>✔ Warranty Included</p>
-  </div>
-</div>
-
-<div class="section">
-  <h2>Customer Reviews</h2>
-  <div class="review-list">
-    <p>⭐⭐⭐⭐⭐ Fixed same day – Mike</p>
-    <p>⭐⭐⭐⭐⭐ Fast and professional – Anna</p>
-  </div>
-</div>
-
-<div class="section section-alt" id="form">
-  <h2>Get a Free Quote</h2>
-
-  <form action="https://formspree.io/f/mdaplrvq" method="POST" class="form">
-    <input type="hidden" name="_replyto" value="luricollc@gmail.com">
-    <input type="hidden" name="_autoresponse" value="Thanks! We will contact you shortly">
-
-    <input type="text" name="name" placeholder="Your Name" required>
-    <input type="tel" name="phone" placeholder="Phone Number" required>
-    <textarea name="message" placeholder="What needs repair?" required></textarea>
-    <button type="submit">Send Request</button>
-  </form>
-</div>
-
-<div class="section">
-  <h2>Service Areas</h2>
-  <p class="areas-text">Palm Beach Gardens • West Palm Beach • Jupiter • Boca Raton</p>
-</div>
-
-<footer class="footer">
-  <p><strong>Lurico Appliance Repair</strong></p>
-  <p><a href="tel:+19543055539">📞 954-305-5539</a></p>
-  <p>Serving Palm Beach Gardens • West Palm Beach • Jupiter • Boca Raton</p>
-  <p>© 2026 Lurico Appliance Repair. All rights reserved.</p>
-</footer>
-
-<a href="tel:+19543055539" class="call-fixed">📞 Call Now</a>
-
-<div class="popup" id="popup">
-  <div class="popup-box">
-    <h2>$20 OFF Repair</h2>
-    <p>Leave your phone — we call you fast</p>
-
+  <div class="floating-offer" id="floatingOffer">
+    <button class="close-x" onclick="closeOffer()" aria-label="Close">×</button>
+    <strong>$20 OFF Repair</strong>
+    <p>Leave your phone — we call you fast.</p>
     <form action="https://formspree.io/f/mdaplrvq" method="POST">
-      <input type="tel" name="phone" placeholder="Phone" required>
-      <button type="submit">Get Discount</button>
+      <input type="tel" name="phone" placeholder="Your phone number" required />
+      <button type="submit" class="btn btn-primary" style="min-height:46px; padding:12px 14px;">Get Discount</button>
     </form>
-
-    <span class="close" onclick="closePopup()">✖</span>
   </div>
-</div>
 
-<script>
-setTimeout(() => {
-  document.getElementById("popup").style.display = "flex";
-}, 5000);
+  <div id="privacyModal" class="modal" onclick="outsideClose(event, 'privacyModal')">
+    <div class="modal-content">
+      <button class="modal-close" onclick="closeModal('privacyModal')">×</button>
+      <h2>Privacy Policy</h2>
+      <p>Lurico Appliance Repair respects your privacy. We collect personal information such as your name, phone number, and service details only to provide and improve our services.</p>
+      <p>We do not sell, rent, or share your personal information with third parties for marketing purposes.</p>
+      <p>By submitting your information, you agree that we may contact you via call, SMS, or email regarding your service request.</p>
+      <p>Message frequency may vary. Message and data rates may apply. You can opt out of SMS communication at any time by replying STOP.</p>
+      <p>For questions, contact us at <a href="mailto:luricollc@gmail.com" style="color:#2563eb; font-weight:700;">luricollc@gmail.com</a>.</p>
+    </div>
+  </div>
 
-function closePopup() {
-  document.getElementById("popup").style.display = "none";
-}
-</script>
+  <div id="termsModal" class="modal" onclick="outsideClose(event, 'termsModal')">
+    <div class="modal-content">
+      <button class="modal-close" onclick="closeModal('termsModal')">×</button>
+      <h2>Terms & Conditions</h2>
+      <p>By using our services, you agree to the following terms:</p>
+      <ul>
+        <li>You consent to receive calls and SMS messages related to your service request.</li>
+        <li>Message frequency may vary depending on service activity.</li>
+        <li>Standard message and data rates may apply.</li>
+        <li>You can opt out at any time by replying STOP to SMS messages.</li>
+        <li>We are not responsible for delays caused by external factors.</li>
+      </ul>
+      <p>All services are provided with a warranty as described during service.</p>
+      <p>Lurico Appliance Repair reserves the right to update these terms at any time.</p>
+    </div>
+  </div>
 
+  <script>
+    function openModal(id) {
+      document.getElementById(id).style.display = 'flex';
+    }
+
+    function closeModal(id) {
+      document.getElementById(id).style.display = 'none';
+    }
+
+    function outsideClose(event, id) {
+      if (event.target.id === id) {
+        closeModal(id);
+      }
+    }
+
+    function closeOffer() {
+      var offer = document.getElementById('floatingOffer');
+      if (offer) offer.style.display = 'none';
+    }
+  </script>
 </body>
 </html>
+
+ 

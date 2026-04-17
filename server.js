@@ -1,5 +1,35 @@
 require('dotenv').config();
+const https = require('https');
 
+const TELEGRAM_TOKEN = process.env.TELEGRAM_TOKEN;
+const TELEGRAM_CHAT_ID = process.env.TELEGRAM_CHAT_ID;
+
+function sendTelegram(text) {
+  return new Promise((resolve, reject) => {
+    if (!TELEGRAM_TOKEN || !TELEGRAM_CHAT_ID) return resolve();
+
+    const data = JSON.stringify({ chat_id: TELEGRAM_CHAT_ID, text });
+
+    const req = https.request(
+      `https://api.telegram.org/bot${TELEGRAM_TOKEN}/sendMessage`,
+      {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          'Content-Length': Buffer.byteLength(data),
+        },
+      },
+      (res) => {
+        res.on('data', () => {});
+        res.on('end', resolve);
+      }
+    );
+
+    req.on('error', reject);
+    req.write(data);
+    req.end();
+  });
+}
 const express = require('express');
 const bodyParser = require('body-parser');
 const twilio = require('twilio');

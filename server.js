@@ -67,7 +67,15 @@ Message: ${message}`,
       to: '+19543055539'      // твой личный номер
     });
 
-    res.json({ success: true });
+    const telegramText = `🩾 Lurico request:
+Name: ${name}
+Phone: ${phone}
+Address: ${address}
+Appliance: ${appliance}
+Issue: ${issue}
+Message: ${message}`;
+await sendTelegram(telegramText);
+res.json({ success: true });
   } catch (error) {
     console.error(error);
     res.status(500).json({ success: false });

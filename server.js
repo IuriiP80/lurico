@@ -1,20 +1,34 @@
 require('dotenv').config();
 const https = require('https');
 const express = require('express');
-const bodyParser = require('body-parser');
-const twilio = require('twilio');
 const cors = require('cors');
+const twilio = require('twilio');
 
+const app = express();
+app.use(cors());
+app.use(express.json());
+app.use(express.urlencoded({ extended: true }));
+
+// ENV
 const TELEGRAM_TOKEN = process.env.TELEGRAM_TOKEN;
 const TELEGRAM_CHAT_ID = process.env.TELEGRAM_CHAT_ID;
-const accountSid = process.env.TWILIO_SID;
-const authToken = process.env.TWILIO_AUTH_TOKEN;
+const TWILIO_SID = process.env.TWILIO_SID;
+const TWILIO_AUTH = process.env.TWILIO_AUTH_TOKEN;
+const TWILIO_FROM = process.env.TWILIO_FROM;
+const ALERT_TO = process.env.ALERT_TO;
+const WEBHOOK_KEY = process.env.GOOGLE_WEBHOOK_KEY;
 
+const client = twilio(TWILIO_SID, TWILIO_AUTH);
+
+// TELEGRAM
 function sendTelegram(text) {
   return new Promise((resolve, reject) => {
     if (!TELEGRAM_TOKEN || !TELEGRAM_CHAT_ID) return resolve();
 
-    const data = JSON.stringify({ chat_id: TELEGRAM_CHAT_ID, text });
+    const data = JSON.stringify({
+      chat_id: TELEGRAM_CHAT_ID,
+      text,
+    });
 
     const req = https.request(
       `https://api.telegram.org/bot${TELEGRAM_TOKEN}/sendMessage`,
@@ -37,61 +51,51 @@ function sendTelegram(text) {
   });
 }
 
-const app = express();
-app.use(cors());
-app.use(bodyParser.urlencoded({ extended: false }));
-app.use(bodyParser.json());
-
-const client = twilio(accountSid, authToken);
-
-app.post('/send', async (req, res) => {
-  const { name, phone, address, appliance, issue, message } = req.body;
-
-  try {
-    await client.messages.create({
-      body: `🔥 New Service Request:
-Name: ${name}
-Phone: ${phone}
-Address: ${address}
-Appliance: ${appliance}
-Issue: ${issue}
-Message: ${message}`,
-      from: '+15619561773',
-      to: '+19543055539'
-    });
-
-    const telegramText = `🩾 Lurico request:
-Name: ${name}
-Phone: ${phone}
-Address: ${address}
-Appliance: ${appliance}
-Issue: ${issue}
-Message: ${message}`;
-
-    await sendTelegram(telegramText);
-
-    res.json({ success: true });
-  } catch (error) {
-    console.error(error);
-    res.status(500).json({ success: false });
-  }
+// ПРОСТАЯ ПРОВЕРКА
+app.get('/', (req, res) => {
+  res.send('🚀 Lurico server is running');
 });
 
+// GOOGLE LEADS WEBHOOK
 app.post('/google-lead', async (req, res) => {
   try {
-    const lead = req.body;
+    // защита
+    if (WEBHOOK_KEY) {
+      const key = req.headers['authorization'] || req.query.key;
+      if (key !== WEBHOOK_KEY) {
+        return res.status(403).send('Forbidden');
+      }
+    }
 
-    const telegramText = `🔥 New Google Lead:
-Name: ${lead.full_name || lead.name || 'N/A'}
-Phone: ${lead.phone_number || lead.phone || 'N/A'}
-Email: ${lead.email || 'N/A'}`;
+    const lead = req.body || {};
 
-    await sendTelegram(telegramText);
+    const name = lead.full_name || lead.name || 'N/A';
+    const phone = lead.phone_number || lead.phone || 'N/A';
+    const email = lead.email || 'N/A';
+
+    const text = `🔥 Google Lead:
+Name: ${name}
+Phone: ${phone}
+Email: ${email}`;
+
+    // Telegram
+    await sendTelegram(text);
+
+    // SMS
+    if (TWILIO_SID) {
+      await client.messages.create({
+        body: text,
+        from: TWILIO_FROM,
+        to: ALERT_TO,
+      });
+    }
+
+    console.log('✅ Lead received:', lead);
 
     res.sendStatus(200);
-  } catch (error) {
-    console.error('Google lead error:', error);
-    res.sendStatus(500);
+  } catch (err) {
+    console.error('❌ ERROR:', err);
+    res.status(500).send('Error');
   }
 });
 

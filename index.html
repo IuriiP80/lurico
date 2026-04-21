@@ -531,46 +531,71 @@
         <h2>Request Service</h2>
         <p>Tell us what appliance is giving you trouble, and we’ll get back to you quickly.</p>
 
-        <form action="https://formspree.io/f/mdayejrl" method="POST" class="quote-form">
-          <input type="hidden" name="_subject" value="New Service Request - Lurico Appliance Repair" />
+      <form action="https://formspree.io/f/mdaplrvq" method="POST" class="service-form">
 
-          <input type="text" name="name" placeholder="Your Name" required />
+  <h2 style="margin-bottom:10px;">Request Service</h2>
+  <p style="font-size:14px; color:#6b7280; margin-bottom:20px;">
+    Fast response. Same-day service available.
+  </p>
 
-          <input type="tel" name="phone" placeholder="Phone Number" required />
+  <!-- Name -->
+  <input type="text" name="name" placeholder="Your Name" required>
 
-          <input type="text" name="address" placeholder="Service Address" required />
+  <!-- Phone -->
+  <input type="tel" name="phone" placeholder="Phone Number" required>
 
-          <div class="row">
-            <select id="appliance" name="appliance" required>
-              <option value="">Select Appliance</option>
-              <option>Refrigerator</option>
-              <option>Washer</option>
-              <option>Dryer</option>
-              <option>Dishwasher</option>
-              <option>Oven / Range</option>
-              <option>AC Unit</option>
-            </select>
+  <!-- Address -->
+  <input type="text" name="address" placeholder="Service Address" required>
 
-            <select id="issue" name="issue" required>
-              <option value="">Select Issue</option>
-              <option>Not cooling</option>
-              <option>Not heating</option>
-              <option>Leaking water</option>
-              <option>Not turning on</option>
-              <option>Making noise</option>
-              <option>Not draining</option>
-              <option>Not spinning</option>
-            </select>
-          </div>
+  <!-- Appliance + Issue -->
+  <div class="form-row">
+    
+    <div class="select-group">
+      <label>Choose appliance</label>
+      <div class="select-wrap">
+        <select name="appliance" required>
+          <option value="" disabled selected>Select appliance</option>
+          <option>Refrigerator</option>
+          <option>Washer</option>
+          <option>Dryer</option>
+          <option>Dishwasher</option>
+          <option>Oven / Range</option>
+          <option>AC Unit</option>
+        </select>
+      </div>
+    </div>
 
-          <textarea id="message" name="message" rows="5" placeholder="Describe your appliance issue" required></textarea>
+    <div class="select-group">
+      <label>What’s the issue?</label>
+      <div class="select-wrap">
+        <select name="issue" required>
+          <option value="" disabled selected>Select issue</option>
+          <option>Not cooling</option>
+          <option>Not heating</option>
+          <option>Leaking water</option>
+          <option>Not turning on</option>
+          <option>Making noise</option>
+          <option>Not draining</option>
+          <option>Not spinning</option>
+        </select>
+      </div>
+    </div>
 
-          <label style="font-size:13px;"><input type="checkbox" required /> I agree to receive SMS messages from Lurico Appliance Repair</label>           <div class="sms-note">
-            By submitting this form, you agree to receive SMS messages from Lurico Appliance Repair related to your request. Reply STOP to opt out. Message frequency may vary. Message and data rates may apply.
-          </div>
+  </div>
 
-          <button type="submit" class="btn btn-primary">Get Service Now</button>
-        </form>
+  <!-- Message -->
+  <textarea name="message" placeholder="Describe the problem (optional)"></textarea>
+
+  <!-- SMS Consent -->
+  <label class="consent">
+    <input type="checkbox" required>
+    I agree to receive SMS updates about my request. Message & data rates may apply. Reply STOP to opt out.
+  </label>
+
+  <!-- Button -->
+  <button type="submit">Get Free Quote</button>
+
+</form>
 
         <script>
           const appliance = document.getElementById('appliance');

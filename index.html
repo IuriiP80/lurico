@@ -3,37 +3,1295 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Lurico Appliance Repair</title>
-  <meta name="description" content="Same-day appliance repair in Palm Beach Gardens, West Palm Beach, Jupiter, Palm City, Hobe Sound, Boca Raton. Fast, reliable, and affordable service." />
+  <title>Lurico Appliance Repair | Same-Day Service in Palm Beach Area</title>
+  <meta name="description" content="Same-day appliance repair in Palm Beach Gardens, West Palm Beach, Jupiter, and Boca Raton. Call Lurico Appliance Repair for fast, reliable service." />
+  <meta name="theme-color" content="#0f172a" />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800&display=swap" rel="stylesheet">
   <style>
-    * {
-      box-sizing: border-box;
-      margin: 0;
-      padding: 0;
+    :root {
+      --bg: #f5f7fb;
+      --surface: #ffffff;
+      --surface-2: #eef3fb;
+      --text: #0f172a;
+      --muted: #475569;
+      --line: #dbe4f0;
+      --primary: #0f62fe;
+      --primary-dark: #0a4ecc;
+      --accent: #16a34a;
+      --warning: #f59e0b;
+      --danger: #dc2626;
+      --shadow: 0 15px 45px rgba(15, 23, 42, 0.10);
+      --radius: 22px;
+      --radius-sm: 16px;
+      --container: 1180px;
     }
 
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
     body {
-      font-family: Montserrat, Arial, sans-serif;
-      background: #f7f9fc;
-      color: #1b1b1b;
-      line-height: 1.6;
+      margin: 0;
+      font-family: 'Montserrat', sans-serif;
+      color: var(--text);
+      background:
+        radial-gradient(circle at top left, rgba(15,98,254,0.08), transparent 30%),
+        radial-gradient(circle at top right, rgba(22,163,74,0.08), transparent 26%),
+        var(--bg);
+      line-height: 1.55;
     }
 
-    a {
-      text-decoration: none;
-      color: inherit;
-    }
-
-    img {
-      max-width: 100%;
-      display: block;
-    }
+    img { max-width: 100%; display: block; }
+    a { color: inherit; text-decoration: none; }
+    button, input, select, textarea { font: inherit; }
 
     .container {
-      width: min(1120px, calc(100% - 32px));
+      width: min(var(--container), calc(100% - 32px));
       margin: 0 auto;
     }
 
+    .topbar {
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+      backdrop-filter: blur(16px);
+      background: rgba(255,255,255,0.86);
+      border-bottom: 1px solid rgba(219, 228, 240, 0.85);
+    }
+
+    .topbar-inner {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 18px;
+      min-height: 74px;
+    }
+
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      min-width: 0;
+    }
+
+    .brand-badge {
+      width: 46px;
+      height: 46px;
+      border-radius: 14px;
+      background: linear-gradient(135deg, #0f62fe, #0a4ecc);
+      display: grid;
+      place-items: center;
+      color: white;
+      font-weight: 800;
+      font-size: 1rem;
+      box-shadow: 0 10px 24px rgba(15, 98, 254, 0.28);
+      flex: 0 0 auto;
+    }
+
+    .brand-text {
+      min-width: 0;
+    }
+
+    .brand-text strong {
+      display: block;
+      font-size: 1rem;
+      line-height: 1.15;
+    }
+
+    .brand-text span {
+      display: block;
+      font-size: 0.82rem;
+      color: var(--muted);
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+
+    .top-actions {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      flex-wrap: wrap;
+      justify-content: flex-end;
+    }
+
+    .mini-badge {
+      padding: 10px 14px;
+      border-radius: 999px;
+      background: #edfdf2;
+      color: #166534;
+      font-size: 0.82rem;
+      font-weight: 700;
+      border: 1px solid #c9f1d5;
+    }
+
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      min-height: 52px;
+      padding: 0 20px;
+      border-radius: 16px;
+      border: 1px solid transparent;
+      cursor: pointer;
+      transition: transform .18s ease, box-shadow .18s ease, background .18s ease, border-color .18s ease;
+      font-weight: 700;
+      text-align: center;
+    }
+
+    .btn:hover { transform: translateY(-1px); }
+    .btn:active { transform: translateY(0); }
+
+    .btn-primary {
+      background: linear-gradient(135deg, var(--primary), var(--primary-dark));
+      color: white;
+      box-shadow: 0 14px 32px rgba(15, 98, 254, 0.24);
+    }
+
+    .btn-primary:hover { box-shadow: 0 18px 36px rgba(15, 98, 254, 0.28); }
+
+    .btn-secondary {
+      background: white;
+      border-color: var(--line);
+      color: var(--text);
+    }
+
+    .btn-whatsapp {
+      background: #16a34a;
+      color: white;
+      box-shadow: 0 14px 32px rgba(22, 163, 74, 0.24);
+    }
+
+    .hero {
+      padding: 36px 0 20px;
+    }
+
+    .hero-grid {
+      display: grid;
+      grid-template-columns: 1.08fr 0.92fr;
+      gap: 28px;
+      align-items: stretch;
+    }
+
+    .hero-card,
+    .form-card,
+    .section-card,
+    .discount-card,
+    .review-card,
+    .area-card,
+    .service-card,
+    .trust-card {
+      background: rgba(255,255,255,0.95);
+      border: 1px solid rgba(219, 228, 240, 0.9);
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+    }
+
+    .hero-card {
+      padding: 38px;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .hero-card::before {
+      content: "";
+      position: absolute;
+      inset: auto -80px -90px auto;
+      width: 220px;
+      height: 220px;
+      background: radial-gradient(circle, rgba(15,98,254,0.14), transparent 70%);
+      pointer-events: none;
+    }
+
+    .eyebrow {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 10px 14px;
+      border-radius: 999px;
+      background: #eaf1ff;
+      color: var(--primary-dark);
+      font-weight: 700;
+      font-size: 0.84rem;
+      margin-bottom: 18px;
+    }
+
+    h1 {
+      font-size: clamp(2rem, 4vw, 3.5rem);
+      line-height: 1.04;
+      margin: 0 0 16px;
+      letter-spacing: -0.03em;
+    }
+
+    .hero-lead {
+      font-size: 1.02rem;
+      color: var(--muted);
+      margin: 0 0 24px;
+      max-width: 640px;
+    }
+
+    .hero-stats {
+      display: grid;
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+      gap: 14px;
+      margin: 26px 0 28px;
+    }
+
+    .stat {
+      background: var(--surface-2);
+      border: 1px solid #dce6f5;
+      border-radius: 18px;
+      padding: 16px;
+    }
+
+    .stat strong {
+      display: block;
+      font-size: 1.05rem;
+      margin-bottom: 4px;
+    }
+
+    .stat span {
+      display: block;
+      color: var(--muted);
+      font-size: 0.9rem;
+    }
+
+    .hero-cta {
+      display: flex;
+      gap: 12px;
+      flex-wrap: wrap;
+      margin-bottom: 18px;
+    }
+
+    .hero-note {
+      color: var(--muted);
+      font-size: 0.9rem;
+    }
+
+    .form-card {
+      padding: 28px;
+      position: relative;
+    }
+
+    .form-card h2 {
+      margin: 0 0 8px;
+      font-size: 1.55rem;
+    }
+
+    .form-card p {
+      margin: 0 0 22px;
+      color: var(--muted);
+    }
+
+    .offer-chip {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 10px 14px;
+      border-radius: 999px;
+      background: #fff8e8;
+      color: #a16207;
+      border: 1px solid #fde7b1;
+      font-weight: 700;
+      font-size: 0.84rem;
+      margin-bottom: 14px;
+    }
+
+    form {
+      display: grid;
+      gap: 16px;
+    }
+
+    .grid-2 {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 14px;
+    }
+
+    .field {
+      display: grid;
+      gap: 8px;
+    }
+
+    .field label {
+      font-weight: 700;
+      font-size: 0.92rem;
+    }
+
+    .input,
+    .textarea,
+    .select-hidden {
+      width: 100%;
+      border: 1.5px solid var(--line);
+      background: white;
+      border-radius: 16px;
+      padding: 15px 16px;
+      color: var(--text);
+      outline: none;
+      transition: border-color .18s ease, box-shadow .18s ease, transform .18s ease;
+    }
+
+    .input:focus,
+    .textarea:focus {
+      border-color: #8cb2ff;
+      box-shadow: 0 0 0 4px rgba(15, 98, 254, 0.10);
+    }
+
+    .textarea {
+      min-height: 130px;
+      resize: vertical;
+    }
+
+    .selector-wrap {
+      display: grid;
+      gap: 10px;
+    }
+
+    .selector-title {
+      font-weight: 700;
+      font-size: 0.92rem;
+    }
+
+    .option-grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 10px;
+    }
+
+    .option-btn {
+      border: 1.5px solid var(--line);
+      background: white;
+      border-radius: 16px;
+      padding: 14px 14px;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      text-align: left;
+      transition: all .18s ease;
+      font-weight: 700;
+      color: var(--text);
+    }
+
+    .option-btn small {
+      display: block;
+      color: var(--muted);
+      font-weight: 600;
+      font-size: 0.76rem;
+      margin-top: 2px;
+    }
+
+    .option-btn:hover {
+      transform: translateY(-1px);
+      border-color: #b8ccef;
+      box-shadow: 0 8px 18px rgba(15, 23, 42, 0.06);
+    }
+
+    .option-btn.active {
+      border-color: #90b2ff;
+      background: #eef4ff;
+      box-shadow: 0 8px 18px rgba(15, 98, 254, 0.12);
+    }
+
+    .icon-box {
+      width: 42px;
+      height: 42px;
+      border-radius: 14px;
+      background: var(--surface-2);
+      display: grid;
+      place-items: center;
+      font-size: 1.1rem;
+      flex: 0 0 auto;
+    }
+
+    .issue-pills {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+    }
+
+    .issue-pill {
+      border: 1.5px solid var(--line);
+      background: white;
+      color: var(--text);
+      padding: 12px 14px;
+      border-radius: 999px;
+      cursor: pointer;
+      font-weight: 700;
+      transition: all .18s ease;
+    }
+
+    .issue-pill.active {
+      background: #eef4ff;
+      border-color: #90b2ff;
+      color: var(--primary-dark);
+    }
+
+    .consent {
+      display: flex;
+      align-items: flex-start;
+      gap: 10px;
+      font-size: 0.84rem;
+      color: var(--muted);
+      line-height: 1.45;
+    }
+
+    .consent input {
+      margin-top: 4px;
+      width: 18px;
+      height: 18px;
+      accent-color: var(--primary);
+      flex: 0 0 auto;
+    }
+
+    .submit-row {
+      display: flex;
+      gap: 12px;
+      flex-wrap: wrap;
+      align-items: center;
+    }
+
+    .submit-row .btn {
+      min-width: 220px;
+    }
+
+    .fine-print {
+      color: var(--muted);
+      font-size: 0.8rem;
+    }
+
+    .status-success {
+      color: #166534;
+      font-weight: 700;
+    }
+
+    .status-error {
+      color: #b91c1c;
+      font-weight: 700;
+    }
+
+    .is-loading {
+      opacity: 0.75;
+      pointer-events: none;
+    }
+
+    section {
+      padding: 26px 0;
+    }
+
+    .section-head {
+      display: flex;
+      justify-content: space-between;
+      gap: 20px;
+      align-items: end;
+      margin-bottom: 20px;
+    }
+
+    .section-head h2 {
+      margin: 0 0 8px;
+      font-size: clamp(1.6rem, 3vw, 2.3rem);
+      line-height: 1.08;
+    }
+
+    .section-head p {
+      margin: 0;
+      color: var(--muted);
+      max-width: 690px;
+    }
+
+    .services-grid,
+    .trust-grid,
+    .reviews-grid,
+    .areas-grid {
+      display: grid;
+      gap: 18px;
+    }
+
+    .services-grid {
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+    }
+
+    .trust-grid {
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+    }
+
+    .reviews-grid {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+
+    .areas-grid {
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+    }
+
+    .service-card,
+    .trust-card,
+    .review-card,
+    .area-card,
+    .discount-card {
+      padding: 24px;
+    }
+
+    .service-card h3,
+    .trust-card h3,
+    .review-card h3,
+    .area-card h3 {
+      margin: 14px 0 10px;
+      font-size: 1.08rem;
+    }
+
+    .service-card p,
+    .trust-card p,
+    .review-card p,
+    .area-card p,
+    .discount-card p {
+      margin: 0;
+      color: var(--muted);
+      font-size: 0.94rem;
+    }
+
+    .service-card ul {
+      margin: 14px 0 0;
+      padding-left: 18px;
+      color: var(--muted);
+      font-size: 0.92rem;
+    }
+
+    .service-card li + li { margin-top: 6px; }
+
+    .stars {
+      color: #f59e0b;
+      letter-spacing: 0.05em;
+      font-size: 1rem;
+      font-weight: 800;
+    }
+
+    .discount-card {
+      display: flex;
+      justify-content: space-between;
+      gap: 24px;
+      align-items: center;
+      background: linear-gradient(135deg, #0f172a, #1e293b);
+      color: white;
+      border-color: rgba(255,255,255,0.08);
+    }
+
+    .discount-card h2 {
+      margin: 0 0 10px;
+      font-size: clamp(1.6rem, 3vw, 2.4rem);
+      line-height: 1.08;
+    }
+
+    .discount-card p {
+      color: rgba(255,255,255,0.76);
+      max-width: 700px;
+    }
+
+    .discount-actions {
+      display: flex;
+      gap: 12px;
+      flex-wrap: wrap;
+      margin-top: 18px;
+    }
+
+    .discount-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 12px 16px;
+      border-radius: 999px;
+      background: rgba(245, 158, 11, 0.14);
+      color: #fbbf24;
+      font-weight: 800;
+      border: 1px solid rgba(251, 191, 36, 0.2);
+      white-space: nowrap;
+    }
+
+    .footer {
+      padding: 18px 0 96px;
+    }
+
+    .footer-card {
+      background: #0f172a;
+      color: white;
+      border-radius: 28px;
+      padding: 30px;
+      display: grid;
+      grid-template-columns: 1.25fr 0.75fr;
+      gap: 22px;
+    }
+
+    .footer h3 {
+      margin: 0 0 10px;
+      font-size: 1.2rem;
+    }
+
+    .footer p,
+    .footer a,
+    .footer li {
+      color: rgba(255,255,255,0.78);
+    }
+
+    .footer-links {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px 18px;
+      margin-top: 16px;
+    }
+
+    .footer-contact {
+      display: grid;
+      gap: 12px;
+      align-content: start;
+    }
+
+    .footer-chip {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      padding: 12px 14px;
+      border-radius: 16px;
+      background: rgba(255,255,255,0.06);
+      border: 1px solid rgba(255,255,255,0.08);
+    }
+
+    .sticky-bar {
+      position: fixed;
+      left: 14px;
+      right: 14px;
+      bottom: 14px;
+      z-index: 1000;
+      background: rgba(15, 23, 42, 0.94);
+      color: white;
+      border-radius: 22px;
+      border: 1px solid rgba(255,255,255,0.08);
+      box-shadow: 0 18px 40px rgba(15, 23, 42, 0.28);
+      backdrop-filter: blur(14px);
+    }
+
+    .sticky-inner {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 16px;
+      padding: 14px 16px;
+    }
+
+    .sticky-text strong {
+      display: block;
+      font-size: 1rem;
+      margin-bottom: 2px;
+    }
+
+    .sticky-text span {
+      color: rgba(255,255,255,0.72);
+      font-size: 0.84rem;
+    }
+
+    .sticky-actions {
+      display: flex;
+      gap: 10px;
+      flex-wrap: wrap;
+      justify-content: flex-end;
+    }
+
+    .sticky-actions .btn {
+      min-height: 46px;
+      padding-inline: 16px;
+      border-radius: 14px;
+    }
+
+    .btn-light {
+      background: white;
+      color: var(--text);
+    }
+
+    .btn-ghost {
+      background: rgba(255,255,255,0.08);
+      color: white;
+      border-color: rgba(255,255,255,0.1);
+    }
+
+    .sr-only {
+      position: absolute;
+      width: 1px;
+      height: 1px;
+      padding: 0;
+      margin: -1px;
+      overflow: hidden;
+      clip: rect(0, 0, 0, 0);
+      white-space: nowrap;
+      border: 0;
+    }
+
+    @media (max-width: 1080px) {
+      .hero-grid,
+      .footer-card,
+      .discount-card {
+        grid-template-columns: 1fr;
+      }
+
+      .services-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+      .trust-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+      .areas-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+      .hero-stats { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+    }
+
+    @media (max-width: 760px) {
+      .topbar-inner,
+      .section-head,
+      .sticky-inner,
+      .submit-row {
+        flex-direction: column;
+        align-items: stretch;
+      }
+
+      .top-actions,
+      .sticky-actions {
+        width: 100%;
+        justify-content: stretch;
+      }
+
+      .top-actions .btn,
+      .sticky-actions .btn,
+      .submit-row .btn {
+        width: 100%;
+      }
+
+      .hero-card,
+      .form-card,
+      .service-card,
+      .trust-card,
+      .review-card,
+      .area-card,
+      .discount-card,
+      .footer-card {
+        padding: 22px;
+      }
+
+      .grid-2,
+      .services-grid,
+      .trust-grid,
+      .reviews-grid,
+      .areas-grid,
+      .option-grid,
+      .hero-stats {
+        grid-template-columns: 1fr;
+      }
+
+      .mini-badge { display: none; }
+      .sticky-text { text-align: center; }
+      .footer { padding-bottom: 118px; }
+    }
+  </style>
+</head>
+<body>
+  <header class="topbar">
+    <div class="container topbar-inner">
+      <a href="#top" class="brand" aria-label="Lurico Appliance Repair home">
+        <div class="brand-badge">L</div>
+        <div class="brand-text">
+          <strong>Lurico Appliance Repair</strong>
+          <span>Same-day service in Palm Beach Area</span>
+        </div>
+      </a>
+
+      <div class="top-actions">
+        <div class="mini-badge">Fast response • $20 Off Available</div>
+        <a class="btn btn-secondary" href="sms:+19543055539">💬 Text Us</a>
+        <a class="btn btn-primary" href="tel:+19543055539">📞 Call 954-305-5539</a>
+      </div>
+    </div>
+  </header>
+
+  <main id="top">
+    <section class="hero">
+      <div class="container hero-grid">
+        <div class="hero-card">
+          <div class="eyebrow">✔ Same-Day Appointments • Palm Beach Area</div>
+          <h1>Fast appliance repair that feels professional from the first call.</h1>
+          <p class="hero-lead">
+            We repair refrigerators, washers, dryers, dishwashers, ovens, and AC units across Palm Beach Gardens, West Palm Beach, Jupiter, and Boca Raton.
+            Fast scheduling, honest recommendations, and dependable work.
+          </p>
+
+          <div class="hero-cta">
+            <a class="btn btn-primary" href="#request-service">Get Free Quote</a>
+            <a class="btn btn-secondary" href="tel:+19543055539">📞 Call Now</a>
+            <a class="btn btn-whatsapp" href="https://wa.me/19543055539" target="_blank" rel="noopener">🟢 WhatsApp</a>
+          </div>
+
+          <div class="hero-stats">
+            <div class="stat">
+              <strong>Same-Day</strong>
+              <span>Fast response when available</span>
+            </div>
+            <div class="stat">
+              <strong>Warranty</strong>
+              <span>Included with repair work</span>
+            </div>
+            <div class="stat">
+              <strong>Honest Pricing</strong>
+              <span>No unnecessary upsells</span>
+            </div>
+            <div class="stat">
+              <strong>5-Star Focus</strong>
+              <span>Friendly and reliable service</span>
+            </div>
+          </div>
+
+          <div class="hero-note">
+            Call or text now to check today’s availability and claim your <strong>$20 OFF</strong> repair offer.
+          </div>
+        </div>
+
+        <aside class="form-card" id="request-service">
+          <div class="offer-chip">🔥 Get $20 Off Your Repair Today</div>
+          <h2>Request Service</h2>
+          <p>Tell us what appliance is giving you trouble and we’ll get back to you quickly.</p>
+
+          <form id="serviceForm" action="#" method="post" novalidate>
+            <div class="grid-2">
+              <div class="field">
+                <label for="name">Full Name</label>
+                <input class="input" id="name" name="name" type="text" placeholder="Your name" required>
+              </div>
+              <div class="field">
+                <label for="phone">Phone Number</label>
+                <input class="input" id="phone" name="phone" type="tel" placeholder="(954) 305-5539" required>
+              </div>
+            </div>
+
+            <div class="field">
+              <label for="address">Service Address</label>
+              <input class="input" id="address" name="address" type="text" placeholder="Street address, city">
+            </div>
+
+            <div class="grid-2">
+              <div class="field selector-wrap">
+                <div class="selector-title">Choose appliance</div>
+                <div class="option-grid" id="applianceOptions">
+                  <button type="button" class="option-btn" data-type="appliance" data-value="Refrigerator">
+                    <span class="icon-box">❄️</span>
+                    <span>Refrigerator<small>Cooling, ice, leaks</small></span>
+                  </button>
+                  <button type="button" class="option-btn" data-type="appliance" data-value="Washer">
+                    <span class="icon-box">🧺</span>
+                    <span>Washer<small>Spin, drain, leaks</small></span>
+                  </button>
+                  <button type="button" class="option-btn" data-type="appliance" data-value="Dryer">
+                    <span class="icon-box">🔥</span>
+                    <span>Dryer<small>No heat, loud drum</small></span>
+                  </button>
+                  <button type="button" class="option-btn" data-type="appliance" data-value="Dishwasher">
+                    <span class="icon-box">🍽</span>
+                    <span>Dishwasher<small>Drain, wash, dry</small></span>
+                  </button>
+                  <button type="button" class="option-btn" data-type="appliance" data-value="Oven / Range">
+                    <span class="icon-box">🍳</span>
+                    <span>Oven / Range<small>Heat, igniter, controls</small></span>
+                  </button>
+                  <button type="button" class="option-btn" data-type="appliance" data-value="AC Unit">
+                    <span class="icon-box">💨</span>
+                    <span>AC Unit<small>Cooling, airflow, thermostat</small></span>
+                  </button>
+                </div>
+                <select class="select-hidden sr-only" id="appliance" name="appliance" required>
+                  <option value="">Select appliance</option>
+                  <option value="Refrigerator">Refrigerator</option>
+                  <option value="Washer">Washer</option>
+                  <option value="Dryer">Dryer</option>
+                  <option value="Dishwasher">Dishwasher</option>
+                  <option value="Oven / Range">Oven / Range</option>
+                  <option value="AC Unit">AC Unit</option>
+                </select>
+              </div>
+
+              <div class="field selector-wrap">
+                <div class="selector-title">What’s the issue?</div>
+                <div class="issue-pills" id="issueOptions">
+                  <button type="button" class="issue-pill" data-type="issue" data-value="Not cooling">Not cooling</button>
+                  <button type="button" class="issue-pill" data-type="issue" data-value="Not heating">Not heating</button>
+                  <button type="button" class="issue-pill" data-type="issue" data-value="Leaking water">Leaking water</button>
+                  <button type="button" class="issue-pill" data-type="issue" data-value="Not turning on">Not turning on</button>
+                  <button type="button" class="issue-pill" data-type="issue" data-value="Making noise">Making noise</button>
+                  <button type="button" class="issue-pill" data-type="issue" data-value="Not draining">Not draining</button>
+                  <button type="button" class="issue-pill" data-type="issue" data-value="Not spinning">Not spinning</button>
+                </div>
+                <select class="select-hidden sr-only" id="issue" name="issue" required>
+                  <option value="">Select issue</option>
+                  <option value="Not cooling">Not cooling</option>
+                  <option value="Not heating">Not heating</option>
+                  <option value="Leaking water">Leaking water</option>
+                  <option value="Not turning on">Not turning on</option>
+                  <option value="Making noise">Making noise</option>
+                  <option value="Not draining">Not draining</option>
+                  <option value="Not spinning">Not spinning</option>
+                </select>
+              </div>
+            </div>
+
+            <div class="field">
+              <label for="message">Describe the problem</label>
+              <textarea class="textarea" id="message" name="message" placeholder="Example: Refrigerator is warm, freezer works but fridge section is not cooling."></textarea>
+            </div>
+
+            <label class="consent">
+              <input type="checkbox" name="sms_consent" required>
+              <span>I agree to receive SMS updates about my request. Message &amp; data rates may apply. Reply STOP to opt out.</span>
+            </label>
+
+            <div class="submit-row">
+              <button class="btn btn-primary" type="submit">Get Free Quote</button>
+              <a class="btn btn-secondary" href="tel:+19543055539">Call Instead</a>
+            </div>
+
+            <div id="formStatus" class="fine-print" aria-live="polite">Fast response. Same-day service available based on schedule and location.</div>
+          </form>
+        </aside>
+      </div>
+    </section>
+
+    <section>
+      <div class="container">
+        <div class="section-head">
+          <div>
+            <h2>We repair the appliances you use every day.</h2>
+            <p>Clear communication, practical troubleshooting, and repair work designed to get your home back to normal as quickly as possible.</p>
+          </div>
+        </div>
+
+        <div class="services-grid">
+          <article class="service-card">
+            <div class="icon-box">❄️</div>
+            <h3>Refrigerator Repair</h3>
+            <p>Fast help for cooling problems, leaks, ice maker issues, unusual noise, and temperature inconsistency.</p>
+            <ul>
+              <li>Warm fridge or freezer issues</li>
+              <li>Water leaks and frost buildup</li>
+              <li>Ice maker and airflow problems</li>
+            </ul>
+          </article>
+
+          <article class="service-card">
+            <div class="icon-box">🧺</div>
+            <h3>Washer & Dryer Repair</h3>
+            <p>From no-spin washers to dryers with no heat, we diagnose the issue and explain the next step clearly.</p>
+            <ul>
+              <li>Not draining or not spinning</li>
+              <li>No heat or long drying times</li>
+              <li>Vibration, noise, burning smell</li>
+            </ul>
+          </article>
+
+          <article class="service-card">
+            <div class="icon-box">🍽</div>
+            <h3>Dishwasher Repair</h3>
+            <p>Reliable service for dishwashers that won’t start, don’t clean well, leak, or leave standing water.</p>
+            <ul>
+              <li>Drain and water flow issues</li>
+              <li>Poor cleaning or drying</li>
+              <li>Start and control problems</li>
+            </ul>
+          </article>
+
+          <article class="service-card">
+            <div class="icon-box">🍳</div>
+            <h3>Oven / Range Repair</h3>
+            <p>We help with heating issues, bad igniters, faulty temperature control, and damaged control panels.</p>
+            <ul>
+              <li>Not heating or heating unevenly</li>
+              <li>Igniter and burner problems</li>
+              <li>Panel and thermostat issues</li>
+            </ul>
+          </article>
+
+          <article class="service-card">
+            <div class="icon-box">💨</div>
+            <h3>AC Unit Repair</h3>
+            <p>When your AC is not cooling or airflow feels weak, we work to restore comfort quickly.</p>
+            <ul>
+              <li>No cooling or weak airflow</li>
+              <li>Thermostat concerns</li>
+              <li>Unusual sounds or operation</li>
+            </ul>
+          </article>
+
+          <article class="service-card">
+            <div class="icon-box">⚙️</div>
+            <h3>Honest Diagnosis</h3>
+            <p>Before any repair, we focus on identifying the real problem and giving you a straightforward recommendation.</p>
+            <ul>
+              <li>Clear explanation of issue</li>
+              <li>Transparent next steps</li>
+              <li>No unnecessary upsells</li>
+            </ul>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section>
+      <div class="container">
+        <div class="section-head">
+          <div>
+            <h2>Why customers choose Lurico</h2>
+            <p>Simple process, fast communication, and repair service built around reliability and trust.</p>
+          </div>
+        </div>
+
+        <div class="trust-grid">
+          <article class="trust-card">
+            <div class="icon-box">⚡</div>
+            <h3>Fast Response</h3>
+            <p>Call, text, or submit the form and we’ll respond quickly to help schedule your service.</p>
+          </article>
+
+          <article class="trust-card">
+            <div class="icon-box">🧰</div>
+            <h3>Experienced Service</h3>
+            <p>Careful troubleshooting and practical repair recommendations based on the actual issue.</p>
+          </article>
+
+          <article class="trust-card">
+            <div class="icon-box">💵</div>
+            <h3>Affordable Pricing</h3>
+            <p>Fair pricing with clear communication and no pressure tactics.</p>
+          </article>
+
+          <article class="trust-card">
+            <div class="icon-box">🛡️</div>
+            <h3>Warranty Included</h3>
+            <p>We stand behind our repair work so you can feel more confident after service.</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section>
+      <div class="container">
+        <div class="discount-card">
+          <div>
+            <div class="discount-badge">$20 OFF Repair Offer</div>
+            <h2>Need help today? Call or text now.</h2>
+            <p>Reach out now to check same-day availability and get fast help for your appliance issue in the Palm Beach area.</p>
+            <div class="discount-actions">
+              <a class="btn btn-primary" href="tel:+19543055539">📞 Call 954-305-5539</a>
+              <a class="btn btn-secondary" href="sms:+19543055539">💬 Text Us</a>
+              <a class="btn btn-whatsapp" href="https://wa.me/19543055539" target="_blank" rel="noopener">🟢 WhatsApp</a>
+            </div>
+          </div>
+          <div>
+            <p><strong>Serving:</strong> Palm Beach Gardens, West Palm Beach, Jupiter, and Boca Raton.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section>
+      <div class="container">
+        <div class="section-head">
+          <div>
+            <h2>Customer reviews</h2>
+            <p>Short, clear feedback matters. Keep this section updated with your best real customer reviews.</p>
+          </div>
+        </div>
+
+        <div class="reviews-grid">
+          <article class="review-card">
+            <div class="stars">★★★★★</div>
+            <h3>Mike</h3>
+            <p>Fixed the issue the same day. Fast response and very professional service.</p>
+          </article>
+
+          <article class="review-card">
+            <div class="stars">★★★★★</div>
+            <h3>Anna</h3>
+            <p>Quick, friendly, and honest. I would definitely call again.</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section>
+      <div class="container">
+        <div class="section-head">
+          <div>
+            <h2>Service areas</h2>
+            <p>Proudly serving homeowners across the Palm Beach area.</p>
+          </div>
+        </div>
+
+        <div class="areas-grid">
+          <article class="area-card">
+            <div class="icon-box">📍</div>
+            <h3>Palm Beach Gardens</h3>
+            <p>Fast service for refrigerator, washer, dryer, dishwasher, oven, and AC repairs.</p>
+          </article>
+
+          <article class="area-card">
+            <div class="icon-box">📍</div>
+            <h3>West Palm Beach</h3>
+            <p>Same-day appliance repair availability based on schedule and service load.</p>
+          </article>
+
+          <article class="area-card">
+            <div class="icon-box">📍</div>
+            <h3>Jupiter</h3>
+            <p>Dependable repair help with quick communication and practical service.</p>
+          </article>
+
+          <article class="area-card">
+            <div class="icon-box">📍</div>
+            <h3>Boca Raton</h3>
+            <p>Convenient scheduling and responsive appliance repair service.</p>
+          </article>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <div class="container">
+      <div class="footer-card">
+        <div>
+          <h3>Lurico Appliance Repair</h3>
+          <p>Fast, reliable, and affordable appliance repair in the Palm Beach area. Call, text, or message us on WhatsApp to request service.</p>
+          <div class="footer-links">
+            <a href="https://lurico.us/privacy.html">Privacy Policy</a>
+            <a href="https://lurico.us/terms.html">Terms &amp; Conditions</a>
+          </div>
+          <p style="margin-top:16px;">© 2026 Lurico Appliance Repair. All rights reserved.</p>
+        </div>
+
+        <div class="footer-contact">
+          <a class="footer-chip" href="tel:+19543055539">📞 954-305-5539</a>
+          <a class="footer-chip" href="sms:+19543055539">💬 Text Us</a>
+          <a class="footer-chip" href="mailto:luricollc@gmail.com">✉️ luricollc@gmail.com</a>
+          <div class="footer-chip">📍 Palm Beach Gardens • West Palm Beach • Jupiter • Boca Raton</div>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <div class="sticky-bar">
+    <div class="sticky-inner">
+      <div class="sticky-text">
+        <strong>Need appliance repair today?</strong>
+        <span>Call, text, or request a quote in seconds.</span>
+      </div>
+      <div class="sticky-actions">
+        <a class="btn btn-light" href="tel:+19543055539">📞 Call Now</a>
+        <a class="btn btn-ghost" href="sms:+19543055539">💬 Text Us</a>
+        <a class="btn btn-whatsapp" href="https://wa.me/19543055539" target="_blank" rel="noopener">🟢 WhatsApp</a>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    const applianceButtons = document.querySelectorAll('[data-type="appliance"]');
+    const issueButtons = document.querySelectorAll('[data-type="issue"]');
+    const applianceSelect = document.getElementById('appliance');
+    const issueSelect = document.getElementById('issue');
+    const form = document.getElementById('serviceForm');
+    const formStatus = document.getElementById('formStatus');
+    const submitButton = form.querySelector('button[type="submit"]');
+
+    // Replace this with your real endpoint:
+    // Examples:
+    // const FORM_ENDPOINT = 'https://formspree.io/f/xxxxxxx';
+    // const FORM_ENDPOINT = 'https://your-domain.com/api/request-service';
+    const FORM_ENDPOINT = 'https://formspree.io/f/YOUR_FORM_ID';
+
+    applianceButtons.forEach(button => {
+      button.addEventListener('click', () => {
+        applianceButtons.forEach(btn => btn.classList.remove('active'));
+        button.classList.add('active');
+        applianceSelect.value = button.dataset.value;
+      });
+    });
+
+    issueButtons.forEach(button => {
+      button.addEventListener('click', () => {
+        issueButtons.forEach(btn => btn.classList.remove('active'));
+        button.classList.add('active');
+        issueSelect.value = button.dataset.value;
+      });
+    });
+
+    function setStatus(message, type = '') {
+      formStatus.textContent = message;
+      formStatus.classList.remove('status-success', 'status-error');
+      if (type) formStatus.classList.add(type);
+    }
+
+    form.addEventListener('submit', async function (e) {
+      e.preventDefault();
+
+      const data = new FormData(form);
+      const payload = {
+        name: (data.get('name') || '').trim(),
+        phone: (data.get('phone') || '').trim(),
+        address: (data.get('address') || '').trim(),
+        appliance: (data.get('appliance') || '').trim(),
+        issue: (data.get('issue') || '').trim(),
+        message: (data.get('message') || '').trim(),
+        sms_consent: data.get('sms_consent') ? 'Yes' : 'No'
+      };
+
+      if (!payload.name || !payload.phone) {
+        setStatus('Please enter your name and phone number.', 'status-error');
+        return;
+      }
+
+      if (!payload.appliance || !payload.issue) {
+        setStatus('Please select the appliance and the issue.', 'status-error');
+        return;
+      }
+
+      if (FORM_ENDPOINT.includes('YOUR_FORM_ID')) {
+        setStatus('Add your real form endpoint in the code first.', 'status-error');
+        return;
+      }
+
+      try {
+        form.classList.add('is-loading');
+        submitButton.disabled = true;
+        submitButton.textContent = 'Sending...';
+        setStatus('Sending your request...');
+
+        const response = await fetch(FORM_ENDPOINT, {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+            'Accept': 'application/json'
+          },
+          body: JSON.stringify(payload)
+        });
+
+        if (!response.ok) {
+          throw new Error('Request failed');
+        }
+
+        form.reset();
+        applianceButtons.forEach(btn => btn.classList.remove('active'));
+        issueButtons.forEach(btn => btn.classList.remove('active'));
+        applianceSelect.value = '';
+        issueSelect.value = '';
+
+        setStatus('Thank you! Your request has been sent successfully. We will contact you shortly.', 'status-success');
+      } catch (error) {
+        console.error(error);
+        setStatus('Sorry, something went wrong. Please call or text us directly.', 'status-error');
+      } finally {
+        form.classList.remove('is-loading');
+        submitButton.disabled = false;
+        submitButton.textContent = 'Get Free Quote';
+      }
+    });
+  </script>
+</body>
+</html>
     .topbar {
       background: #0f172a;
       color: #fff;

@@ -130,10 +130,20 @@ Issue: ${issue}
 Message: ${message}`;
 
   try {
-    await Promise.allSettled([
-      sendTelegram(text),
-      sendSms(text),
-    ]);
+    const payload = {
+  name,
+  phone,
+  address,
+  appliance,
+  issue,
+  message,
+};
+
+await Promise.allSettled([
+  sendTelegram(text),
+  sendSms(text),
+  sendToFormspree(payload),
+]);
 
     console.log('Website lead received:', req.body);
     res.status(200).json({ success: true });

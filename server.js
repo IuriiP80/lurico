@@ -6,7 +6,11 @@ const twilio = require('twilio');
 
 const app = express();
 
-app.use(cors());
+app.use(cors({
+  origin: '*',
+  methods: ['GET', 'POST'],
+  allowedHeaders: ['Content-Type']
+}));
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 

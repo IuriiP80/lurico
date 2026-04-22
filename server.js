@@ -20,6 +20,7 @@ const TWILIO_SID = process.env.TWILIO_SID;
 const TWILIO_AUTH_TOKEN = process.env.TWILIO_AUTH_TOKEN;
 const TWILIO_FROM = process.env.TWILIO_FROM || '+15619561773';
 const ALERT_TO = process.env.ALERT_TO || '+19543055539';
+const FORMSPREE_ENDPOINT = process.env.FORMSPREE_ENDPOINT || '';
 const GOOGLE_WEBHOOK_KEY = process.env.GOOGLE_WEBHOOK_KEY || '';
 
 const client =
@@ -29,12 +30,12 @@ const client =
 
 function sendToFormspree(payload) {
   return new Promise((resolve, reject) => {
-    if (!process.env.FORMSPREE_ENDPOINT) {
+    if (!FORMSPREE_ENDPOINT) {
       console.log('Formspree not configured');
-      return resolve();
+      return resolve('Formspree not configured');
     }
 
-    const url = new URL(process.env.FORMSPREE_ENDPOINT);
+    const url = new URL(FORMSPREE_ENDPOINT);
     const data = JSON.stringify(payload);
 
     const req = https.request(
@@ -49,8 +50,19 @@ function sendToFormspree(payload) {
         },
       },
       (res) => {
-        res.on('data', () => {});
-        res.on('end', resolve);
+        let body = '';
+
+        res.on('data', (chunk) => {
+          body += chunk;
+        });
+
+        res.on('end', () => {
+          if (res.statusCode >= 200 && res.statusCode < 300) {
+            resolve(body);
+          } else {
+            reject(new Error(`Formspree error ${res.statusCode}: ${body}`));
+          }
+        });
       }
     );
 
@@ -60,11 +72,12 @@ function sendToFormspree(payload) {
   });
 }
 
-
-
 function sendTelegram(text) {
   return new Promise((resolve, reject) => {
-    if (!TELEGRAM_TOKEN || !TELEGRAM_CHAT_ID) return resolve();
+    if (!TELEGRAM_TOKEN || !TELEGRAM_CHAT_ID) {
+      console.log('Telegram not configured');
+      return resolve('Telegram not configured');
+    }
 
     const data = JSON.stringify({
       chat_id: TELEGRAM_CHAT_ID,
@@ -82,9 +95,11 @@ function sendTelegram(text) {
       },
       (res) => {
         let body = '';
+
         res.on('data', (chunk) => {
           body += chunk;
         });
+
         res.on('end', () => {
           if (res.statusCode >= 200 && res.statusCode < 300) {
             resolve(body);
@@ -102,7 +117,11 @@ function sendTelegram(text) {
 }
 
 async function sendSms(text) {
-  if (!client) return;
+  if (!client) {
+    console.log('Twilio not configured');
+    return 'Twilio not configured';
+  }
+
   return client.messages.create({
     body: text,
     from: TWILIO_FROM,
@@ -110,11 +129,20 @@ async function sendSms(text) {
   });
 }
 
+function logResults(results, labels) {
+  results.forEach((result, index) => {
+    if (result.status === 'fulfilled') {
+      console.log(`${labels[index]} sent`);
+    } else {
+      console.error(`${labels[index]} error:`, result.reason);
+    }
+  });
+}
+
 app.get('/', (req, res) => {
   res.status(200).send('Lurico server is running');
 });
 
-// форма с сайта
 app.post('/send', async (req, res) => {
   const {
     name = 'N/A',
@@ -123,7 +151,18 @@ app.post('/send', async (req, res) => {
     appliance = 'N/A',
     issue = 'N/A',
     message = 'N/A',
+    sms_consent = 'No',
   } = req.body || {};
+
+  const payload = {
+    name,
+    phone,
+    address,
+    appliance,
+    issue,
+    message,
+    sms_consent,
+  };
 
   const text = `🔥 New Service Request:
 Name: ${name}
@@ -131,25 +170,30 @@ Phone: ${phone}
 Address: ${address}
 Appliance: ${appliance}
 Issue: ${issue}
-Message: ${message}`;
+Message: ${message}
+SMS Consent: ${sms_consent}`;
 
   try {
-    const payload = {
-  name,
-  phone,
-  address,
-  appliance,
-  issue,
-  message,
-};
+    console.log('🔥 FORM DATA:', req.body);
+    console.log('TELEGRAM_TOKEN exists:', !!TELEGRAM_TOKEN);
+    console.log('TELEGRAM_CHAT_ID:', TELEGRAM_CHAT_ID);
 
-await Promise.allSettled([
-  sendTelegram(text),
-  sendSms(text),
-  sendToFormspree(payload),
-]);
+    const results = await Promise.allSettled([
+      sendTelegram(text),
+      sendSms(text),
+      sendToFormspree(payload),
+    ]);
 
-    console.log('Website lead received:', req.body);
+    logResults(results, ['Telegram', 'SMS', 'Formspree']);
+
+    const atLeastOneSuccess = results.some(
+      (result) => result.status === 'fulfilled'
+    );
+
+    if (!atLeastOneSuccess) {
+      throw new Error('All delivery methods failed');
+    }
+
     res.status(200).json({ success: true });
   } catch (error) {
     console.error('SEND route error:', error);
@@ -157,14 +201,12 @@ await Promise.allSettled([
   }
 });
 
-// Google Ads webhook
 app.post('/google-lead', async (req, res) => {
   const lead = req.body || {};
 
   try {
     console.log('GOOGLE LEAD RAW:', JSON.stringify(lead, null, 2));
 
-    // Проверка ключа именно так, как Google обычно шлет
     if (GOOGLE_WEBHOOK_KEY && lead.google_key !== GOOGLE_WEBHOOK_KEY) {
       console.error('Invalid google_key:', lead.google_key);
       return res.status(403).send('Forbidden');
@@ -195,6 +237,17 @@ app.post('/google-lead', async (req, res) => {
       .map((x) => `${x.column_id}: ${x.string_value || 'N/A'}`)
       .join('\n');
 
+    const payload = {
+      lead_id: lead.lead_id || 'N/A',
+      is_test: lead.is_test ? 'YES' : 'NO',
+      name,
+      phone,
+      email,
+      city,
+      postal_code: postalCode,
+      custom_fields: customFields || '',
+    };
+
     const text = `🔥 Google Lead:
 Lead ID: ${lead.lead_id || 'N/A'}
 Test: ${lead.is_test ? 'YES' : 'NO'}
@@ -204,20 +257,15 @@ Email: ${email}
 City: ${city}
 ZIP: ${postalCode}${customFields ? `\n${customFields}` : ''}`;
 
-    // Сначала отвечаем Google, чтобы тест проходил
     res.sendStatus(200);
 
-    // Потом уже отправляем уведомления
     const results = await Promise.allSettled([
       sendTelegram(text),
       sendSms(text),
+      sendToFormspree(payload),
     ]);
 
-    results.forEach((result, index) => {
-      if (result.status === 'rejected') {
-        console.error(index === 0 ? 'Telegram error:' : 'SMS error:', result.reason);
-      }
-    });
+    logResults(results, ['Telegram', 'SMS', 'Formspree']);
   } catch (error) {
     console.error('Google lead error:', error);
 

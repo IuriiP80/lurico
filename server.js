@@ -51,9 +51,7 @@ function sendTelegram(text) {
           if (res.statusCode >= 200 && res.statusCode < 300) {
             resolve({ ok: true, body });
           } else {
-            reject(
-              new Error(`Telegram error ${res.statusCode}: ${body}`)
-            );
+            reject(new Error(`Telegram error ${res.statusCode}: ${body}`));
           }
         });
       }
@@ -89,7 +87,8 @@ function sendToFormspree(payload) {
     const req = https.request(
       {
         hostname: url.hostname,
-        path: url.pathname,
+        port: url.port || 443,
+        path: `${url.pathname}${url.search}`,
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -104,9 +103,7 @@ function sendToFormspree(payload) {
           if (res.statusCode >= 200 && res.statusCode < 300) {
             resolve({ ok: true, body: responseBody });
           } else {
-            reject(
-              new Error(`Formspree error ${res.statusCode}: ${responseBody}`)
-            );
+            reject(new Error(`Formspree error ${res.statusCode}: ${responseBody}`));
           }
         });
       }
@@ -120,6 +117,17 @@ function sendToFormspree(payload) {
 
 app.post('/send', async (req, res) => {
   try {
+    console.log('Incoming /send:', req.body);
+    console.log('Telegram configured:', !!TELEGRAM_TOKEN, !!TELEGRAM_CHAT_ID);
+    console.log(
+      'Twilio configured:',
+      !!TWILIO_SID,
+      !!TWILIO_AUTH_TOKEN,
+      !!TWILIO_FROM,
+      !!ALERT_TO
+    );
+    console.log('Formspree configured:', !!FORMSPREE_ENDPOINT);
+
     const {
       name = '',
       phone = '',
@@ -165,13 +173,19 @@ app.post('/send', async (req, res) => {
       sendToFormspree(formspreePayload)
     ]);
 
-    const telegramResult = results[0];
-    const smsResult = results[1];
-    const formspreeResult = results[2];
+    const normalized = results.map((r) => {
+      if (r.status !== 'fulfilled') {
+        return { delivered: false, raw: r.reason?.message || r.reason || r };
+      }
+      if (r.value && r.value.skipped) {
+        return { delivered: false, raw: r.value };
+      }
+      return { delivered: true, raw: r.value };
+    });
 
-    const atLeastOneWorked = results.some(
-      (r) => r.status === 'fulfilled'
-    );
+    const atLeastOneWorked = normalized.some((r) => r.delivered);
+
+    console.log('Delivery results:', JSON.stringify(results, null, 2));
 
     if (!atLeastOneWorked) {
       return res.status(500).json({
@@ -183,9 +197,7 @@ app.post('/send', async (req, res) => {
 
     return res.json({
       ok: true,
-      telegram: telegramResult.status,
-      sms: smsResult.status,
-      formspree: formspreeResult.status
+      results
     });
   } catch (error) {
     console.error('Server error:', error);

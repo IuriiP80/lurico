@@ -23,6 +23,41 @@ const client =
     ? twilio(TWILIO_SID, TWILIO_AUTH_TOKEN)
     : null;
 
+function sendToFormspree(payload) {
+  return new Promise((resolve, reject) => {
+    if (!process.env.FORMSPREE_ENDPOINT) {
+      console.log('Formspree not configured');
+      return resolve();
+    }
+
+    const url = new URL(process.env.FORMSPREE_ENDPOINT);
+    const data = JSON.stringify(payload);
+
+    const req = https.request(
+      {
+        hostname: url.hostname,
+        path: url.pathname,
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          'Accept': 'application/json',
+          'Content-Length': Buffer.byteLength(data),
+        },
+      },
+      (res) => {
+        res.on('data', () => {});
+        res.on('end', resolve);
+      }
+    );
+
+    req.on('error', reject);
+    req.write(data);
+    req.end();
+  });
+}
+
+
+
 function sendTelegram(text) {
   return new Promise((resolve, reject) => {
     if (!TELEGRAM_TOKEN || !TELEGRAM_CHAT_ID) return resolve();

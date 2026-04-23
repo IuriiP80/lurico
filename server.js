@@ -2,6 +2,7 @@ require('dotenv').config();
 const https = require('https');
 const express = require('express');
 const cors = require('cors');
+const twilio = require('twilio');
 
 const app = express();
 
@@ -13,6 +14,16 @@ app.use(express.static('.'));
 const TELEGRAM_TOKEN = process.env.TELEGRAM_TOKEN;
 const TELEGRAM_CHAT_ID = process.env.TELEGRAM_CHAT_ID;
 const FORMSPREE_ENDPOINT = process.env.FORMSPREE_ENDPOINT;
+
+const TWILIO_SID = process.env.TWILIO_SID;
+const TWILIO_AUTH_TOKEN = process.env.TWILIO_AUTH_TOKEN;
+const TWILIO_FROM = process.env.TWILIO_FROM;
+const ALERT_TO = process.env.ALERT_TO;
+
+const twilioClient =
+  TWILIO_SID && TWILIO_AUTH_TOKEN
+    ? twilio(TWILIO_SID, TWILIO_AUTH_TOKEN)
+    : null;
 
 function sendTelegram(text) {
   return new Promise((resolve, reject) => {
@@ -74,7 +85,7 @@ function sendToFormspree(payload) {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
-          'Accept': 'application/json',
+          Accept: 'application/json',
           'Content-Length': Buffer.byteLength(body)
         }
       },
@@ -101,11 +112,45 @@ function sendToFormspree(payload) {
   });
 }
 
+function sendSms(text) {
+  if (!twilioClient || !TWILIO_FROM || !ALERT_TO) {
+    return Promise.resolve({ skipped: true, reason: 'Twilio env missing' });
+  }
+
+  return twilioClient.messages.create({
+    body: text,
+    from: TWILIO_FROM,
+    to: ALERT_TO
+  });
+}
+
+function normalizeResult(result) {
+  if (result.status !== 'fulfilled') {
+    return {
+      delivered: false,
+      raw: result.reason?.message || String(result.reason)
+    };
+  }
+
+  if (result.value && result.value.skipped) {
+    return {
+      delivered: false,
+      raw: result.value
+    };
+  }
+
+  return {
+    delivered: true,
+    raw: result.value
+  };
+}
+
 app.post('/send', async (req, res) => {
   try {
     console.log('Incoming /send:', req.body);
     console.log('Telegram configured:', !!TELEGRAM_TOKEN, !!TELEGRAM_CHAT_ID);
     console.log('Formspree configured:', !!FORMSPREE_ENDPOINT);
+    console.log('Twilio configured:', !!TWILIO_SID, !!TWILIO_AUTH_TOKEN, !!TWILIO_FROM, !!ALERT_TO);
 
     const {
       name = '',
@@ -148,35 +193,27 @@ app.post('/send', async (req, res) => {
 
     const results = await Promise.allSettled([
       sendTelegram(text),
-      sendToFormspree(formspreePayload)
+      sendToFormspree(formspreePayload),
+      sendSms(text)
     ]);
 
-    const normalized = results.map((r) => {
-      if (r.status !== 'fulfilled') {
-        return { delivered: false, raw: r.reason?.message || r.reason || r };
-      }
-
-      if (r.value && r.value.skipped) {
-        return { delivered: false, raw: r.value };
-      }
-
-      return { delivered: true, raw: r.value };
-    });
+    const normalized = results.map(normalizeResult);
 
     console.log('Delivery results:', JSON.stringify(normalized, null, 2));
 
-    const atLeastOneWorked = normalized.some((r) => r.delivered);
+    const atLeastOneWorked = normalized.some((item) => item.delivered);
 
     if (!atLeastOneWorked) {
       return res.status(500).json({
         ok: false,
-        error: 'Telegram and Formspree both failed',
+        error: 'All delivery methods failed',
         results: normalized
       });
     }
 
     return res.json({
       ok: true,
+      message: 'Request sent successfully',
       results: normalized
     });
   } catch (error) {

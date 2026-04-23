@@ -2,7 +2,6 @@ require('dotenv').config();
 const https = require('https');
 const express = require('express');
 const cors = require('cors');
-const twilio = require('twilio');
 
 const app = express();
 
@@ -13,16 +12,7 @@ app.use(express.static('.'));
 
 const TELEGRAM_TOKEN = process.env.TELEGRAM_TOKEN;
 const TELEGRAM_CHAT_ID = process.env.TELEGRAM_CHAT_ID;
-const TWILIO_SID = process.env.TWILIO_SID;
-const TWILIO_AUTH_TOKEN = process.env.TWILIO_AUTH_TOKEN;
-const TWILIO_FROM = process.env.TWILIO_FROM;
-const ALERT_TO = process.env.ALERT_TO;
 const FORMSPREE_ENDPOINT = process.env.FORMSPREE_ENDPOINT;
-
-const client =
-  TWILIO_SID && TWILIO_AUTH_TOKEN
-    ? twilio(TWILIO_SID, TWILIO_AUTH_TOKEN)
-    : null;
 
 function sendTelegram(text) {
   return new Promise((resolve, reject) => {
@@ -60,18 +50,6 @@ function sendTelegram(text) {
     req.on('error', reject);
     req.write(data);
     req.end();
-  });
-}
-
-async function sendSms(text) {
-  if (!client || !TWILIO_FROM || !ALERT_TO) {
-    return { skipped: true, reason: 'Twilio env missing' };
-  }
-
-  return client.messages.create({
-    body: text,
-    from: TWILIO_FROM,
-    to: ALERT_TO
   });
 }
 
@@ -119,13 +97,6 @@ app.post('/send', async (req, res) => {
   try {
     console.log('Incoming /send:', req.body);
     console.log('Telegram configured:', !!TELEGRAM_TOKEN, !!TELEGRAM_CHAT_ID);
-    console.log(
-      'Twilio configured:',
-      !!TWILIO_SID,
-      !!TWILIO_AUTH_TOKEN,
-      !!TWILIO_FROM,
-      !!ALERT_TO
-    );
     console.log('Formspree configured:', !!FORMSPREE_ENDPOINT);
 
     const {
@@ -169,7 +140,6 @@ app.post('/send', async (req, res) => {
 
     const results = await Promise.allSettled([
       sendTelegram(text),
-      sendSms(text),
       sendToFormspree(formspreePayload)
     ]);
 

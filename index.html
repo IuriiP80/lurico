@@ -1210,8 +1210,9 @@
     // Examples:
     // const FORM_ENDPOINT = 'https://formspree.io/f/mdayejrl';
     // const FORM_ENDPOINT = 'https://lurico.us/api/request-service';
-  const FORM_ENDPOINT = 'https://formspree.io/f/mdayejrl';
-  const FORM_ENDPOINT = 'https://lurico.us/send';
+  //const FORM_ENDPOINT = 'https://formspree.io/f/mdayejrl';
+const FORM_ENDPOINT = '/send'; 
+
     
     applianceButtons.forEach(button => {
       button.addEventListener('click', () => {
@@ -1270,7 +1271,7 @@
         submitButton.textContent = 'Sending...';
         setStatus('Sending your request...');
 
-        const response = await fetch('https://whale-app-gpejb.ondigitalocean.app/send', {
+        const response = await fetch(FORM_ENDPOINT, {
   method: 'POST',
   headers: {
     'Content-Type': 'application/json',

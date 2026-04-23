@@ -36,7 +36,11 @@ function sendTelegram(text) {
       },
       (res) => {
         let body = '';
-        res.on('data', (chunk) => (body += chunk));
+
+        res.on('data', (chunk) => {
+          body += chunk;
+        });
+
         res.on('end', () => {
           if (res.statusCode >= 200 && res.statusCode < 300) {
             resolve({ ok: true, body });
@@ -76,7 +80,11 @@ function sendToFormspree(payload) {
       },
       (res) => {
         let responseBody = '';
-        res.on('data', (chunk) => (responseBody += chunk));
+
+        res.on('data', (chunk) => {
+          responseBody += chunk;
+        });
+
         res.on('end', () => {
           if (res.statusCode >= 200 && res.statusCode < 300) {
             resolve({ ok: true, body: responseBody });
@@ -147,27 +155,29 @@ app.post('/send', async (req, res) => {
       if (r.status !== 'fulfilled') {
         return { delivered: false, raw: r.reason?.message || r.reason || r };
       }
+
       if (r.value && r.value.skipped) {
         return { delivered: false, raw: r.value };
       }
+
       return { delivered: true, raw: r.value };
     });
 
-    const atLeastOneWorked = normalized.some((r) => r.delivered);
+    console.log('Delivery results:', JSON.stringify(normalized, null, 2));
 
-    console.log('Delivery results:', JSON.stringify(results, null, 2));
+    const atLeastOneWorked = normalized.some((r) => r.delivered);
 
     if (!atLeastOneWorked) {
       return res.status(500).json({
         ok: false,
-        error: 'All delivery methods failed',
-        results
+        error: 'Telegram and Formspree both failed',
+        results: normalized
       });
     }
 
     return res.json({
       ok: true,
-      results
+      results: normalized
     });
   } catch (error) {
     console.error('Server error:', error);

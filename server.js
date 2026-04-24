@@ -107,16 +107,29 @@ function getFieldValue(arr, keys) {
   if (!Array.isArray(arr)) return '';
 
   const found = arr.find((item) => {
-    const key = String(item.name || item.key || item.column_name || '')
-      .trim()
-      .toLowerCase();
+    const rawKey =
+      item.name ||
+      item.key ||
+      item.column_name ||
+      item.column_id ||
+      '';
 
+    const key = String(rawKey).trim().toLowerCase();
     return keys.includes(key);
   });
 
   if (!found) return '';
 
-  return found.value || found.field_value || found.answer || '';
+  return (
+    found.value ||
+    found.field_value ||
+    found.answer ||
+    found.string_value ||
+    found.integer_value ||
+    found.double_value ||
+    found.boolean_value ||
+    ''
+  );
 }
 
 function normalizeResults(results) {
@@ -230,9 +243,12 @@ app.post('/send', async (req, res) => {
 });
 
 // Google Ads webhook
-app.post('/google-leads', async (req, res) => {
+app.post('/googlehook', async (req, res) => {
   try {
-    console.log('Incoming /google-leads:', JSON.stringify(req.body, null, 2));
+    console.log('Incoming /googlehook:', JSON.stringify(req.body, null, 2));
+
+    const body = req.body || {};
+    const bodyKey = body.google_key || '';
 
     const authHeader = req.headers.authorization || '';
     const bearer = authHeader.startsWith('Bearer ')
@@ -246,10 +262,15 @@ app.post('/google-leads', async (req, res) => {
       '';
 
     const queryKey = req.query.key || '';
-    const providedKey = bearer || headerKey || queryKey;
+    const providedKey = bodyKey || bearer || headerKey || queryKey;
 
     if (GOOGLE_WEBHOOK_KEY && providedKey !== GOOGLE_WEBHOOK_KEY) {
-      console.log('Webhook auth failed');
+      console.log('Webhook auth failed', {
+        bodyKey,
+        headerKey,
+        queryKey,
+        hasBearer: !!bearer
+      });
 
       return res.status(401).json({
         ok: false,
@@ -257,7 +278,6 @@ app.post('/google-leads', async (req, res) => {
       });
     }
 
-    const body = req.body || {};
     const userColumnData =
       body.user_column_data ||
       body.lead_data ||
@@ -266,19 +286,34 @@ app.post('/google-leads', async (req, res) => {
       [];
 
     const fullName =
-      getFieldValue(userColumnData, ['full name', 'name', 'full_name']) ||
+      getFieldValue(userColumnData, [
+        'full name',
+        'name',
+        'full_name',
+        'full_name'
+      ]) ||
       body.full_name ||
       body.name ||
       '';
 
     const phone =
-      getFieldValue(userColumnData, ['phone number', 'phone', 'mobile phone']) ||
+      getFieldValue(userColumnData, [
+        'phone number',
+        'phone',
+        'mobile phone',
+        'user phone',
+        'phone_number'
+      ]) ||
       body.phone_number ||
       body.phone ||
       '';
 
     const email =
-      getFieldValue(userColumnData, ['email', 'email address']) ||
+      getFieldValue(userColumnData, [
+        'email',
+        'email address',
+        'email_address'
+      ]) ||
       body.email ||
       '';
 
@@ -288,12 +323,23 @@ app.post('/google-leads', async (req, res) => {
       '';
 
     const zip =
-      getFieldValue(userColumnData, ['zip/postal code', 'zip code', 'postal code', 'zip']) ||
+      getFieldValue(userColumnData, [
+        'zip/postal code',
+        'zip code',
+        'postal code',
+        'zip',
+        'zip_postal_code'
+      ]) ||
       body.zip ||
       '';
 
     const appliance =
-      getFieldValue(userColumnData, ['what appliance needs repair?']) ||
+      getFieldValue(userColumnData, [
+        'what appliance needs repair?',
+        'what appliance needs repair',
+        'what_appliance_needs_repair?',
+        'appliance'
+      ]) ||
       body.appliance ||
       '';
 
@@ -304,7 +350,10 @@ app.post('/google-leads', async (req, res) => {
       `Email: ${email || '-'}`,
       `City: ${city || '-'}`,
       `ZIP: ${zip || '-'}`,
-      `Appliance: ${appliance || '-'}`
+      `Appliance: ${appliance || '-'}`,
+      `Test: ${body.is_test ? 'YES' : 'NO'}`,
+      `Lead ID: ${body.lead_id || '-'}`,
+      `Campaign ID: ${body.campaign_id || '-'}`
     ].join('\n');
 
     const formspreePayload = {
@@ -314,6 +363,10 @@ app.post('/google-leads', async (req, res) => {
       city,
       zip,
       appliance,
+      lead_id: body.lead_id || '',
+      campaign_id: body.campaign_id || '',
+      form_id: body.form_id || '',
+      is_test: !!body.is_test,
       source: 'google ads lead form'
     };
 
@@ -324,16 +377,16 @@ app.post('/google-leads', async (req, res) => {
 
     const results = normalizeResults(rawResults);
 
-    console.log('Results /google-leads:', JSON.stringify(results, null, 2));
+    console.log('Results /googlehook:', JSON.stringify(results, null, 2));
 
     return res.status(200).json({
       ok: true,
       results
     });
   } catch (error) {
-    console.error('Server error /google-leads:', error);
+    console.error('Server error /googlehook:', error);
 
-    return res.status(200).json({
+    return res.status(500).json({
       ok: false,
       error: error.message || 'Webhook error'
     });

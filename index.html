@@ -1357,8 +1357,14 @@
         issueButtons.forEach(btn => btn.classList.remove('active'));
         applianceSelect.value = '';
         issueSelect.value = '';
-
+        
+        gtag('event', 'conversion', {
+        'send_to': 'AW-18097232975/vkdmCI3c06ocEM-4t7VD'
+         });
         setStatus('Thank you! Your request has been sent successfully. We will contact you shortly.', 'status-success');
+     
+      
+     
       } catch (error) {
         console.error(error);
         setStatus('Sorry, something went wrong. Please call or text us directly.', 'status-error');

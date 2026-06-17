@@ -87,6 +87,17 @@
  justify-content:space-between;
  gap:18px;
  }
+ .brand-logo-img{
+ width:56px;
+ height:56px;
+ object-fit:contain;
+ border-radius:16px;
+ background:#fff;
+ padding:6px;
+ box-shadow:0 14px 34px rgba(7,17,31,.14);
+ flex:0 0 auto;
+ }
+
  .brand{
  display:flex;
  align-items:center;
@@ -736,6 +747,28 @@
  }
  .sticky .btn{width:100%;min-height:50px;padding:0 10px}
 
+ 
+ .appliance-btn{
+ display:flex;
+ align-items:center;
+ justify-content:flex-start;
+ gap:10px;
+ text-align:left;
+ }
+
+ .appliance-btn span:first-child{
+ flex:0 0 auto;
+ }
+
+ .appliance-btn span:last-child{
+ flex:1 1 auto;
+ min-width:0;
+ display:block;
+ line-height:1.15;
+ white-space:normal;
+ overflow-wrap:anywhere;
+ }
+
  @media(max-width:1060px){
  .hero-grid{grid-template-columns:1fr}
  .visual-card{min-height:auto}
@@ -787,7 +820,7 @@
  <header class="nav">
  <div class="container nav-inner">
  <a class="brand" href="#top" aria-label="Lurico Appliance Repair">
- <div class="brand-icon">L</div>
+ <img class="brand-logo-img" src="logo.png" alt="Lurico Appliance Repair logo">
  <div>
  <strong>Lurico Appliance Repair</strong>
  <span>EPA Certified • Warranty included</span>
@@ -847,7 +880,7 @@
 
  <div class="machine" aria-hidden="true">
  <div class="machine-top">
- <span>Lurico</span>
+ <span>LURICO</span>
  <span class="machine-led"></span>
  </div>
  <div class="machine-door"></div>
@@ -872,7 +905,6 @@
  <button type="button" class="appliance-btn" data-value="Dryer"><span>🔥</span><span>Dryer</span></button>
  <button type="button" class="appliance-btn" data-value="Dishwasher"><span>🍽</span><span>Dishwasher</span></button>
  <button type="button" class="appliance-btn" data-value="Oven / Range"><span>🍳</span><span>Oven / Range</span></button>
- <button type="button" class="appliance-btn" data-value=""><span>💨</span><span></span></button>
  </div>
  <input type="hidden" id="appliance" name="appliance" required>
  </div>
@@ -996,12 +1028,6 @@
  <div class="service-icon">✅</div>
  <h3>EPA Certified</h3>
  <p>Certified technician for appliance refrigeration work and professional service standards.</p>
- </article>
-
- <article class="service-card">
- <div class="service-icon">💨</div>
- <h3> Repair</h3>
- <p>Weak cooling, airflow problems, thermostat issues, unusual sounds or system not turning on.</p>
  </article>
  </div>
  </div>

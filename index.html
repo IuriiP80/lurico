@@ -1,1394 +1,1205 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Lurico Appliance Repair | Same-Day Service in Palm Beach Area</title>
-  <meta name="description" content="Same-day appliance repair in Boca Raton, Delray Beach, Boynton Beach, Lake Worth Beach, West Palm Beach, Palm Beach Gardens, and Jupiter. Call Lurico Appliance Repair for fast, reliable service." />
-  <meta name="theme-color" content="#0f172a" />
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800&display=swap" rel="stylesheet">
-
-  <style>
-    :root {
-      --bg: #f5f7fb;
-      --surface: #ffffff;
-      --surface-2: #eef3fb;
-      --text: #0f172a;
-      --muted: #475569;
-      --line: #dbe4f0;
-      --primary: #0f62fe;
-      --primary-dark: #0a4ecc;
-      --accent: #16a34a;
-      --shadow: 0 15px 45px rgba(15, 23, 42, 0.10);
-      --radius: 22px;
-      --container: 1180px;
-    }
-
-    * { box-sizing: border-box; }
-    html { scroll-behavior: smooth; }
-    body {
-      margin: 0;
-      font-family: 'Montserrat', sans-serif;
-      color: var(--text);
-      background:
-        radial-gradient(circle at top left, rgba(15,98,254,0.08), transparent 30%),
-        radial-gradient(circle at top right, rgba(22,163,74,0.08), transparent 26%),
-        var(--bg);
-      line-height: 1.55;
-      padding-bottom: 84px;
-    }
-
-    img { max-width: 100%; display: block; }
-    a { color: inherit; text-decoration: none; }
-    button, input, select, textarea { font: inherit; }
-
-    .container {
-      width: min(var(--container), calc(100% - 32px));
-      margin: 0 auto;
-    }
-
-    .logo {
-      width: 40px;
-      height: 40px;
-      object-fit: contain;
-      border-radius: 10px;
-      flex: 0 0 auto;
-    }
-
-    .topbar {
-      position: sticky;
-      top: 0;
-      z-index: 1000;
-      backdrop-filter: blur(16px);
-      background: rgba(255,255,255,0.92);
-      border-bottom: 1px solid rgba(219, 228, 240, 0.85);
-      transition: transform .25s ease, opacity .25s ease, box-shadow .25s ease;
-    }
-
-    .topbar.topbar-hidden {
-      transform: translateY(-110%);
-      opacity: 0.98;
-    }
-
-    .topbar-inner {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      gap: 14px;
-      min-height: 64px;
-      padding: 8px 0;
-    }
-
-    .brand {
-      display: flex;
-      align-items: center;
-      gap: 10px;
-      min-width: 0;
-      flex: 1 1 auto;
-    }
-
-    .brand-text {
-      min-width: 0;
-    }
-
-    .brand-text strong {
-      display: block;
-      font-size: 0.98rem;
-      line-height: 1.1;
-    }
-
-    .brand-text span {
-      display: block;
-      font-size: 0.8rem;
-      color: var(--muted);
-      white-space: nowrap;
-      overflow: hidden;
-      text-overflow: ellipsis;
-    }
-
-    .top-actions {
-      display: flex;
-      align-items: center;
-      gap: 8px;
-      flex-wrap: nowrap;
-      justify-content: flex-end;
-      flex: 0 0 auto;
-    }
-
-    .btn {
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-      gap: 8px;
-      min-height: 48px;
-      padding: 0 18px;
-      border-radius: 14px;
-      border: 1px solid transparent;
-      cursor: pointer;
-      transition: transform .18s ease, box-shadow .18s ease, background .18s ease, border-color .18s ease;
-      font-weight: 700;
-      text-align: center;
-    }
-
-    .btn:hover { transform: translateY(-1px); }
-    .btn:active { transform: translateY(0); }
-
-    .btn-primary {
-      background: linear-gradient(135deg, var(--primary), var(--primary-dark));
-      color: white;
-      box-shadow: 0 12px 28px rgba(15, 98, 254, 0.22);
-    }
-
-    .btn-secondary {
-      background: white;
-      border-color: var(--line);
-      color: var(--text);
-    }
-
-    .btn-whatsapp {
-      background: #16a34a;
-      color: white;
-      box-shadow: 0 12px 28px rgba(22, 163, 74, 0.22);
-    }
-
-    .hero {
-      padding: 20px 0 14px;
-    }
-
-    .hero-grid {
-      display: grid;
-      grid-template-columns: 0.82fr 1.18fr;
-      gap: 22px;
-      align-items: stretch;
-    }
-
-    .hero-card,
-    .form-card,
-    .discount-card,
-    .review-card,
-    .area-card,
-    .service-card,
-    .trust-card {
-      background: rgba(255,255,255,0.95);
-      border: 1px solid rgba(219, 228, 240, 0.9);
-      border-radius: var(--radius);
-      box-shadow: var(--shadow);
-    }
-
-    .hero-card,
-    .form-card,
-    .service-card,
-    .trust-card,
-    .review-card,
-    .area-card,
-    .discount-card,
-    .footer-card {
-      padding: 22px;
-    }
-
-    .hero-card {
-      position: relative;
-      overflow: hidden;
-    }
-
-    .hero-card::before {
-      content: "";
-      position: absolute;
-      inset: auto -80px -90px auto;
-      width: 220px;
-      height: 220px;
-      background: radial-gradient(circle, rgba(15,98,254,0.14), transparent 70%);
-      pointer-events: none;
-    }
-
-    .eyebrow {
-      display: inline-flex;
-      align-items: center;
-      gap: 8px;
-      padding: 10px 14px;
-      border-radius: 999px;
-      background: #eaf1ff;
-      color: var(--primary-dark);
-      font-weight: 700;
-      font-size: 0.84rem;
-      margin-bottom: 14px;
-    }
-
-    h1 {
-      font-size: clamp(2rem, 4vw, 3.5rem);
-      line-height: 1.04;
-      margin: 0 0 12px;
-      letter-spacing: -0.03em;
-    }
-
-    .hero-lead {
-      font-size: 0.96rem;
-      color: var(--muted);
-      margin: 0 0 18px;
-      max-width: 640px;
-    }
-
-    .hero-stats {
-      display: grid;
-      grid-template-columns: repeat(4, minmax(0, 1fr));
-      gap: 10px;
-      margin: 18px 0 16px;
-    }
-
-    .stat {
-      background: var(--surface-2);
-      border: 1px solid #dce6f5;
-      border-radius: 16px;
-      padding: 14px;
-    }
-
-    .stat strong {
-      display: block;
-      font-size: 1rem;
-      margin-bottom: 4px;
-    }
-
-    .stat span {
-      display: block;
-      color: var(--muted);
-      font-size: 0.86rem;
-    }
-
-    .hero-cta {
-      display: flex;
-      gap: 10px;
-      flex-wrap: wrap;
-      margin-bottom: 14px;
-    }
-
-    .hero-note {
-      color: var(--muted);
-      font-size: 0.88rem;
-    }
-
-    .form-card {
-      position: relative;
-      overflow: hidden;
-    }
-
-    .form-card h2 {
-      margin: 0 0 8px;
-      font-size: 1.45rem;
-    }
-
-    .form-card p {
-      margin: 0 0 18px;
-      color: var(--muted);
-    }
-
-    .offer-chip {
-      display: inline-flex;
-      align-items: center;
-      gap: 8px;
-      padding: 10px 14px;
-      border-radius: 999px;
-      background: #fff8e8;
-      color: #a16207;
-      border: 1px solid #fde7b1;
-      font-weight: 700;
-      font-size: 0.84rem;
-      margin-bottom: 14px;
-    }
-
-    form {
-      display: grid;
-      gap: 14px;
-    }
-
-    .grid-2 {
-      display: grid;
-      grid-template-columns: repeat(2, minmax(0, 1fr));
-      gap: 12px;
-    }
-
-    .field {
-      display: grid;
-      gap: 8px;
-      min-width: 0;
-    }
-
-    .field label,
-    .selector-title {
-      font-weight: 700;
-      font-size: 0.92rem;
-    }
-
-    .input,
-    .textarea,
-    .select-hidden {
-      width: 100%;
-      border: 1.5px solid var(--line);
-      background: white;
-      border-radius: 14px;
-      padding: 14px 15px;
-      color: var(--text);
-      outline: none;
-      transition: border-color .18s ease, box-shadow .18s ease;
-    }
-
-    .input:focus,
-    .textarea:focus {
-      border-color: #8cb2ff;
-      box-shadow: 0 0 0 4px rgba(15, 98, 254, 0.10);
-    }
-
-    .textarea {
-      min-height: 110px;
-      resize: vertical;
-    }
-
-    .selector-wrap {
-      display: grid;
-      gap: 10px;
-      min-width: 0;
-    }
-
-    .option-grid {
-      display: grid;
-      grid-template-columns: repeat(2, minmax(0, 1fr));
-      gap: 12px;
-      min-width: 0;
-    }
-
-    .option-btn {
-      border: 1.5px solid var(--line);
-      background: white;
-      border-radius: 22px;
-      padding: 18px 16px;
-      cursor: pointer;
-      display: flex;
-      align-items: flex-start;
-      gap: 14px;
-      text-align: left;
-      transition: all .18s ease;
-      font-weight: 800;
-      color: var(--text);
-      min-width: 0;
-      overflow: hidden;
-      min-height: 140px;
-    }
-
-    .option-btn > span:last-child {
-      min-width: 0;
-      display: block;
-      overflow-wrap: anywhere;
-      word-break: break-word;
-      line-height: 1.22;
-      font-size: 1.02rem;
-    }
-
-    .option-btn small {
-      display: block;
-      color: var(--muted);
-      font-weight: 700;
-      font-size: 0.74rem;
-      margin-top: 8px;
-      line-height: 1.4;
-      overflow-wrap: anywhere;
-      word-break: break-word;
-    }
-
-    .option-btn:hover {
-      border-color: #b8ccef;
-      box-shadow: 0 8px 18px rgba(15, 23, 42, 0.06);
-    }
-
-    .option-btn.active {
-      border-color: #90b2ff;
-      background: #eef4ff;
-      box-shadow: 0 8px 18px rgba(15, 98, 254, 0.12);
-    }
-
-    .icon-box {
-      width: 56px;
-      height: 56px;
-      border-radius: 18px;
-      background: var(--surface-2);
-      display: grid;
-      place-items: center;
-      font-size: 1.25rem;
-      flex: 0 0 auto;
-      margin-top: 2px;
-    }
-
-    .issue-pills {
-      display: grid;
-      grid-template-columns: 1fr;
-      gap: 12px;
-      min-width: 0;
-    }
-
-    .issue-pill {
-      border: 1.5px solid var(--line);
-      background: white;
-      color: var(--text);
-      padding: 18px 20px;
-      border-radius: 999px;
-      cursor: pointer;
-      font-weight: 800;
-      font-size: 1rem;
-      transition: all .18s ease;
-      width: 100%;
-      text-align: center;
-      min-width: 0;
-    }
-
-    .issue-pill.active {
-      background: #eef4ff;
-      border-color: #90b2ff;
-      color: var(--primary-dark);
-    }
-
-    .consent {
-      display: flex;
-      align-items: flex-start;
-      gap: 10px;
-      font-size: 0.84rem;
-      color: var(--muted);
-      line-height: 1.45;
-    }
-
-    .consent input {
-      margin-top: 4px;
-      width: 18px;
-      height: 18px;
-      accent-color: var(--primary);
-      flex: 0 0 auto;
-    }
-
-    .submit-row {
-      display: flex;
-      gap: 10px;
-      flex-wrap: wrap;
-      align-items: center;
-    }
-
-    .submit-row .btn {
-      min-width: 200px;
-    }
-
-    .fine-print {
-      color: var(--muted);
-      font-size: 0.8rem;
-    }
-
-    .status-success {
-      color: #166534;
-      font-weight: 700;
-    }
-
-    .status-error {
-      color: #b91c1c;
-      font-weight: 700;
-    }
-
-    .is-loading {
-      opacity: 0.75;
-      pointer-events: none;
-    }
-
-    section {
-      padding: 18px 0;
-    }
-
-    .section-head {
-      display: flex;
-      justify-content: space-between;
-      gap: 20px;
-      align-items: end;
-      margin-bottom: 16px;
-    }
-
-    .section-head h2 {
-      margin: 0 0 8px;
-      font-size: clamp(1.55rem, 3vw, 2.2rem);
-      line-height: 1.08;
-    }
-
-    .section-head p {
-      margin: 0;
-      color: var(--muted);
-      max-width: 690px;
-    }
-
-    .services-grid,
-    .trust-grid,
-    .reviews-grid,
-    .areas-grid {
-      display: grid;
-      gap: 16px;
-    }
-
-    .services-grid { grid-template-columns: repeat(3, minmax(0, 1fr)); }
-    .trust-grid { grid-template-columns: repeat(4, minmax(0, 1fr)); }
-    .reviews-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
-    .areas-grid { grid-template-columns: repeat(4, minmax(0, 1fr)); }
-
-    .service-card,
-    .trust-card,
-    .review-card,
-    .area-card,
-    .discount-card {
-      padding: 20px;
-    }
-
-    .service-card h3,
-    .trust-card h3,
-    .review-card h3,
-    .area-card h3 {
-      margin: 12px 0 8px;
-      font-size: 1.02rem;
-    }
-
-    .service-card p,
-    .trust-card p,
-    .review-card p,
-    .area-card p,
-    .discount-card p {
-      margin: 0;
-      color: var(--muted);
-      font-size: 0.92rem;
-    }
-
-    .service-card ul {
-      margin: 12px 0 0;
-      padding-left: 18px;
-      color: var(--muted);
-      font-size: 0.9rem;
-    }
-
-    .service-card li + li { margin-top: 6px; }
-
-    .stars {
-      color: #f59e0b;
-      letter-spacing: 0.05em;
-      font-size: 1rem;
-      font-weight: 800;
-    }
-
-    .discount-card {
-      display: flex;
-      justify-content: space-between;
-      gap: 24px;
-      align-items: center;
-      background: linear-gradient(135deg, #0f172a, #1e293b);
-      color: white;
-      border-color: rgba(255,255,255,0.08);
-    }
-
-    .discount-card h2 {
-      margin: 0 0 10px;
-      font-size: clamp(1.5rem, 3vw, 2.2rem);
-      line-height: 1.08;
-    }
-
-    .discount-card p {
-      color: rgba(255,255,255,0.76);
-      max-width: 700px;
-    }
-
-    .discount-actions {
-      display: flex;
-      gap: 10px;
-      flex-wrap: wrap;
-      margin-top: 16px;
-    }
-
-    .discount-badge {
-      display: inline-flex;
-      align-items: center;
-      gap: 8px;
-      padding: 12px 16px;
-      border-radius: 999px;
-      background: rgba(245, 158, 11, 0.14);
-      color: #fbbf24;
-      font-weight: 800;
-      border: 1px solid rgba(251, 191, 36, 0.2);
-      white-space: nowrap;
-    }
-
-    .footer {
-      padding: 16px 0 84px;
-    }
-
-    .footer-card {
-      background: #0f172a;
-      color: white;
-      border-radius: 24px;
-      padding: 24px;
-      display: grid;
-      grid-template-columns: 1.25fr 0.75fr;
-      gap: 20px;
-    }
-
-    .footer h3 {
-      margin: 0 0 10px;
-      font-size: 1.2rem;
-    }
-
-    .footer p,
-    .footer a,
-    .footer li {
-      color: rgba(255,255,255,0.78);
-    }
-
-    .footer-links {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 12px 18px;
-      margin-top: 16px;
-    }
-
-    .footer-contact {
-      display: grid;
-      gap: 10px;
-      align-content: start;
-    }
-
-    .footer-chip {
-      display: inline-flex;
-      align-items: center;
-      gap: 10px;
-      padding: 12px 14px;
-      border-radius: 14px;
-      background: rgba(255,255,255,0.06);
-      border: 1px solid rgba(255,255,255,0.08);
-    }
-
-    .sticky-bar {
-      position: fixed;
-      left: 12px;
-      right: 12px;
-      bottom: 12px;
-      z-index: 1000;
-      background: rgba(15, 23, 42, 0.96);
-      color: white;
-      border-radius: 18px;
-      border: 1px solid rgba(255,255,255,0.08);
-      box-shadow: 0 12px 30px rgba(15, 23, 42, 0.22);
-      backdrop-filter: blur(14px);
-    }
-
-    .sticky-inner {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 10px;
-      padding: 10px;
-    }
-
-    .sticky-actions {
-      display: contents;
-    }
-
-    .sticky-actions .btn {
-      min-height: 46px;
-      padding-inline: 14px;
-      border-radius: 14px;
-      width: 100%;
-    }
-
-    .btn-light {
-      background: white;
-      color: var(--text);
-    }
-
-    .btn-ghost {
-      background: rgba(255,255,255,0.08);
-      color: white;
-      border-color: rgba(255,255,255,0.1);
-    }
-
-    .sr-only {
-      position: absolute;
-      width: 1px;
-      height: 1px;
-      padding: 0;
-      margin: -1px;
-      overflow: hidden;
-      clip: rect(0, 0, 0, 0);
-      white-space: nowrap;
-      border: 0;
-    }
-
-    @media (max-width: 1080px) {
-      .hero-grid,
-      .footer-card,
-      .discount-card {
-        grid-template-columns: 1fr;
-      }
-
-      .services-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
-      .trust-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
-      .areas-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
-      .hero-stats { grid-template-columns: repeat(2, minmax(0, 1fr)); }
-    }
-
-    @media (max-width: 760px) {
-      .container {
-        width: min(var(--container), calc(100% - 20px));
-      }
-
-      .topbar-inner {
-        min-height: 58px;
-        gap: 10px;
-      }
-
-      .brand {
-        gap: 8px;
-        min-width: 0;
-        flex: 1 1 auto;
-      }
-
-      .logo {
-        width: 36px;
-        height: 36px;
-      }
-
-      .brand-text strong {
-        font-size: 0.9rem;
-      }
-
-      .brand-text span {
-        font-size: 0.74rem;
-      }
-
-      .top-actions {
-        flex: 0 0 auto;
-        gap: 6px;
-      }
-
-      .top-actions .btn {
-        min-height: 42px;
-        padding: 0 12px;
-        border-radius: 12px;
-        font-size: 0.9rem;
-      }
-
-      .hero-card,
-      .form-card,
-      .service-card,
-      .trust-card,
-      .review-card,
-      .area-card,
-      .discount-card,
-      .footer-card {
-        padding: 18px;
-        border-radius: 18px;
-      }
-
-      .hero {
-        padding: 14px 0 10px;
-      }
-
-      .hero-card h1 {
-        font-size: 1.8rem;
-      }
-
-      .hero-lead,
-      .service-card p,
-      .trust-card p,
-      .review-card p,
-      .area-card p,
-      .discount-card p,
-      .service-card li {
-        font-size: 0.92rem;
-        line-height: 1.45;
-      }
-
-      .grid-2,
-      .services-grid,
-      .trust-grid,
-      .reviews-grid,
-      .areas-grid,
-      .option-grid,
-      .hero-stats {
-        grid-template-columns: 1fr;
-      }
-
-      .hero-cta,
-      .submit-row,
-      .discount-actions {
-        display: grid;
-        grid-template-columns: 1fr;
-        gap: 10px;
-      }
-
-      .hero-cta .btn,
-      .submit-row .btn,
-      .discount-actions .btn {
-        width: 100%;
-      }
-
-      .section-head {
-        margin-bottom: 14px;
-      }
-
-      section {
-        padding: 14px 0;
-      }
-
-      .sticky-inner {
-        grid-template-columns: 1fr 1fr;
-      }
-
-      .sticky-actions .btn {
-        min-height: 44px;
-        font-size: 0.95rem;
-      }
-
-      .footer {
-        padding-bottom: 86px;
-      }
-    }
-
-    @media (max-width: 420px) {
-      .brand-text span {
-        max-width: 150px;
-      }
-
-      .top-actions .btn {
-        padding: 0 10px;
-        font-size: 0.84rem;
-      }
-
-      .sticky-inner {
-        gap: 8px;
-        padding: 8px;
-      }
-    }
-  </style>
-  <!-- Google tag (gtag.js) -->
-<script async src="https://www.googletagmanager.com/gtag/js?id=AW-18097232975">
-</script>
-<script>
-  window.dataLayer = window.dataLayer || [];
-  function gtag(){dataLayer.push(arguments);}
-  gtag('js', new Date());
-
-  gtag('config', 'AW-18097232975');
-</script>
+ <meta charset="UTF-8" />
+ <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+ <title>Lurico Appliance Repair | Same-Day Service in Palm Beach County</title>
+ <meta name="description" content="Same-day appliance repair in Palm Beach County. Refrigerator, washer, dryer, dishwasher, oven and range repair. Fast callback, warranty included, $20 off today's repair." />
+ <meta name="theme-color" content="#07111f" />
+
+ <link rel="preconnect" href="https://fonts.googleapis.com">
+ <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+ <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet">
+
+ <script async src="https://www.googletagmanager.com/gtag/js?id=AW-18097232975"></script>
+ <script>
+ window.dataLayer = window.dataLayer || [];
+ function gtag(){dataLayer.push(arguments);}
+ gtag('js', new Date());
+ gtag('config', 'AW-18097232975');
+ </script>
+
+ <style>
+ :root{
+ --ink:#07111f;
+ --ink2:#111d31;
+ --paper:#f5f7fb;
+ --white:#fff;
+ --muted:#69758a;
+ --line:#e4eaf3;
+ --blue:#2f6bff;
+ --blue2:#123ee8;
+ --green:#19d27f;
+ --green2:#0db46a;
+ --gold:#ffba32;
+ --red:#ff5a5a;
+ --radius:30px;
+ --container:1180px;
+ --shadow:0 22px 70px rgba(7,17,31,.12);
+ --shadow-dark:0 34px 110px rgba(0,0,0,.34);
+ }
+
+ *{box-sizing:border-box}
+ html{scroll-behavior:smooth}
+ body{
+ margin:0;
+ font-family:Manrope,system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;
+ color:var(--ink);
+ background:var(--paper);
+ line-height:1.45;
+ overflow-x:hidden;
+ padding-bottom:92px;
+ }
+
+ a{text-decoration:none;color:inherit}
+ button,input,textarea{font:inherit}
+ .container{width:min(var(--container),calc(100% - 32px));margin:0 auto}
+
+ .top-alert{
+ background:#07111f;
+ color:#d9e7ff;
+ border-bottom:1px solid rgba(255,255,255,.09);
+ font-size:.88rem;
+ font-weight:800;
+ }
+ .top-alert .container{
+ min-height:40px;
+ display:flex;
+ justify-content:space-between;
+ align-items:center;
+ gap:14px;
+ }
+ .top-alert b{color:#b9ff68}
+
+ .nav{
+ position:sticky;
+ top:0;
+ z-index:60;
+ background:rgba(245,247,251,.82);
+ backdrop-filter:blur(18px);
+ border-bottom:1px solid rgba(7,17,31,.08);
+ }
+ .nav-inner{
+ min-height:78px;
+ display:flex;
+ align-items:center;
+ justify-content:space-between;
+ gap:18px;
+ }
+ .brand{
+ display:flex;
+ align-items:center;
+ gap:12px;
+ min-width:0;
+ }
+ .brand-icon{
+ width:50px;
+ height:50px;
+ border-radius:18px;
+ display:grid;
+ place-items:center;
+ color:white;
+ font-family:"Space Grotesk",sans-serif;
+ font-weight:700;
+ font-size:1.25rem;
+ background:
+ radial-gradient(circle at 35% 30%, rgba(255,255,255,.9), transparent 10%),
+ linear-gradient(135deg,var(--blue),var(--green));
+ box-shadow:0 16px 38px rgba(47,107,255,.28);
+ flex:0 0 auto;
+ }
+ .brand strong{
+ display:block;
+ font-family:"Space Grotesk",sans-serif;
+ font-size:1.05rem;
+ line-height:1;
+ letter-spacing:-.02em;
+ }
+ .brand span{
+ display:block;
+ color:var(--muted);
+ font-size:.82rem;
+ font-weight:800;
+ margin-top:5px;
+ white-space:nowrap;
+ overflow:hidden;
+ text-overflow:ellipsis;
+ }
+ .nav-links{
+ display:flex;
+ align-items:center;
+ gap:20px;
+ color:#334155;
+ font-weight:900;
+ font-size:.9rem;
+ }
+ .nav-actions{display:flex;align-items:center;gap:10px}
+
+ .btn{
+ display:inline-flex;
+ align-items:center;
+ justify-content:center;
+ gap:10px;
+ min-height:54px;
+ padding:0 22px;
+ border-radius:999px;
+ border:1px solid transparent;
+ font-weight:950;
+ letter-spacing:-.01em;
+ cursor:pointer;
+ transition:.22s ease;
+ white-space:nowrap;
+ }
+ .btn:hover{transform:translateY(-2px)}
+ .btn-blue{color:white;background:linear-gradient(135deg,var(--blue),var(--blue2));box-shadow:0 18px 42px rgba(47,107,255,.28)}
+ .btn-green{color:#03140c;background:linear-gradient(135deg,var(--green),var(--green2));box-shadow:0 18px 42px rgba(25,210,127,.25)}
+ .btn-white{background:white;color:var(--ink);border-color:rgba(7,17,31,.1);box-shadow:0 12px 30px rgba(7,17,31,.07)}
+ .btn-dark{background:var(--ink);color:white}
+
+ .hero{
+ position:relative;
+ overflow:hidden;
+ color:white;
+ padding:72px 0 70px;
+ background:
+ radial-gradient(circle at 7% 7%, rgba(47,107,255,.40), transparent 30%),
+ radial-gradient(circle at 86% 6%, rgba(25,210,127,.30), transparent 28%),
+ radial-gradient(circle at 55% 110%, rgba(255,186,50,.16), transparent 36%),
+ linear-gradient(135deg,#07111f 0%,#0f1d35 52%,#142642 100%);
+ }
+ .hero:before{
+ content:"";
+ position:absolute;
+ inset:0;
+ background-image:
+ linear-gradient(rgba(255,255,255,.045) 1px, transparent 1px),
+ linear-gradient(90deg, rgba(255,255,255,.045) 1px, transparent 1px);
+ background-size:52px 52px;
+ mask-image:linear-gradient(to bottom, rgba(0,0,0,.92), rgba(0,0,0,.18));
+ pointer-events:none;
+ }
+ .hero:after{
+ content:"";
+ position:absolute;
+ width:520px;
+ height:520px;
+ border-radius:999px;
+ right:-180px;
+ top:90px;
+ background:radial-gradient(circle, rgba(185,255,104,.18), transparent 68%);
+ filter:blur(10px);
+ pointer-events:none;
+ }
+
+ .hero-grid{
+ position:relative;
+ z-index:1;
+ display:grid;
+ grid-template-columns:1.05fr .95fr;
+ gap:34px;
+ align-items:center;
+ }
+ .kicker{
+ display:inline-flex;
+ align-items:center;
+ gap:10px;
+ padding:11px 15px;
+ border-radius:999px;
+ background:rgba(255,255,255,.09);
+ border:1px solid rgba(255,255,255,.17);
+ color:#ecfff5;
+ font-weight:950;
+ font-size:.9rem;
+ margin-bottom:20px;
+ }
+ h1{
+ margin:0 0 20px;
+ font-family:"Space Grotesk",sans-serif;
+ font-size:clamp(3.35rem,7.7vw,7rem);
+ line-height:.83;
+ letter-spacing:-.075em;
+ max-width:880px;
+ }
+ .accent-text{
+ background:linear-gradient(135deg,#fff 0%,#a7c0ff 48%,#b9ff68 100%);
+ -webkit-background-clip:text;
+ background-clip:text;
+ color:transparent;
+ }
+ .hero-text{
+ margin:0;
+ max-width:680px;
+ color:#c9d5eb;
+ font-size:1.15rem;
+ font-weight:650;
+ }
+ .trust-row{
+ display:flex;
+ flex-wrap:wrap;
+ gap:10px;
+ margin:26px 0;
+ }
+ .trust-pill{
+ padding:12px 14px;
+ border-radius:999px;
+ background:rgba(255,255,255,.085);
+ border:1px solid rgba(255,255,255,.15);
+ color:#f6fbff;
+ font-size:.92rem;
+ font-weight:900;
+ }
+ .hero-actions{display:flex;flex-wrap:wrap;gap:12px;margin-top:26px}
+ .hero-note{
+ margin-top:18px;
+ color:#afbdd6;
+ font-weight:750;
+ font-size:.94rem;
+ }
+
+ .visual-card{
+ position:relative;
+ min-height:590px;
+ }
+
+ .orbit{
+ position:absolute;
+ inset:18px 18px auto auto;
+ width:255px;
+ height:255px;
+ border:1px solid rgba(255,255,255,.14);
+ border-radius:999px;
+ animation:spin 16s linear infinite;
+ }
+ .orbit:before,.orbit:after{
+ content:"";
+ position:absolute;
+ width:18px;
+ height:18px;
+ border-radius:999px;
+ background:var(--green);
+ box-shadow:0 0 26px rgba(25,210,127,.8);
+ }
+ .orbit:before{left:40px;top:18px}
+ .orbit:after{right:20px;bottom:50px;background:var(--blue)}
+ @keyframes spin{to{transform:rotate(360deg)}}
+
+ .machine{
+ position:absolute;
+ left:0;
+ bottom:18px;
+ width:56%;
+ min-height:370px;
+ border-radius:42px;
+ background:
+ linear-gradient(180deg,rgba(255,255,255,.98),rgba(226,235,249,.96));
+ box-shadow:var(--shadow-dark);
+ padding:22px;
+ color:var(--ink);
+ transform:rotate(-4deg);
+ }
+ .machine-top{
+ height:70px;
+ border-radius:24px;
+ background:#111d31;
+ display:flex;
+ align-items:center;
+ justify-content:space-between;
+ padding:0 16px;
+ color:white;
+ font-weight:950;
+ }
+ .machine-led{
+ width:74px;
+ height:24px;
+ border-radius:999px;
+ background:linear-gradient(135deg,var(--green),#b9ff68);
+ box-shadow:0 0 26px rgba(25,210,127,.35);
+ }
+ .machine-door{
+ width:215px;
+ height:215px;
+ border-radius:999px;
+ margin:32px auto 0;
+ background:
+ radial-gradient(circle at 38% 34%, rgba(255,255,255,.9), transparent 18%),
+ radial-gradient(circle, #263b5a 0 46%, #e8eef8 47% 60%, #cfd9e9 61%);
+ box-shadow:inset 0 18px 40px rgba(0,0,0,.22);
+ }
+ .float-panel{
+ position:absolute;
+ right:0;
+ top:30px;
+ width:58%;
+ background:rgba(255,255,255,.12);
+ border:1px solid rgba(255,255,255,.18);
+ border-radius:34px;
+ padding:18px;
+ backdrop-filter:blur(18px);
+ box-shadow:var(--shadow-dark);
+ }
+ .lead-form{
+ background:white;
+ color:var(--ink);
+ border-radius:28px;
+ padding:22px;
+ }
+ .lead-head{
+ display:flex;
+ justify-content:space-between;
+ align-items:flex-start;
+ gap:12px;
+ margin-bottom:16px;
+ }
+ .lead-head h2{
+ margin:0;
+ font-family:"Space Grotesk",sans-serif;
+ line-height:1;
+ letter-spacing:-.045em;
+ font-size:1.7rem;
+ }
+ .lead-head p{
+ margin:7px 0 0;
+ color:var(--muted);
+ font-weight:700;
+ font-size:.93rem;
+ }
+ .coupon{
+ background:#fff3cd;
+ border:1px solid #ffe198;
+ color:#935b00;
+ padding:9px 11px;
+ border-radius:16px;
+ font-weight:950;
+ white-space:nowrap;
+ font-size:.82rem;
+ }
+ form{display:grid;gap:13px}
+ .label{
+ display:block;
+ font-weight:950;
+ color:#13233d;
+ font-size:.92rem;
+ margin-bottom:8px;
+ }
+ .appliance-grid{
+ display:grid;
+ grid-template-columns:repeat(2,minmax(0,1fr));
+ gap:9px;
+ }
+ .appliance-btn{
+ min-height:64px;
+ border:1.5px solid #dde6f2;
+ background:#f8fbff;
+ color:#122033;
+ border-radius:18px;
+ display:flex;
+ align-items:center;
+ gap:10px;
+ padding:10px;
+ cursor:pointer;
+ font-weight:950;
+ transition:.2s ease;
+ text-align:left;
+ }
+ .appliance-btn span:first-child{font-size:1.3rem}
+ .appliance-btn.active,.appliance-btn:hover{
+ border-color:#7aa4ff;
+ background:#edf4ff;
+ box-shadow:0 10px 24px rgba(47,107,255,.12);
+ transform:translateY(-1px);
+ }
+ .field{display:grid;gap:8px}
+ input[type="text"],input[type="tel"]{
+ width:100%;
+ min-height:54px;
+ border:1.5px solid #dde6f2;
+ border-radius:17px;
+ padding:0 15px;
+ outline:none;
+ color:#122033;
+ background:#fff;
+ font-weight:800;
+ }
+ input[type="text"]:focus,input[type="tel"]:focus{
+ border-color:#7aa4ff;
+ box-shadow:0 0 0 5px rgba(47,107,255,.12);
+ }
+ .consent{
+ display:flex;
+ gap:9px;
+ align-items:flex-start;
+ color:#66758d;
+ font-size:.75rem;
+ line-height:1.35;
+ font-weight:650;
+ }
+ .consent input{
+ width:17px;
+ height:17px;
+ accent-color:var(--green);
+ margin-top:1px;
+ flex:0 0 auto;
+ }
+ .submit{
+ min-height:60px;
+ border:0;
+ border-radius:18px;
+ background:linear-gradient(135deg,var(--green),var(--green2));
+ color:#03140c;
+ font-weight:950;
+ cursor:pointer;
+ box-shadow:0 16px 34px rgba(25,210,127,.24);
+ }
+ .form-meta{
+ display:grid;
+ grid-template-columns:repeat(3,1fr);
+ gap:7px;
+ }
+ .meta{
+ padding:9px 6px;
+ text-align:center;
+ background:#f3f7ff;
+ border:1px solid #e1e9f6;
+ border-radius:14px;
+ font-size:.72rem;
+ font-weight:950;
+ color:#21314d;
+ }
+ .status{
+ color:#66758d;
+ font-size:.82rem;
+ font-weight:800;
+ min-height:18px;
+ }
+ .status.success{color:#07824b}
+ .status.error{color:#b42318}
+
+ .below-hero{
+ background:var(--paper);
+ margin-top:-28px;
+ position:relative;
+ z-index:3;
+ color:var(--ink);
+ }
+ .quick-proof{
+ display:grid;
+ grid-template-columns:repeat(4,1fr);
+ gap:14px;
+ background:white;
+ border:1px solid #e3ebf5;
+ border-radius:30px;
+ padding:16px;
+ box-shadow:var(--shadow);
+ }
+ .quick-item{
+ padding:18px;
+ border-radius:22px;
+ background:#f7faff;
+ border:1px solid #e6edf7;
+ }
+ .quick-item strong{
+ display:block;
+ font-family:"Space Grotesk",sans-serif;
+ font-size:1.05rem;
+ margin-bottom:4px;
+ }
+ .quick-item span{color:var(--muted);font-weight:700;font-size:.9rem}
+
+ section.white{
+ background:var(--paper);
+ color:var(--ink);
+ padding:78px 0;
+ }
+ .section-head{
+ display:flex;
+ justify-content:space-between;
+ align-items:end;
+ gap:22px;
+ margin-bottom:26px;
+ }
+ .section-head h2{
+ margin:0;
+ font-family:"Space Grotesk",sans-serif;
+ font-size:clamp(2.2rem,4.7vw,4.4rem);
+ line-height:.9;
+ letter-spacing:-.065em;
+ }
+ .section-head p{
+ margin:0;
+ color:var(--muted);
+ max-width:620px;
+ font-weight:700;
+ }
+
+ .brand-wall{
+ display:grid;
+ grid-template-columns:repeat(6,1fr);
+ gap:12px;
+ }
+ .brand-card{
+ min-height:92px;
+ background:white;
+ border:1px solid #e3ebf5;
+ border-radius:24px;
+ display:grid;
+ place-items:center;
+ font-family:"Space Grotesk",sans-serif;
+ font-weight:700;
+ letter-spacing:-.025em;
+ font-size:1.12rem;
+ box-shadow:0 14px 36px rgba(7,17,31,.06);
+ }
+
+ .service-grid{
+ display:grid;
+ grid-template-columns:repeat(3,1fr);
+ gap:16px;
+ }
+ .service-card{
+ min-height:250px;
+ background:white;
+ border:1px solid #e3ebf5;
+ border-radius:30px;
+ padding:24px;
+ box-shadow:0 16px 44px rgba(7,17,31,.07);
+ position:relative;
+ overflow:hidden;
+ }
+ .service-card:before{
+ content:"";
+ position:absolute;
+ right:-80px;
+ top:-80px;
+ width:190px;
+ height:190px;
+ border-radius:999px;
+ background:rgba(47,107,255,.08);
+ }
+ .service-icon{
+ width:62px;
+ height:62px;
+ border-radius:22px;
+ display:grid;
+ place-items:center;
+ background:#edf4ff;
+ font-size:1.6rem;
+ margin-bottom:18px;
+ position:relative;
+ z-index:1;
+ }
+ .service-card h3{
+ margin:0 0 9px;
+ font-family:"Space Grotesk",sans-serif;
+ font-size:1.28rem;
+ letter-spacing:-.03em;
+ position:relative;
+ z-index:1;
+ }
+ .service-card p{
+ margin:0;
+ color:#657287;
+ font-weight:650;
+ position:relative;
+ z-index:1;
+ }
+
+ .dark-process{
+ background:
+ radial-gradient(circle at 15% 12%, rgba(47,107,255,.28), transparent 32%),
+ radial-gradient(circle at 90% 18%, rgba(25,210,127,.23), transparent 30%),
+ linear-gradient(135deg,#07111f,#152848);
+ color:white;
+ border-radius:44px;
+ padding:38px;
+ display:grid;
+ grid-template-columns:.92fr 1.08fr;
+ gap:22px;
+ align-items:center;
+ box-shadow:var(--shadow-dark);
+ }
+ .dark-process h2{
+ margin:0 0 14px;
+ font-family:"Space Grotesk",sans-serif;
+ font-size:clamp(2.4rem,5.2vw,4.8rem);
+ line-height:.88;
+ letter-spacing:-.07em;
+ }
+ .dark-process p{margin:0;color:#cbd7ee;font-weight:700}
+ .steps{
+ display:grid;
+ grid-template-columns:repeat(3,1fr);
+ gap:12px;
+ }
+ .step{
+ background:rgba(255,255,255,.09);
+ border:1px solid rgba(255,255,255,.15);
+ border-radius:28px;
+ padding:22px;
+ min-height:190px;
+ }
+ .step strong{
+ display:block;
+ font-family:"Space Grotesk",sans-serif;
+ font-size:2.2rem;
+ color:#b9ff68;
+ margin-bottom:10px;
+ }
+ .step b{display:block;font-size:1.05rem}
+ .step span{display:block;color:#cbd7ee;margin-top:8px;font-weight:650}
+
+ .review-grid{
+ display:grid;
+ grid-template-columns:repeat(3,1fr);
+ gap:16px;
+ }
+ .review{
+ background:white;
+ border:1px solid #e3ebf5;
+ border-radius:30px;
+ padding:24px;
+ box-shadow:0 16px 44px rgba(7,17,31,.07);
+ }
+ .stars{color:#f59e0b;font-weight:950;letter-spacing:.04em}
+ .review p{
+ color:#24324a;
+ font-size:1.03rem;
+ font-weight:750;
+ margin:14px 0;
+ }
+ .review small{color:#647084;font-weight:900}
+
+ .areas{
+ display:flex;
+ flex-wrap:wrap;
+ gap:10px;
+ }
+ .area{
+ background:white;
+ border:1px solid #e3ebf5;
+ border-radius:999px;
+ padding:13px 16px;
+ box-shadow:0 10px 26px rgba(7,17,31,.05);
+ font-weight:950;
+ color:#1c2b45;
+ }
+
+ .final-cta{
+ margin-top:34px;
+ background:linear-gradient(135deg,var(--blue),var(--green));
+ color:white;
+ border-radius:44px;
+ padding:40px;
+ display:flex;
+ justify-content:space-between;
+ align-items:center;
+ gap:24px;
+ box-shadow:0 24px 74px rgba(47,107,255,.22);
+ }
+ .final-cta h2{
+ margin:0 0 10px;
+ font-family:"Space Grotesk",sans-serif;
+ font-size:clamp(2.2rem,4.6vw,4.2rem);
+ line-height:.9;
+ letter-spacing:-.065em;
+ }
+ .final-cta p{margin:0;color:rgba(255,255,255,.88);font-weight:750}
+
+ footer{
+ background:#07111f;
+ color:#aebbd2;
+ padding:28px 0 118px;
+ font-weight:650;
+ }
+ .footer-inner{
+ display:flex;
+ justify-content:space-between;
+ flex-wrap:wrap;
+ gap:14px;
+ }
+
+ .sticky{
+ position:fixed;
+ left:12px;
+ right:12px;
+ bottom:12px;
+ z-index:100;
+ background:rgba(7,17,31,.92);
+ border:1px solid rgba(255,255,255,.14);
+ border-radius:24px;
+ padding:10px;
+ display:grid;
+ grid-template-columns:1fr 1fr;
+ gap:10px;
+ box-shadow:0 20px 60px rgba(0,0,0,.32);
+ backdrop-filter:blur(18px);
+ }
+ .sticky .btn{width:100%;min-height:50px;padding:0 10px}
+
+ @media(max-width:1060px){
+ .hero-grid{grid-template-columns:1fr}
+ .visual-card{min-height:auto}
+ .float-panel{position:relative;right:auto;top:auto;width:100%}
+ .machine,.orbit{display:none}
+ .quick-proof{grid-template-columns:repeat(2,1fr)}
+ .brand-wall{grid-template-columns:repeat(3,1fr)}
+ .service-grid,.review-grid{grid-template-columns:repeat(2,1fr)}
+ .dark-process{grid-template-columns:1fr}
+ .nav-links{display:none}
+ }
+
+ @media(max-width:720px){
+ .top-alert{display:none}
+ .container{width:min(var(--container),calc(100% - 22px))}
+ .nav-inner{min-height:68px}
+ .brand-icon{width:42px;height:42px;border-radius:15px}
+ .brand span{max-width:160px}
+ .nav-actions .btn-white{display:none}
+ .hero{padding:40px 0 42px}
+ h1{font-size:3.25rem}
+ .hero-text{font-size:1rem}
+ .hero-actions{display:grid;grid-template-columns:1fr}
+ .hero-actions .btn{width:100%}
+ .float-panel{padding:10px;border-radius:32px;background:rgba(255,255,255,.10)}
+ .lead-form{padding:18px;border-radius:26px}
+ .lead-head{display:block}
+ .coupon{display:inline-flex;margin-top:12px}
+ .appliance-grid,.form-meta{grid-template-columns:1fr}
+ .appliance-btn{min-height:58px}
+ .quick-proof,.brand-wall,.service-grid,.review-grid,.steps{grid-template-columns:1fr}
+ section.white{padding:52px 0}
+ .section-head{display:block}
+ .dark-process,.final-cta{display:block;padding:24px;border-radius:32px}
+ .final-cta .btn{width:100%;margin-top:16px}
+ .footer-inner{display:grid;gap:10px}
+ }
+ </style>
 </head>
-  
+
 <body>
-  <header class="topbar" id="topbar">
-    <div class="container topbar-inner">
-      <a href="#top" class="brand" aria-label="Lurico Appliance Repair home">
-        <img src="logo.png" alt="Lurico Appliance Repair" class="logo">
-        <div class="brand-text">
-          <strong>Lurico Appliance Repair</strong>
-          <span>Same-day service in Palm Beach Area</span>
-        </div>
-      </a>
+ <div class="top-alert">
+ <div class="container">
+ <span>Same-Day Appliance Repair • Palm Beach County</span>
+ <b>✅ EPA Certified Technician</b>
+ </div>
+ </div>
 
-      <div class="top-actions">
-        <a class="btn btn-secondary" href="sms:+19543055539">💬 Text Us</a>
-        <a class="btn btn-primary" href="tel:+19543055539">📞 Call</a>
-      </div>
-    </div>
-  </header>
+ <header class="nav">
+ <div class="container nav-inner">
+ <a class="brand" href="#top" aria-label="Lurico Appliance Repair">
+ <div class="brand-icon">L</div>
+ <div>
+ <strong>Lurico Appliance Repair</strong>
+ <span>EPA Certified • Warranty included</span>
+ </div>
+ </a>
 
-  <main id="top">
-    <section class="hero">
-      <div class="container hero-grid">
-        <div class="hero-card">
-          <div class="eyebrow">✔ Same-Day Appointments • Palm Beach Area</div>
-          <h1>Fast appliance repair that feels professional from the first call.</h1>
-          <p class="hero-lead">
-            We repair refrigerators, washers, dryers, dishwashers, ovens, and AC units across Palm Beach Gardens, West Palm Beach, Jupiter, and Boca Raton.
-            Fast scheduling, honest recommendations, and dependable work.
-          </p>
+ <nav class="nav-links" aria-label="Main navigation">
+ <a href="#brands">Brands</a>
+ <a href="#services">Services</a>
+ <a href="#reviews">Reviews</a>
+ <a href="#areas">Areas</a>
+ </nav>
 
-          <div class="hero-cta">
-            <a class="btn btn-primary" href="#request-service">Get Free Quote</a>
-            <a class="btn btn-secondary" href="tel:+19543055539">📞 Call Now</a>
-            <a class="btn btn-whatsapp" href="https://wa.me/19543055539" target="_blank" rel="noopener">🟢 WhatsApp</a>
-          </div>
+ <div class="nav-actions">
+ <a class="btn btn-white" href="sms:+19543055539">💬 Text</a>
+ <a class="btn btn-green" href="tel:+19543055539">📞 Call Now</a>
+ </div>
+ </div>
+ </header>
 
-          <div class="hero-stats">
-            <div class="stat">
-              <strong>Same-Day</strong>
-              <span>Fast response when available</span>
-            </div>
-            <div class="stat">
-              <strong>Warranty</strong>
-              <span>Included with repair work</span>
-            </div>
-            <div class="stat">
-              <strong>Honest Pricing</strong>
-              <span>No unnecessary upsells</span>
-            </div>
-            <div class="stat">
-              <strong>5-Star Focus</strong>
-              <span>Friendly and reliable service</span>
-            </div>
-          </div>
+ <main id="top">
+ <section class="hero">
+ <div class="container hero-grid">
+ <div>
+ <div class="kicker">⭐⭐⭐⭐⭐ Premium Local Appliance Repair</div>
 
-          <div class="hero-note">
-            Call or text now to check today’s availability and claim your <strong>$20 OFF</strong> repair offer.
-          </div>
-        </div>
+ <h1>
+ Same-Day<br>
+ <span class="accent-text">Appliance Repair</span>
+ </h1>
 
-        <aside class="form-card" id="request-service">
-          <div class="offer-chip">🔥 Get $20 Off Your Repair Today</div>
-          <h2>Request Service</h2>
-          <p>Tell us what appliance is giving you trouble and we’ll get back to you quickly.</p>
+ <p class="hero-text">
+ Fast repair for refrigerators, washers, dryers, dishwashers, ovens and ranges.
+ Request service in under 30 seconds and get a quick call or text back.
+ </p>
 
-          <form id="serviceForm" action="#" method="post" novalidate>
-            <div class="grid-2">
-              <div class="field">
-                <label for="name">Full Name</label>
-                <input class="input" id="name" name="name" type="text" placeholder="Your name" required>
-              </div>
-              <div class="field">
-                <label for="phone">Phone Number</label>
-                <input class="input" id="phone" name="phone" type="tel" placeholder="(954) 305-5539" required>
-              </div>
-            </div>
+ <div class="trust-row">
+ <span class="trust-pill">⚡ Callback Within Minutes</span>
+ <span class="trust-pill">🛡 Warranty Included</span>
+ <span class="trust-pill">✅ EPA Certified</span>
+ <span class="trust-pill">✅ EPA Certified</span>
+ <span class="trust-pill">⭐ 100+ Positive Reviews</span>
+ </div>
 
-            <div class="field">
-              <label for="address">Service Address</label>
-              <input class="input" id="address" name="address" type="text" placeholder="Street address, city">
-            </div>
+ <div class="hero-actions">
+ <a class="btn btn-blue" href="#request-service">GET SAME-DAY SERVICE</a>
+ <a class="btn btn-green" href="tel:+19543055539">📞 954-305-5539</a>
+ </div>
 
-            <div class="grid-2">
-              <div class="field selector-wrap">
-                <div class="selector-title">Choose appliance</div>
-                <div class="option-grid" id="applianceOptions">
-                  <button type="button" class="option-btn" data-type="appliance" data-value="Refrigerator">
-                    <span class="icon-box">❄️</span>
-                    <span>Refrigerator<small>Cooling, ice, leaks</small></span>
-                  </button>
-                  <button type="button" class="option-btn" data-type="appliance" data-value="Washer">
-                    <span class="icon-box">🧺</span>
-                    <span>Washer<small>Spin, drain, leaks</small></span>
-                  </button>
-                  <button type="button" class="option-btn" data-type="appliance" data-value="Dryer">
-                    <span class="icon-box">🔥</span>
-                    <span>Dryer<small>No heat, loud drum</small></span>
-                  </button>
-                  <button type="button" class="option-btn" data-type="appliance" data-value="Dishwasher">
-                    <span class="icon-box">🍽</span>
-                    <span>Dishwasher<small>Drain, wash, dry</small></span>
-                  </button>
-                  <button type="button" class="option-btn" data-type="appliance" data-value="Oven / Range">
-                    <span class="icon-box">🍳</span>
-                    <span>Oven / Range<small>Heat, igniter, controls</small></span>
-                  </button>
-                  <button type="button" class="option-btn" data-type="appliance" data-value="AC Unit">
-                    <span class="icon-box">💨</span>
-                    <span>AC Unit<small>Cooling, airflow, thermostat</small></span>
-                  </button>
-                </div>
-                <select class="select-hidden sr-only" id="appliance" name="appliance" required>
-                  <option value="">Select appliance</option>
-                  <option value="Refrigerator">Refrigerator</option>
-                  <option value="Washer">Washer</option>
-                  <option value="Dryer">Dryer</option>
-                  <option value="Dishwasher">Dishwasher</option>
-                  <option value="Oven / Range">Oven / Range</option>
-                  <option value="AC Unit">AC Unit</option>
-                </select>
-              </div>
+ <div class="hero-note">
+ Built for leads: appliance + name + phone. No long form.
+ </div>
+ </div>
 
-              <div class="field selector-wrap">
-                <div class="selector-title">What’s the issue?</div>
-                <div class="issue-pills" id="issueOptions">
-                  <button type="button" class="issue-pill" data-type="issue" data-value="Not cooling">Not cooling</button>
-                  <button type="button" class="issue-pill" data-type="issue" data-value="Not heating">Not heating</button>
-                  <button type="button" class="issue-pill" data-type="issue" data-value="Leaking water">Leaking water</button>
-                  <button type="button" class="issue-pill" data-type="issue" data-value="Not turning on">Not turning on</button>
-                  <button type="button" class="issue-pill" data-type="issue" data-value="Making noise">Making noise</button>
-                  <button type="button" class="issue-pill" data-type="issue" data-value="Not draining">Not draining</button>
-                  <button type="button" class="issue-pill" data-type="issue" data-value="Not spinning">Not spinning</button>
-                </div>
-                <select class="select-hidden sr-only" id="issue" name="issue" required>
-                  <option value="">Select issue</option>
-                  <option value="Not cooling">Not cooling</option>
-                  <option value="Not heating">Not heating</option>
-                  <option value="Leaking water">Leaking water</option>
-                  <option value="Not turning on">Not turning on</option>
-                  <option value="Making noise">Making noise</option>
-                  <option value="Not draining">Not draining</option>
-                  <option value="Not spinning">Not spinning</option>
-                </select>
-              </div>
-            </div>
+ <div class="visual-card">
+ <div class="orbit"></div>
 
-            <div class="field">
-              <label for="message">Describe the problem</label>
-              <textarea class="textarea" id="message" name="message" placeholder="Example: Refrigerator is warm, freezer works but fridge section is not cooling."></textarea>
-            </div>
+ <div class="machine" aria-hidden="true">
+ <div class="machine-top">
+ <span>Lurico</span>
+ <span class="machine-led"></span>
+ </div>
+ <div class="machine-door"></div>
+ </div>
 
-            <label class="consent">
-              <input type="checkbox" name="sms_consent" required>
-              <span>I agree to receive SMS updates about my request. Message &amp; data rates may apply. Reply STOP to opt out.</span>
-            </label>
+ <aside class="float-panel" id="request-service">
+ <div class="lead-form">
+ <div class="lead-head">
+ <div>
+ <h2>Book Your Repair</h2>
+ <p>Choose appliance. Enter phone. We call you.</p>
+ </div>
+ <div class="coupon">EPA Certified</div>
+ </div>
 
-            <div class="submit-row">
-              <button class="btn btn-primary" type="submit">Get Free Quote</button>
-              <a class="btn btn-secondary" href="tel:+19543055539">Call Instead</a>
-            </div>
+ <form id="serviceForm" novalidate>
+ <div>
+ <span class="label">What needs repair?</span>
+ <div class="appliance-grid">
+ <button type="button" class="appliance-btn" data-value="Refrigerator"><span>❄️</span><span>Refrigerator</span></button>
+ <button type="button" class="appliance-btn" data-value="Washer"><span>🧺</span><span>Washer</span></button>
+ <button type="button" class="appliance-btn" data-value="Dryer"><span>🔥</span><span>Dryer</span></button>
+ <button type="button" class="appliance-btn" data-value="Dishwasher"><span>🍽</span><span>Dishwasher</span></button>
+ <button type="button" class="appliance-btn" data-value="Oven / Range"><span>🍳</span><span>Oven / Range</span></button>
+ <button type="button" class="appliance-btn" data-value=""><span>💨</span><span></span></button>
+ </div>
+ <input type="hidden" id="appliance" name="appliance" required>
+ </div>
 
-            <div id="formStatus" class="fine-print" aria-live="polite">Fast response. Same-day service available based on schedule and location.</div>
-          </form>
-        </aside>
-      </div>
-    </section>
+ <div class="field">
+ <label class="label" for="name">Full Name</label>
+ <input id="name" name="name" type="text" placeholder="Your name" autocomplete="name" required>
+ </div>
 
-    <section>
-      <div class="container">
-        <div class="section-head">
-          <div>
-            <h2>We repair the appliances you use every day.</h2>
-            <p>Clear communication, practical troubleshooting, and repair work designed to get your home back to normal as quickly as possible.</p>
-          </div>
-        </div>
+ <div class="field">
+ <label class="label" for="phone">Phone Number</label>
+ <input id="phone" name="phone" type="tel" placeholder="(954) 305-5539" autocomplete="tel" required>
+ </div>
 
-        <div class="services-grid">
-          <article class="service-card">
-            <div class="icon-box">❄️</div>
-            <h3>Refrigerator Repair</h3>
-            <p>Fast help for cooling problems, leaks, ice maker issues, unusual noise, and temperature inconsistency.</p>
-            <ul>
-              <li>Warm fridge or freezer issues</li>
-              <li>Water leaks and frost buildup</li>
-              <li>Ice maker and airflow problems</li>
-            </ul>
-          </article>
+ <label class="consent">
+ <input type="checkbox" name="sms_consent" required>
+ <span>I agree to receive SMS updates about my request. Message & data rates may apply. Reply STOP to opt out.</span>
+ </label>
 
-          <article class="service-card">
-            <div class="icon-box">🧺</div>
-            <h3>Washer &amp; Dryer Repair</h3>
-            <p>From no-spin washers to dryers with no heat, we diagnose the issue and explain the next step clearly.</p>
-            <ul>
-              <li>Not draining or not spinning</li>
-              <li>No heat or long drying times</li>
-              <li>Vibration, noise, burning smell</li>
-            </ul>
-          </article>
+ <button class="submit" type="submit">GET SAME-DAY SERVICE</button>
 
-          <article class="service-card">
-            <div class="icon-box">🍽</div>
-            <h3>Dishwasher Repair</h3>
-            <p>Reliable service for dishwashers that won’t start, don’t clean well, leak, or leave standing water.</p>
-            <ul>
-              <li>Drain and water flow issues</li>
-              <li>Poor cleaning or drying</li>
-              <li>Start and control problems</li>
-            </ul>
-          </article>
+ <div class="form-meta">
+ <div class="meta">⭐⭐⭐⭐⭐ Rated</div>
+ <div class="meta">⚡ Fast Callback</div>
+ <div class="meta">🛡 Warranty</div>
+ </div>
 
-          <article class="service-card">
-            <div class="icon-box">🍳</div>
-            <h3>Oven / Range Repair</h3>
-            <p>We help with heating issues, bad igniters, faulty temperature control, and damaged control panels.</p>
-            <ul>
-              <li>Not heating or heating unevenly</li>
-              <li>Igniter and burner problems</li>
-              <li>Panel and thermostat issues</li>
-            </ul>
-          </article>
+ <div id="formStatus" class="status">Same-day appointments depend on schedule and location.</div>
+ </form>
+ </div>
+ </aside>
+ </div>
+ </div>
+ </section>
 
-          <article class="service-card">
-            <div class="icon-box">💨</div>
-            <h3>AC Unit Repair</h3>
-            <p>When your AC is not cooling or airflow feels weak, we work to restore comfort quickly.</p>
-            <ul>
-              <li>No cooling or weak airflow</li>
-              <li>Thermostat concerns</li>
-              <li>Unusual sounds or operation</li>
-            </ul>
-          </article>
+ <div class="below-hero">
+ <div class="container">
+ <div class="quick-proof">
+ <div class="quick-item">
+ <strong>Same-Day</strong>
+ <span>Fast scheduling when available</span>
+ </div>
+ <div class="quick-item">
+ <strong>Warranty</strong>
+ <span>Included with repair work</span>
+ </div>
+ <div class="quick-item">
+ <strong>Fast Callback</strong>
+ <span>Call or text after request</span>
+ </div>
+ <div class="quick-item">
+ <strong>EPA Certified</strong>
+ <span>Certified for refrigerant work</span>
+ </div>
+ </div>
+ </div>
+ </div>
 
-          <article class="service-card">
-            <div class="icon-box">⚙️</div>
-            <h3>Honest Diagnosis</h3>
-            <p>Before any repair, we focus on identifying the real problem and giving you a straightforward recommendation.</p>
-            <ul>
-              <li>Clear explanation of issue</li>
-              <li>Transparent next steps</li>
-              <li>No unnecessary upsells</li>
-            </ul>
-          </article>
-        </div>
-      </div>
-    </section>
+ <section class="white" id="brands">
+ <div class="container">
+ <div class="section-head">
+ <h2>Brands<br>We Service</h2>
+ <p>Brand recognition builds trust fast. Customers immediately see their appliance brand before submitting the form.</p>
+ </div>
 
-    <section>
-      <div class="container">
-        <div class="section-head">
-          <div>
-            <h2>Why customers choose Lurico</h2>
-            <p>Simple process, fast communication, and repair service built around reliability and trust.</p>
-          </div>
-        </div>
+ <div class="brand-wall">
+ <div class="brand-card">LG</div>
+ <div class="brand-card">Samsung</div>
+ <div class="brand-card">GE</div>
+ <div class="brand-card">Whirlpool</div>
+ <div class="brand-card">Maytag</div>
+ <div class="brand-card">KitchenAid</div>
+ <div class="brand-card">Bosch</div>
+ <div class="brand-card">Frigidaire</div>
+ <div class="brand-card">Electrolux</div>
+ <div class="brand-card">Kenmore</div>
+ <div class="brand-card">Miele</div>
+ <div class="brand-card">Speed Queen</div>
+ </div>
+ </div>
+ </section>
 
-        <div class="trust-grid">
-          <article class="trust-card">
-            <div class="icon-box">⚡</div>
-            <h3>Fast Response</h3>
-            <p>Call, text, or submit the form and we’ll respond quickly to help schedule your service.</p>
-          </article>
+ <section class="white" id="services">
+ <div class="container">
+ <div class="section-head">
+ <h2>Repair<br>Services</h2>
+ <p>Short, scannable service cards designed for mobile Google Ads traffic.</p>
+ </div>
 
-          <article class="trust-card">
-            <div class="icon-box">🧰</div>
-            <h3>Experienced Service</h3>
-            <p>Careful troubleshooting and practical repair recommendations based on the actual issue.</p>
-          </article>
+ <div class="service-grid">
+ <article class="service-card">
+ <div class="service-icon">❄️</div>
+ <h3>Refrigerator Repair</h3>
+ <p>Not cooling, leaking, frost buildup, ice maker issues, loud noise or temperature problems.</p>
+ </article>
 
-          <article class="trust-card">
-            <div class="icon-box">💵</div>
-            <h3>Affordable Pricing</h3>
-            <p>Fair pricing with clear communication and no pressure tactics.</p>
-          </article>
+ <article class="service-card">
+ <div class="service-icon">🧺</div>
+ <h3>Washer Repair</h3>
+ <p>Not spinning, not draining, leaking, shaking, error codes or door lock problems.</p>
+ </article>
 
-          <article class="trust-card">
-            <div class="icon-box">🛡️</div>
-            <h3>Warranty Included</h3>
-            <p>We stand behind our repair work so you can feel more confident after service.</p>
-          </article>
-        </div>
-      </div>
-    </section>
+ <article class="service-card">
+ <div class="service-icon">🔥</div>
+ <h3>Dryer Repair</h3>
+ <p>No heat, long drying times, loud drum, burning smell, belt, motor or airflow problems.</p>
+ </article>
 
-    <section>
-      <div class="container">
-        <div class="discount-card">
-          <div>
-            <div class="discount-badge">$20 OFF Repair Offer</div>
-            <h2>Need help today? Call or text now.</h2>
-            <p>Reach out now to check same-day availability and get fast help for your appliance issue in the Palm Beach area.</p>
-            <div class="discount-actions">
-              <a class="btn btn-primary" href="tel:+19543055539">📞 Call 954-305-5539</a>
-              <a class="btn btn-secondary" href="sms:+19543055539">💬 Text Us</a>
-              <a class="btn btn-whatsapp" href="https://wa.me/19543055539" target="_blank" rel="noopener">🟢 WhatsApp</a>
-            </div>
-          </div>
-          <div>
-            <p><strong>Serving:</strong> Palm Beach Gardens, West Palm Beach, Jupiter, and Boca Raton.</p>
-          </div>
-        </div>
-      </div>
-    </section>
+ <article class="service-card">
+ <div class="service-icon">🍽</div>
+ <h3>Dishwasher Repair</h3>
+ <p>Not draining, not cleaning, leaking, not starting, poor drying or control issues.</p>
+ </article>
 
-    <section>
-      <div class="container">
-        <div class="section-head">
-          <div>
-            <h2>Customer reviews</h2>
-            <p>Short, clear feedback matters. Keep this section updated with your best real customer reviews.</p>
-          </div>
-        </div>
+ <article class="service-card">
+ <div class="service-icon">🍳</div>
+ <h3>Oven / Range Repair</h3>
+ <p>Not heating, igniter problems, burners not working, control board or temperature issues.</p>
+ </article>
+ <article class="service-card">
+ <div class="service-icon">✅</div>
+ <h3>EPA Certified</h3>
+ <p>Certified technician for appliance refrigeration work and professional service standards.</p>
+ </article>
 
-        <div class="reviews-grid">
-          <article class="review-card">
-            <div class="stars">★★★★★</div>
-            <h3>Mike</h3>
-            <p>Fixed the issue the same day. Fast response and very professional service.</p>
-          </article>
+ <article class="service-card">
+ <div class="service-icon">💨</div>
+ <h3> Repair</h3>
+ <p>Weak cooling, airflow problems, thermostat issues, unusual sounds or system not turning on.</p>
+ </article>
+ </div>
+ </div>
+ </section>
 
-          <article class="review-card">
-            <div class="stars">★★★★★</div>
-            <h3>Anna</h3>
-            <p>Quick, friendly, and honest. I would definitely call again.</p>
-          </article>
-        </div>
-      </div>
-    </section>
+ <section class="white">
+ <div class="container">
+ <div class="dark-process">
+ <div>
+ <h2>Simple<br>Lead Flow</h2>
+ <p>The visitor does not need to think. They choose appliance, enter name and phone, then you call and close the job.</p>
+ </div>
 
-    <section>
-      <div class="container">
-        <div class="section-head">
-          <div>
-            <h2>Service areas</h2>
-            <p>Proudly serving homeowners across the Palm Beach area.</p>
-          </div>
-        </div>
+ <div class="steps">
+ <div class="step">
+ <strong>1</strong>
+ <b>Submit Request</b>
+ <span>Short form: appliance, name and phone.</span>
+ </div>
+ <div class="step">
+ <strong>2</strong>
+ <b>Fast Callback</b>
+ <span>Confirm issue, city, brand and availability.</span>
+ </div>
+ <div class="step">
+ <strong>3</strong>
+ <b>Repair Visit</b>
+ <span>Same-day service when schedule allows.</span>
+ </div>
+ </div>
+ </div>
+ </div>
+ </section>
 
-        <div class="areas-grid">
-          <article class="area-card">
-            <div class="icon-box">📍</div>
-            <h3>Palm Beach Gardens</h3>
-            <p>Fast service for refrigerator, washer, dryer, dishwasher, oven, and AC repairs.</p>
-          </article>
+ <section class="white" id="reviews">
+ <div class="container">
+ <div class="section-head">
+ <h2>Trust<br>Section</h2>
+ <p>Replace these with your real Google or Thumbtack reviews for maximum conversion.</p>
+ </div>
 
-          <article class="area-card">
-            <div class="icon-box">📍</div>
-            <h3>West Palm Beach</h3>
-            <p>Same-day appliance repair availability based on schedule and service load.</p>
-          </article>
+ <div class="review-grid">
+ <article class="review">
+ <div class="stars">★★★★★</div>
+ <p>“My LG refrigerator stopped cooling. Lurico responded fast and fixed it the same day.”</p>
+ <small>Michael R. • Boca Raton</small>
+ </article>
 
-          <article class="area-card">
-            <div class="icon-box">📍</div>
-            <h3>Jupiter</h3>
-            <p>Dependable repair help with quick communication and practical service.</p>
-          </article>
+ <article class="review">
+ <div class="stars">★★★★★</div>
+ <p>“Washer would not spin. Very professional, honest pricing and quick service.”</p>
+ <small>Jennifer K. • Palm Beach Gardens</small>
+ </article>
 
-          <article class="area-card">
-            <div class="icon-box">📍</div>
-            <h3>Boca Raton</h3>
-            <p>Convenient scheduling and responsive appliance repair service.</p>
-          </article>
-        </div>
-      </div>
-    </section>
-  </main>
+ <article class="review">
+ <div class="stars">★★★★★</div>
+ <p>“Dryer had no heat. They explained the issue clearly and repaired it quickly.”</p>
+ <small>David M. • West Palm Beach</small>
+ </article>
+ </div>
+ </div>
+ </section>
 
-  <footer class="footer">
-    <div class="container">
-      <div class="footer-card">
-        <div>
-          <h3>Lurico Appliance Repair</h3>
-          <p>Fast, reliable, and affordable appliance repair in the Palm Beach area. Call, text, or message us on WhatsApp to request service.</p>
-          <div class="footer-links">
-            <a href="https://lurico.us/privacy.html">Privacy Policy</a>
-            <a href="https://lurico.us/terms.html">Terms &amp; Conditions</a>
-          </div>
-          <p style="margin-top:16px;">© 2026 Lurico Appliance Repair. All rights reserved.</p>
-        </div>
+ <section class="white" id="areas">
+ <div class="container">
+ <div class="section-head">
+ <h2>Service<br>Areas</h2>
+ <p>Focused on Palm Beach County and nearby cities.</p>
+ </div>
 
-        <div class="footer-contact">
-          <a class="footer-chip" href="tel:+19543055539">📞 954-305-5539</a>
-          <a class="footer-chip" href="sms:+19543055539">💬 Text Us</a>
-          <a class="footer-chip" href="mailto:luricollc@gmail.com">✉️ luricollc@gmail.com</a>
-          <div class="footer-chip">📍 Boca Raton, Delray Beach, Boynton Beach, Lake Worth Beach, West Palm Beach, Palm Beach Gardens, Jupiter.</div>
-        </div>
-      </div>
-    </div>
-  </footer>
+ <div class="areas">
+ <span class="area">Palm Beach Gardens</span>
+ <span class="area">West Palm Beach</span>
+ <span class="area">Jupiter</span>
+ <span class="area">Boca Raton</span>
+ <span class="area">Delray Beach</span>
+ <span class="area">Boynton Beach</span>
+ <span class="area">Lake Worth Beach</span>
+ </div>
 
-  <div class="sticky-bar">
-    <div class="sticky-inner">
-      <div class="sticky-actions">
-        <a class="btn btn-light" href="tel:+19543055539">📞 Call Now</a>
-        <a class="btn btn-ghost" href="sms:+19543055539">💬 Text Us</a>
-      </div>
-    </div>
-  </div>
+ <div class="final-cta">
+ <div>
+ <h2>Need Appliance Repair Today?</h2>
+ <p>Call now or request same-day service in under 30 seconds.</p>
+ </div>
+ <a class="btn btn-dark" href="tel:+19543055539">📞 CALL NOW</a>
+ </div>
+ </div>
+ </section>
+ </main>
 
-  <script>
-    const applianceButtons = document.querySelectorAll('[data-type="appliance"]');
-    const issueButtons = document.querySelectorAll('[data-type="issue"]');
-    const applianceSelect = document.getElementById('appliance');
-    const issueSelect = document.getElementById('issue');
-    const form = document.getElementById('serviceForm');
-    const formStatus = document.getElementById('formStatus');
-    const submitButton = form.querySelector('button[type="submit"]');
-    const topbar = document.getElementById('topbar');
+ <div class="sticky">
+ <a class="btn btn-green" href="tel:+19543055539">📞 Call</a>
+ <a class="btn btn-blue" href="#request-service">Get Service</a>
+ </div>
 
-    const FORM_ENDPOINT = '/send';
+ <footer>
+ <div class="container footer-inner">
+ <div>© 2026 Lurico Appliance Repair</div>
+ <div><a href="mailto:luricollc@gmail.com">luricollc@gmail.com</a></div>
+ <div>
+ <a href="https://lurico.us/privacy.html">Privacy Policy</a>
+ &nbsp;•&nbsp;
+ <a href="https://lurico.us/terms.html">Terms</a>
+ </div>
+ </div>
+ </footer>
 
-    applianceButtons.forEach(button => {
-      button.addEventListener('click', () => {
-        applianceButtons.forEach(btn => btn.classList.remove('active'));
-        button.classList.add('active');
-        applianceSelect.value = button.dataset.value;
-      });
-    });
+ <script>
+ const applianceButtons = document.querySelectorAll('.appliance-btn');
+ const applianceInput = document.getElementById('appliance');
+ const form = document.getElementById('serviceForm');
+ const formStatus = document.getElementById('formStatus');
+ const submitButton = form.querySelector('button[type="submit"]');
+ const FORM_ENDPOINT = '/send';
 
-    issueButtons.forEach(button => {
-      button.addEventListener('click', () => {
-        issueButtons.forEach(btn => btn.classList.remove('active'));
-        button.classList.add('active');
-        issueSelect.value = button.dataset.value;
-      });
-    });
+ applianceButtons.forEach(button => {
+ button.addEventListener('click', () => {
+ applianceButtons.forEach(btn => btn.classList.remove('active'));
+ button.classList.add('active');
+ applianceInput.value = button.dataset.value;
+ });
+ });
 
-    function setStatus(message, type = '') {
-      formStatus.textContent = message;
-      formStatus.classList.remove('status-success', 'status-error');
-      if (type) formStatus.classList.add(type);
-    }
+ function setStatus(message, type = '') {
+ formStatus.textContent = message;
+ formStatus.className = 'status';
+ if (type) formStatus.classList.add(type);
+ }
 
-    form.addEventListener('submit', async function (e) {
-      e.preventDefault();
+ form.addEventListener('submit', async function(e) {
+ e.preventDefault();
 
-      const data = new FormData(form);
-      const payload = {
-        name: (data.get('name') || '').trim(),
-        phone: (data.get('phone') || '').trim(),
-        address: (data.get('address') || '').trim(),
-        appliance: (data.get('appliance') || '').trim(),
-        issue: (data.get('issue') || '').trim(),
-        message: (data.get('message') || '').trim(),
-        sms_consent: data.get('sms_consent') ? 'Yes' : 'No'
-      };
+ const data = new FormData(form);
+ const payload = {
+ name: (data.get('name') || '').trim(),
+ phone: (data.get('phone') || '').trim(),
+ appliance: (data.get('appliance') || '').trim(),
+ address: '',
+ issue: '',
+ message: '',
+ sms_consent: data.get('sms_consent') ? 'Yes' : 'No'
+ };
 
-      if (!payload.name || !payload.phone) {
-        setStatus('Please enter your name and phone number.', 'status-error');
-        return;
-      }
+ if (!payload.appliance) {
+ setStatus('Please choose the appliance.', 'error');
+ return;
+ }
 
-      if (!payload.appliance || !payload.issue) {
-        setStatus('Please select the appliance and the issue.', 'status-error');
-        return;
-      }
+ if (!payload.name || !payload.phone) {
+ setStatus('Please enter your name and phone number.', 'error');
+ return;
+ }
 
-      try {
-        form.classList.add('is-loading');
-        submitButton.disabled = true;
-        submitButton.textContent = 'Sending...';
-        setStatus('Sending your request...');
+ if (payload.sms_consent !== 'Yes') {
+ setStatus('Please agree to receive SMS updates about your request.', 'error');
+ return;
+ }
 
-        const response = await fetch(FORM_ENDPOINT, {
-          method: 'POST',
-          headers: {
-            'Content-Type': 'application/json',
-            'Accept': 'application/json'
-          },
-          body: JSON.stringify(payload)
-        });
+ try {
+ submitButton.disabled = true;
+ submitButton.textContent = 'Sending...';
+ setStatus('Sending your request...');
 
-        const result = await response.json().catch(() => ({}));
+ const response = await fetch(FORM_ENDPOINT, {
+ method: 'POST',
+ headers: {
+ 'Content-Type': 'application/json',
+ 'Accept': 'application/json'
+ },
+ body: JSON.stringify(payload)
+ });
 
-        if (!response.ok || !result.ok) {
-          throw new Error(result.error || 'Request failed');
-        }
+ const result = await response.json().catch(() => ({}));
 
-        form.reset();
-        applianceButtons.forEach(btn => btn.classList.remove('active'));
-        issueButtons.forEach(btn => btn.classList.remove('active'));
-        applianceSelect.value = '';
-        issueSelect.value = '';
-        
-        gtag('event', 'conversion', {
-        'send_to': 'AW-18097232975/vkdmCI3c06ocEM-4t7VD'
-         });
-        setStatus('Thank you! Your request has been sent successfully. We will contact you shortly.', 'status-success');
-     
-      
-     
-      } catch (error) {
-        console.error(error);
-        setStatus('Sorry, something went wrong. Please call or text us directly.', 'status-error');
-      } finally {
-        form.classList.remove('is-loading');
-        submitButton.disabled = false;
-        submitButton.textContent = 'Get Free Quote';
-      }
-    });
+ if (!response.ok || !result.ok) {
+ throw new Error(result.error || 'Request failed');
+ }
 
-    let lastScrollY = window.scrollY;
+ if (typeof gtag === 'function') {
+ gtag('event', 'conversion', {
+ 'send_to': 'AW-18097232975/vkdmCI3c06ocEM-4t7VD'
+ });
+ }
 
-    window.addEventListener('scroll', () => {
-      const currentScrollY = window.scrollY;
-      if (!topbar) return;
+ form.reset();
+ applianceInput.value = '';
+ applianceButtons.forEach(btn => btn.classList.remove('active'));
+ setStatus('🎉 Request received! We will call or text you within minutes.', 'success');
 
-      if (currentScrollY > lastScrollY && currentScrollY > 80) {
-        topbar.classList.add('topbar-hidden');
-      } else {
-        topbar.classList.remove('topbar-hidden');
-      }
-
-      lastScrollY = currentScrollY;
-    });
-  </script>
+ } catch (error) {
+ console.error(error);
+ setStatus('Sorry, something went wrong. Please call or text us directly.', 'error');
+ } finally {
+ submitButton.disabled = false;
+ submitButton.textContent = 'GET SAME-DAY SERVICE';
+ }
+ });
+ </script>
 </body>
 </html>

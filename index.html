@@ -1321,6 +1321,9 @@
  }
 
  if (typeof gtag === 'function') {
+   const phoneDigits = payload.phone.replace(/\D/g, '');
+ const normalizedPhone = phoneDigits.length === 10 ? '+1' + phoneDigits : (phoneDigits.startsWith('1') ? '+' + phoneDigits : payload.phone);
+ gtag('set', 'user_data', { phone_number: normalizedPhone });
  gtag('event', 'conversion', {
  'send_to': 'AW-18097232975/vkdmCI3c06ocEM-4t7VD'
  });

@@ -20,6 +20,22 @@
     function gtag(){dataLayer.push(arguments);}
     gtag('js', new Date());
     gtag('config', 'AW-18097232975');
+gtag('config', 'AW-18097232975/g9WRCKPorZgdEM-4t7VD', {
+  'phone_conversion_number': '954-305-5539',
+  'phone_conversion_callback': function(formattedNumber, mobileNumber) {
+    function updateCallLinks() {
+      document.querySelectorAll('a[href="tel:+19543055539"]').forEach(function(link) {
+        link.href = 'tel:' + mobileNumber;
+        link.textContent = link.textContent.replace('954-305-5539', formattedNumber);
+      });
+    }
+    if (document.readyState === 'loading') {
+      document.addEventListener('DOMContentLoaded', updateCallLinks, {once: true});
+    } else {
+      updateCallLinks();
+    }
+  }
+});
   </script>
   <script type="application/ld+json">
   {

@@ -47,7 +47,8 @@
       {"@type":"Offer","itemOffered":{"@type":"Service","name":"Washer Repair"}},
       {"@type":"Offer","itemOffered":{"@type":"Service","name":"Dryer Repair"}},
       {"@type":"Offer","itemOffered":{"@type":"Service","name":"Dishwasher Repair"}},
-      {"@type":"Offer","itemOffered":{"@type":"Service","name":"Oven / Range Repair"}}
+      {"@type":"Offer","itemOffered":{"@type":"Service","name":"Oven / Range Repair"}},
+      {"@type":"Offer","itemOffered":{"@type":"Service","name":"Built-In Coffee Machine Repair"}}
     ]
   }
   </script>
@@ -213,6 +214,10 @@
             <div><h3 class="cond">Honest Diagnosis</h3><p>Clear troubleshooting, practical recommendations and no unnecessary upsells.</p></div>
           </div>
         </div>
+        <a class="niche" href="/coffee-machine-repair.html">
+          <span><span class="label" style="color:var(--signal)">Also repairing</span><b class="cond">Built-in coffee machines</b><span class="nsub">Miele, Thermador, Wolf, Gaggenau, Bosch and more. Not brewing, leaking or stuck on an error.</span></span>
+          <span class="pill red">Coffee machine service →</span>
+        </a>
       </section>
 
       <section class="panel bg-frost" id="brands">
@@ -384,6 +389,8 @@
       if (reduce) render(0);
     }
     const panels = [...document.querySelectorAll('.stack .panel')];
+    // a panel taller than the screen sticks only after its bottom is visible, so nothing in it gets covered
+    function pinTops() { panels.forEach(pn => { pn.style.top = innerWidth <= 760 ? '' : Math.min(0, innerHeight - pn.offsetHeight) + 'px'; }); }
     function stack() {
       if (reduce || innerWidth <= 760) { panels.forEach(pn => { pn.style.transform = ''; pn.style.filter = ''; }); return; }
       panels.forEach((pn, i) => {
@@ -402,8 +409,9 @@
     mq.addEventListener ? mq.addEventListener('change', () => { placeForm(); size(); onScroll(); }) : mq.addListener(placeForm);
     placeForm();
 
-    size(); onScroll();
-    addEventListener('resize', () => { size(); onScroll(); });
+    pinTops(); size(); onScroll();
+    addEventListener('resize', () => { pinTops(); size(); onScroll(); });
+    addEventListener('load', pinTops);
     addEventListener('scroll', onScroll, { passive: true });
     if (reduce) render(0); else requestAnimationFrame(loop);
   })();

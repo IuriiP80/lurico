@@ -57,7 +57,7 @@
     .film{position:relative;height:330svh}
     .stage{position:sticky;top:0;height:100svh;overflow:hidden;background:var(--wall)}
     .frames{position:absolute;inset:0;transform-origin:67% 62%;will-change:transform}
-    .frames picture{position:absolute;inset:0}
+    .frames picture{position:absolute;inset:0;transform-origin:67% 60%;will-change:opacity,transform}
     .frames img{width:100%;height:100%;object-fit:cover;object-position:62% 50%;display:block;max-width:none}
     .frames picture+picture{opacity:0}
     #scene{position:absolute;inset:0;width:100%;height:100%;display:block;pointer-events:none}
@@ -293,7 +293,9 @@
     const ease = x => 1 - Math.pow(1 - x, 3);
     const io = x => x < .5 ? 4 * x * x * x : 1 - Math.pow(-2 * x + 2, 3) / 2;
     let seed = 11; const rnd = () => (seed = (seed * 16807) % 2147483647) / 2147483647;
-    const fades = [null, [.12, .26], [.3, .44], [.52, .66]];
+    // short crossfades so double exposure stays brief; the camera keeps drifting in between, and each new frame settles in from a slight push
+    const fades = [null, [.08, .22], [.32, .45], [.55, .68]];
+    const smooth = x => x * x * (3 - 2 * x);
     const cubes = Array.from({ length: 14 }, () => ({ a: -Math.PI * .5 + (rnd() - .5) * Math.PI * 1.3, d: .25 + rnd() * .6, s: 16 + rnd() * 26, r0: rnd() * 6.28, spin: (rnd() - .5) * 4, z: .55 + rnd() * .6, bob: rnd() * 6.28, delay: rnd() * .3 }));
     const fog = Array.from({ length: 40 }, () => ({ x: rnd(), y: rnd(), r: 60 + rnd() * 140, v: .3 + rnd() * .7, ph: rnd() * 6.28 }));
 
@@ -325,13 +327,26 @@
     }
     function render(now) {
       const time = reduce ? 0 : (now - t0) / 1000;
-      layers.forEach((l, i) => { if (fades[i]) l.style.opacity = io(clamp((p - fades[i][0]) / (fades[i][1] - fades[i][0]))); });
-      const zoom = 1 + .1 * io(p);
+      layers.forEach((l, i) => {
+        if (!fades[i]) return;
+        const t = smooth(clamp((p - fades[i][0]) / (fades[i][1] - fades[i][0])));
+        l.style.opacity = t;
+        l.style.transform = t > 0 && t < 1 ? `scale(${1 + .025 * (1 - t)})` : '';
+      });
+      const zoom = 1 + .1 * smooth(p);
       frames.style.transform = `scale(${zoom})`;
       ctx.clearRect(0, 0, W, H);
-      const cold = clamp((p - .55) / .15);
-      if (cold <= 0) return;
       const [dx, dy, sc] = drawerPoint(zoom), fw = 420 * sc, FH = frames.offsetHeight;
+      // cool light swelling out of the fridge while the doors open
+      const glow = Math.sin(Math.PI * clamp((p - .08) / .42)) * .3;
+      if (glow > .01) {
+        const gx = dx, gy = dy - 210 * sc, gr = 520 * sc;
+        const g = ctx.createRadialGradient(gx, gy, 0, gx, gy, gr);
+        g.addColorStop(0, `rgba(225,242,255,${glow})`); g.addColorStop(.5, `rgba(205,230,250,${glow * .35})`); g.addColorStop(1, 'rgba(205,230,250,0)');
+        ctx.globalCompositeOperation = 'screen'; ctx.fillStyle = g; ctx.fillRect(gx - gr, gy - gr, gr * 2, gr * 2); ctx.globalCompositeOperation = 'source-over';
+      }
+      const cold = clamp((p - .52) / .15);
+      if (cold <= 0) return;
       for (const f of fog) {
         const life = (f.y + time * .05 * f.v) % 1;
         const px = dx + (f.x - .5) * fw * (1 + life * 2.2) + Math.sin(time * .6 + f.ph) * 18;
@@ -378,7 +393,7 @@
         pn.style.filter = `brightness(${1 - .12 * cover})`;
       });
     }
-    function loop(now) { sp += (p - sp) * .14; const keep = p; p = sp; render(now); p = keep; requestAnimationFrame(loop); }
+    function loop(now) { sp += (p - sp) * .09; const keep = p; p = sp; render(now); p = keep; requestAnimationFrame(loop); }
 
     // the booking form sits in the photo on desktop and right below it on phones
     const form = document.getElementById('request-service');

@@ -1,0 +1,5 @@
+User-agent: *
+Allow: /
+Disallow: /lurico.html
+
+Sitemap: https://lurico.us/sitemap.xml

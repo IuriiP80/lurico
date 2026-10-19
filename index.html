@@ -15,7 +15,7 @@
   <link rel="icon" type="image/png" href="/favicon.png">
   <link rel="apple-touch-icon" href="/img/apple-touch-icon.png">
   <link rel="preload" as="image" href="/img/f1.jpg" media="(min-width:761px)">
-  <link rel="preload" as="image" href="/img/f1m.jpg" media="(max-width:760px)">
+  <link rel="preload" as="image" href="/img/plate-m.jpg" media="(max-width:760px)">
 
   <!-- Google tag (gtag.js) -->
   <script async src="https://www.googletagmanager.com/gtag/js?id=AW-18097232975"></script>
@@ -60,7 +60,21 @@
     .frames{position:absolute;inset:0;transform-origin:67% 62%;will-change:transform}
     .frames picture{position:absolute;inset:0;transform-origin:67% 60%;will-change:opacity,transform}
     .frames img{width:100%;height:100%;object-fit:cover;object-position:62% 50%;display:block;max-width:none}
-    .frames picture+picture{opacity:0}
+    .frames picture:not(:first-child){opacity:0}
+    /* the two French doors, cut from the closed photo, swing open in 3D over the lit interior */
+    .doors{position:absolute;transform-style:preserve-3d;pointer-events:none}
+    .door{position:absolute;top:0;height:100%;background-size:100% 100%;transform-style:preserve-3d;backface-visibility:hidden;will-change:transform}
+    .door.l{left:0;width:49.5%;background-image:url(/img/door-l.jpg);transform-origin:0 50%}
+    .door.r{right:0;width:50.5%;background-image:url(/img/door-r.jpg);transform-origin:100% 50%}
+    .door::after{content:"";position:absolute;inset:0;background:linear-gradient(90deg,rgba(20,28,36,var(--sh,0)),rgba(20,28,36,calc(var(--sh,0) * .55)))}
+    .door.r::after{background:linear-gradient(270deg,rgba(20,28,36,var(--sh,0)),rgba(20,28,36,calc(var(--sh,0) * .55)))}
+    .edge{position:absolute;top:0;height:100%;width:var(--t,12px);background:linear-gradient(90deg,#8e9499,#dfe2e5 45%,#a4aaaf);backface-visibility:hidden}
+    .door.l .edge{left:100%;transform-origin:0 50%;transform:rotateY(90deg)}
+    .door.r .edge{right:100%;transform-origin:100% 50%;transform:rotateY(-90deg)}
+    .door .back{position:absolute;inset:0;background-size:100% 100%;transform:rotateY(180deg);backface-visibility:hidden}
+    .door.l .back{background-image:url(/img/door-l-in.jpg)}
+    .door.r .back{background-image:url(/img/door-r-in.jpg)}
+    .door .back::after{content:"";position:absolute;inset:0;background:rgba(20,28,36,var(--bk,0))}
     #scene{position:absolute;inset:0;width:100%;height:100%;display:block;pointer-events:none}
     .veil{position:absolute;inset:0;pointer-events:none;background:
       linear-gradient(90deg,rgba(246,246,245,.92) 0%,rgba(246,246,245,.6) 30%,rgba(246,246,245,0) 50%),
@@ -111,8 +125,8 @@
     <section class="film" aria-label="Same-day appliance repair in Palm Beach County">
       <div class="stage">
         <div class="frames" id="frames" aria-hidden="true">
-          <picture><source media="(max-width:760px)" srcset="/img/f1m.jpg"><img src="/img/f1.jpg" alt="" fetchpriority="high"></picture>
-          <picture><source media="(max-width:760px)" srcset="/img/f2m.jpg"><img src="/img/f2.jpg" alt="" loading="eager"></picture>
+          <picture><source media="(max-width:760px)" srcset="/img/plate-m.jpg"><img src="/img/plate.jpg" alt="" fetchpriority="high"></picture>
+          <div class="doors" id="doors"><div class="door l"><i class="edge"></i><b class="back"></b></div><div class="door r"><i class="edge"></i><b class="back"></b></div></div>
           <picture><source media="(max-width:760px)" srcset="/img/f3m.jpg"><img src="/img/f3.jpg" alt="" loading="eager"></picture>
           <picture><source media="(max-width:760px)" srcset="/img/f4m.jpg"><img src="/img/f4.jpg" alt="" loading="eager"></picture>
         </div>
@@ -298,8 +312,23 @@
     const ease = x => 1 - Math.pow(1 - x, 3);
     const io = x => x < .5 ? 4 * x * x * x : 1 - Math.pow(-2 * x + 2, 3) / 2;
     let seed = 11; const rnd = () => (seed = (seed * 16807) % 2147483647) / 2147483647;
-    // short crossfades so double exposure stays brief; the camera keeps drifting in between, and each new frame settles in from a slight push
-    const fades = [null, [.08, .22], [.32, .45], [.55, .68]];
+    // the doors swing continuously; the fully-open photo then takes over, and the drawer frame follows
+    const fades = [null, [.455, .5], [.57, .68]];
+    const doorsEl = document.getElementById('doors');
+    const [doorL, doorR] = doorsEl.children;
+    const SWING = [.05, .47], MAXA = 136;
+    function placeDoors() {
+      const mobile = W <= 760, FH = frames.offsetHeight;
+      const iw = mobile ? 842 : 1920, ox = mobile ? 876 : 0, px = mobile ? .5 : .62;
+      const s = Math.max(W / iw, FH / 1080);
+      const x0 = (W - iw * s) * px, y0 = (FH - 1080 * s) * .5;
+      Object.assign(doorsEl.style, {
+        left: x0 + (1107 - ox) * s + 'px', top: y0 + 262 * s + 'px',
+        width: 398 * s + 'px', height: 511 * s + 'px',
+        perspective: 1500 * s + 'px'
+      });
+      doorsEl.style.setProperty('--t', Math.max(4, 13 * s) + 'px');
+    }
     const smooth = x => x * x * (3 - 2 * x);
     const cubes = Array.from({ length: 14 }, () => ({ a: -Math.PI * .5 + (rnd() - .5) * Math.PI * 1.3, d: .25 + rnd() * .6, s: 16 + rnd() * 26, r0: rnd() * 6.28, spin: (rnd() - .5) * 4, z: .55 + rnd() * .6, bob: rnd() * 6.28, delay: rnd() * .3 }));
     const fog = Array.from({ length: 40 }, () => ({ x: rnd(), y: rnd(), r: 60 + rnd() * 140, v: .3 + rnd() * .7, ph: rnd() * 6.28 }));
@@ -309,6 +338,7 @@
       W = canvas.clientWidth; H = canvas.clientHeight;
       canvas.width = W * dpr; canvas.height = H * dpr;
       ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+      placeDoors();
     }
     function rr(x, y, w, h, r) { ctx.beginPath(); if (ctx.roundRect) ctx.roundRect(x, y, w, h, r); else ctx.rect(x, y, w, h); }
     function cube(x, y, s, rot, a) {
@@ -338,6 +368,16 @@
         l.style.opacity = t;
         l.style.transform = t > 0 && t < 1 ? `scale(${1 + .025 * (1 - t)})` : '';
       });
+      // continuous swing: right door leads slightly, both ease in and out
+      const sw = clamp((p - SWING[0]) / (SWING[1] - SWING[0]));
+      const aR = (MAXA + 7) * io(clamp(sw * 1.08)), aL = MAXA * io(clamp(sw * 1.08 - .08));
+      doorL.style.transform = `rotateY(${-aL}deg)`;
+      doorR.style.transform = `rotateY(${aR}deg)`;
+      for (const [d, a] of [[doorL, aL], [doorR, aR]]) {
+        const r = a * Math.PI / 180;
+        d.style.setProperty('--sh', (.32 * Math.sin(Math.min(r, Math.PI / 2))).toFixed(3));
+        d.style.setProperty('--bk', (.28 * clamp(1 - (a - 90) / 46)).toFixed(3));
+      }
       const zoom = 1 + .1 * smooth(p);
       frames.style.transform = `scale(${zoom})`;
       ctx.clearRect(0, 0, W, H);
